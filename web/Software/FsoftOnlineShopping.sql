@@ -15,7 +15,7 @@ CREATE TABLE [dbo].[Category](
  CONSTRAINT [PK_Category] PRIMARY KEY CLUSTERED 
 (
 	[categoryID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 ------
@@ -174,37 +174,38 @@ INSERT [dbo].[Category] ([categoryIcon], [categoryName]) VALUES ('fa-solid fa-pe
 INSERT [dbo].[Category] ([categoryIcon], [categoryName]) VALUES ('fa-solid fa-shirt-long-sleeve', N'Cardigan')
 GO
 
-INSERT [dbo].[Product] ([categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (1, N'Letter Graphic Oversized Longline Tee', 20, 1000, N'Made in USA')
-INSERT [dbo].[Product] ([categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (1, N'Letter & Sun Print Drop Shoulder Tee', 23, 200, N'Made in USA')
-INSERT [dbo].[Product] ([categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (2, N'Tartan Print Lace Up Front Flared Skirt', 30, 234, N'Made in USA')
-INSERT [dbo].[Product] ([categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (2, N'High Waist Zipper Back Skater Skirt', 32, 4567, N'Made in USA')
-INSERT [dbo].[Product] ([categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (2, N'Solid Fold Pleated Skater Skirt', 27, 3231, N'Made in USA')
-INSERT [dbo].[Product] ([categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (2, N'High Waist Solid Pleated Skirt', 26, 35, N'Made in USA')
-INSERT [dbo].[Product] ([categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (3, N'Solid High Waist Belted Wide Leg Pants', 30, 356, N'Made in USA')
-INSERT [dbo].[Product] ([categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (3, N'Solid Belted Tailored Pants', 40, 463, N'Made in USA')
-INSERT [dbo].[Product] ([categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (3, N'High Waist Plaid Slant Pockets Pants', 34, 778, N'Made in USA')
-INSERT [dbo].[Product] ([categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (3, N'Solid Belted Tapered Pants', 45, 7674, N'Made in USA')
-INSERT [dbo].[Product] ([categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (3, N'Asymmetrical Waist Fold Pleated Pants', 43, 345, N'Made in USA')
-INSERT [dbo].[Product] ([categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (3, N'Tall Zipper Back Solid Palazzo Pants', 34, 42, N'Made in Viet Nam')
-INSERT [dbo].[Product] ([categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (3, N'High Waist Velvet Flare Leg Pants', 37, 778, N'Made in Viet Nam')
-INSERT [dbo].[Product] ([categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (3, N'Tall Zipper Back Solid Palazzo Pants', 39, 9765, N'Made in Viet Nam')
-INSERT [dbo].[Product] ([categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (3, N'Solid High Waist Belted Wide Leg Pants', 29, 3467, N'Made in Viet Nam')
-INSERT [dbo].[Product] ([categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (4, N'Turtleneck Lantern Sleeve Sweater Dress', 26, 463, N'Made in Viet Nam')
-INSERT [dbo].[Product] ([categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (4, N'Rolled Neck Ripped Design Hem Cable Knit Sweate', 28, 422, N'Made in Viet Nam')
-INSERT [dbo].[Product] ([categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (4, N'Drop Shoulder Pointelle Knit Sweater Dress', 21, 2322, N'Made in China')
-INSERT [dbo].[Product] ([categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (4, N'Raw Trim Cable Knit Sweater Dress', 36, 242, N'Made in China')
-INSERT [dbo].[Product] ([categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (4, N'High Neck Bishop Sleeve Sweater Dress Without Belt', 24, 75, N'Made in China')
-INSERT [dbo].[Product] ([categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (5, N'EMERY ROSE Shirred Waist Geo Print Shorts', 32, 675, N'Made in China')
-INSERT [dbo].[Product] ([categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (5, N'Shirred Waist Geo Print Shorts', 12, 575, N'Made in China')
-INSERT [dbo].[Product] ([categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (5, N'Knot Waist Patched Slant Pocket Raw Hem Shorts', 10, 876, N'Made in China')
-INSERT [dbo].[Product] ([categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (5, N'Tartan Letter Patched Shorts', 11, 7855, N'Made in China')
-INSERT [dbo].[Product] ([categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (6, N'Pointelle Knit Open Front Crop Cardigan', 23, 3, N'Made in USA')
-INSERT [dbo].[Product] ([categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (6, N'Solid Drop Shoulder Crop Cardigan', 25, 235, N'Made in USA')
-INSERT [dbo].[Product] ([categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (6, N'Purl Knit Button-Front Cropped Cardigan', 26, 532, N'Made in USA')
-INSERT [dbo].[Product] ([categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (6, N'Floral Embroidery Button Front Cardigan', 27, 345, N'Made in USA')
-INSERT [dbo].[Product] ([categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (6, N'V-neck Colorblock Button Up Cardigan', 30, 453, N'Made in USA')
-INSERT [dbo].[Product] ([categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (6, N'Allover Heart Pattern Dual Pocket Cardigan', 21, 24, N'Made in USA')
-GO
+
+    INSERT [dbo].[Product] ([imageFolder],[categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (N'images/productImage/1',1, N'Letter Graphic Oversized Longline Tee', 20, 1000, N'Made in USA')
+    INSERT [dbo].[Product] ([imageFolder],[categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (N'images/productImage/2',1, N'Letter & Sun Print Drop Shoulder Tee', 23, 200, N'Made in USA')
+    INSERT [dbo].[Product] ([imageFolder],[categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (N'images/productImage/3',2, N'Tartan Print Lace Up Front Flared Skirt', 30, 234, N'Made in USA')
+    INSERT [dbo].[Product] ([imageFolder],[categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (N'images/productImage/4',2, N'High Waist Zipper Back Skater Skirt', 32, 4567, N'Made in USA')
+    INSERT [dbo].[Product] ([imageFolder],[categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (N'images/productImage/5',2, N'Solid Fold Pleated Skater Skirt', 27, 3231, N'Made in USA')
+    INSERT [dbo].[Product] ([imageFolder],[categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (N'images/productImage/6',2, N'High Waist Solid Pleated Skirt', 26, 35, N'Made in USA')
+    INSERT [dbo].[Product] ([imageFolder],[categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (N'images/productImage/7',3, N'Solid High Waist Belted Wide Leg Pants', 30, 356, N'Made in USA')
+    INSERT [dbo].[Product] ([imageFolder],[categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (N'images/productImage/8',3, N'Solid Belted Tailored Pants', 40, 463, N'Made in USA')
+    INSERT [dbo].[Product] ([imageFolder],[categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (N'images/productImage/9',3, N'High Waist Plaid Slant Pockets Pants', 34, 778, N'Made in USA')
+    INSERT [dbo].[Product] ([imageFolder],[categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (N'images/productImage/10',3, N'Solid Belted Tapered Pants', 45, 7674, N'Made in USA')
+    INSERT [dbo].[Product] ([imageFolder],[categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (N'images/productImage/11',3, N'Asymmetrical Waist Fold Pleated Pants', 43, 345, N'Made in USA')
+    INSERT [dbo].[Product] ([imageFolder],[categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (N'images/productImage/12',3, N'Tall Zipper Back Solid Palazzo Pants', 34, 42, N'Made in Viet Nam')
+    INSERT [dbo].[Product] ([imageFolder],[categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (N'images/productImage/13',3, N'High Waist Velvet Flare Leg Pants', 37, 778, N'Made in Viet Nam')
+    INSERT [dbo].[Product] ([imageFolder],[categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (N'images/productImage/14',3, N'Tall Zipper Back Solid Palazzo Pants', 39, 9765, N'Made in Viet Nam')
+    INSERT [dbo].[Product] ([imageFolder],[categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (N'images/productImage/15',3, N'Solid High Waist Belted Wide Leg Pants', 29, 3467, N'Made in Viet Nam')
+    INSERT [dbo].[Product] ([imageFolder],[categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (N'images/productImage/16',4, N'Turtleneck Lantern Sleeve Sweater Dress', 26, 463, N'Made in Viet Nam')
+    INSERT [dbo].[Product] ([imageFolder],[categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (N'images/productImage/17',4, N'Rolled Neck Ripped Design Hem Cable Knit Sweate', 28, 422, N'Made in Viet Nam')
+    INSERT [dbo].[Product] ([imageFolder],[categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (N'images/productImage/18',4, N'Drop Shoulder Pointelle Knit Sweater Dress', 21, 2322, N'Made in China')
+    INSERT [dbo].[Product] ([imageFolder],[categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (N'images/productImage/19',4, N'Raw Trim Cable Knit Sweater Dress', 36, 242, N'Made in China')
+    INSERT [dbo].[Product] ([imageFolder],[categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (N'images/productImage/20',4, N'High Neck Bishop Sleeve Sweater Dress Without Belt', 24, 75, N'Made in China')
+    INSERT [dbo].[Product] ([imageFolder],[categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (N'images/productImage/21',5, N'EMERY ROSE Shirred Waist Geo Print Shorts', 32, 675, N'Made in China')
+    INSERT [dbo].[Product] ([imageFolder],[categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (N'images/productImage/22',5, N'Shirred Waist Geo Print Shorts', 12, 575, N'Made in China')
+    INSERT [dbo].[Product] ([imageFolder],[categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (N'images/productImage/23',5, N'Knot Waist Patched Slant Pocket Raw Hem Shorts', 10, 876, N'Made in China')
+    INSERT [dbo].[Product] ([imageFolder],[categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (N'images/productImage/24',5, N'Tartan Letter Patched Shorts', 11, 7855, N'Made in China')
+    INSERT [dbo].[Product] ([imageFolder],[categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (N'images/productImage/25',6, N'Pointelle Knit Open Front Crop Cardigan', 23, 3, N'Made in USA')
+    INSERT [dbo].[Product] ([imageFolder],[categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (N'images/productImage/26',6, N'Solid Drop Shoulder Crop Cardigan', 25, 235, N'Made in USA')
+    INSERT [dbo].[Product] ([imageFolder],[categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (N'images/productImage/27',6, N'Purl Knit Button-Front Cropped Cardigan', 26, 532, N'Made in USA')
+    INSERT [dbo].[Product] ([imageFolder],[categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (N'images/productImage/28',6, N'Floral Embroidery Button Front Cardigan', 27, 345, N'Made in USA')
+    INSERT [dbo].[Product] ([imageFolder],[categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (N'images/productImage/29',6, N'V-neck Colorblock Button Up Cardigan', 30, 453, N'Made in USA')
+    INSERT [dbo].[Product] ([imageFolder],[categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) VALUES (N'images/productImage/30',6, N'Allover Heart Pattern Dual Pocket Cardigan', 21, 24, N'Made in USA')
+    GO
 
 INSERT [dbo].[Color] ([colorName]) VALUES (N'Red')
 INSERT [dbo].[Color] ([colorName]) VALUES (N'Yellow')
