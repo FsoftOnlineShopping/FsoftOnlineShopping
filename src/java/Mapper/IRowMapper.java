@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DAO.Account;
+package Mapper;
+
+import java.sql.ResultSet;
 
 /**
  *
  * @author ADMIN
  */
-public class NewClass {
-    public static void main(String[] args) {
-        System.out.println("a");
-    }
+public interface IRowMapper<T> {
+    T mapRow(ResultSet rs);
 }

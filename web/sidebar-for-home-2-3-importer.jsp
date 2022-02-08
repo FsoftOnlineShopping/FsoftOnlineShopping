@@ -29,8 +29,8 @@
 						</a>
 					</li>
 
-					<li class="p-b-13">
-						<a href="#" class="stext-102 cl2 hov-cl1 trans-04">
+					<li class="p-b-13 my-account">
+						<a href="#" class="stext-102 cl2 hov-cl1 trans-04 ">
 							My Account
 						</a>
 					</li>
@@ -50,6 +50,11 @@
 					<li class="p-b-13">
 						<a href="#" class="stext-102 cl2 hov-cl1 trans-04">
 							Help & FAQs
+						</a>
+					</li>
+                                        <li class="p-b-13">
+						<a href="#" class="stext-102 cl2 hov-cl1 trans-04 sign-in-out">
+							Sign in
 						</a>
 					</li>
 				</ul>
@@ -128,3 +133,5 @@
 			</div>
 		</div>
 	</aside>
+        <script src="js/render-header.js"></script>
+        <script src="js/handle-sign-out.js"></script>
