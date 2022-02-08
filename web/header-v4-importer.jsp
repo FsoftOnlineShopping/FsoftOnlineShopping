@@ -20,7 +20,7 @@
 							Help & FAQs
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
+						<a href="#" class="flex-c-m trans-04 p-lr-25 my-account">
 							My Account
 						</a>
 
@@ -30,6 +30,9 @@
 
 						<a href="#" class="flex-c-m trans-04 p-lr-25">
 							USD
+						</a>
+                                                <a href="#" class="flex-c-m trans-04 p-lr-25 sign-in-out">
+							Sign in
 						</a>
 					</div>
 				</div>
@@ -207,3 +210,5 @@
 			</div>
 		</div>
 	</header>
+<script src="js/render-header.js"></script>
+        <script src="js/handle-sign-out.js"></script>

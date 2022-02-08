@@ -39,6 +39,8 @@ CREATE TABLE [dbo].[Account](
 	[userName] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+--UserRole 1: Admin, 0:User
+--AccountState 1: Active, 0: Deleted    
 ----
 GO
 SET ANSI_NULLS ON
@@ -155,14 +157,14 @@ constraint pk_AccountCoupon primary key (userName,couponID),
 constraint fkss_userName foreign key (userName) references Account(userName),
 constraint fks_couponIDs foreign key (couponID) references Coupon (couponID))
 
-INSERT [dbo].[Account] ([userName], [userPassword], [userEmail], [userFullname], [userAddress], [userCreateDate], [userAvatar], [userFacebook], [userRole], [accountState]) VALUES (N'admin', N'admin', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1)
-INSERT [dbo].[Account] ([userName], [userPassword], [userEmail], [userFullname], [userAddress], [userCreateDate], [userAvatar], [userFacebook], [userRole], [accountState]) VALUES (N'khoi', N'khoi', N'khoinmde150323@fpt.edu.vn', N'Nguyễn Mạnh Khôi', N'Đà Nẵng', CAST(N'2022-01-13T16:10:51.213' AS DateTime), N'images/avatar/khoi.jpg', N'https://www.facebook.com/profile.php?id=100011319337285', 0, 1)
-INSERT [dbo].[Account] ([userName], [userPassword], [userEmail], [userFullname], [userAddress], [userCreateDate], [userAvatar], [userFacebook], [userRole], [accountState]) VALUES (N'minh', N'minh', N'minhnnde150311@fpt.edu.vn
+INSERT [dbo].[Account] ([userName], [userPassword], [userEmail], [userFullname], [userAddress], [userCreateDate], [userAvatar], [userFacebook], [userRole], [accountState]) VALUES (N'admin', N'$2a$12$qXvgl6Rt2zvVLuU5FYtXGO9UUQ9Bo2NXGZvL6XrRv/QZ6O0YOZsH.', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1)
+INSERT [dbo].[Account] ([userName], [userPassword], [userEmail], [userFullname], [userAddress], [userCreateDate], [userAvatar], [userFacebook], [userRole], [accountState]) VALUES (N'khoi', N'$2a$12$x.rde5r0hAHytY/dhPiJ4OcyajqxWGLW72mWfxJY6XID2E1APV.QO', N'khoinmde150323@fpt.edu.vn', N'Nguyễn Mạnh Khôi', N'Đà Nẵng', CAST(N'2022-01-13T16:10:51.213' AS DateTime), N'images/avatar/khoi.jpg', N'https://www.facebook.com/profile.php?id=100011319337285', 0, 1)
+INSERT [dbo].[Account] ([userName], [userPassword], [userEmail], [userFullname], [userAddress], [userCreateDate], [userAvatar], [userFacebook], [userRole], [accountState]) VALUES (N'minh', N'$2a$12$8CWglqOHK7oXoQKbe4mQYOR/.z4xEjWwO4NuwahLbs20u9vN9NBCm', N'minhnnde150311@fpt.edu.vn
 ', N'Nguyễn Nhật Minh', N'Đà Nẵng', CAST(N'2022-01-13T16:10:27.867' AS DateTime), N'images/avatar/minh.jpg', N'https://www.facebook.com/minhpopopro', 0, 1)
-INSERT [dbo].[Account] ([userName], [userPassword], [userEmail], [userFullname], [userAddress], [userCreateDate], [userAvatar], [userFacebook], [userRole], [accountState]) VALUES (N'nhi', N'nhi', N'nhinhtde150290@fpt.edu.vn
+INSERT [dbo].[Account] ([userName], [userPassword], [userEmail], [userFullname], [userAddress], [userCreateDate], [userAvatar], [userFacebook], [userRole], [accountState]) VALUES (N'nhi', N'$2a$12$DGUZohJeS62GGVvh9kMQ1uWIlY5ooDmsY.Tf7yEmc7KWKR8aMZIwq', N'nhinhtde150290@fpt.edu.vn
 ', N'Nguyễn Hoàng Thục Nhi', N'Đà Nẵng', CAST(N'2022-01-13T16:10:43.220' AS DateTime), N'images/avatar/nhi.jpg', N'https://www.facebook.com/nhi.nguyenhoangthuc', 0, 1)
-INSERT [dbo].[Account] ([userName], [userPassword], [userEmail], [userFullname], [userAddress], [userCreateDate], [userAvatar], [userFacebook], [userRole], [accountState]) VALUES (N'phuc', N'phuc', N'phuchntde150314@fpt.edu.vn', N'Huỳnh Ngô Triệu Phúc', N'Đà Nẵng', CAST(N'2022-01-13T16:10:58.953' AS DateTime), N'images/avatar/phuc.jpg', N'https://www.facebook.com/phuchnt0801', 0, 1)
-INSERT [dbo].[Account] ([userName], [userPassword], [userEmail], [userFullname], [userAddress], [userCreateDate], [userAvatar], [userFacebook], [userRole], [accountState]) VALUES (N'quang', N'quang', N'quanglnnde150066@fpt.edu.vn', N'Lương Nguyễn Nhật Quang', N'Đà Nẵng', CAST(N'2022-01-13T16:09:56.000' AS DateTime), N'images/avatar/quang.jpg', N'https://www.facebook.com/profile.php?id=100008194183640', 0, 1)
+INSERT [dbo].[Account] ([userName], [userPassword], [userEmail], [userFullname], [userAddress], [userCreateDate], [userAvatar], [userFacebook], [userRole], [accountState]) VALUES (N'phuc', N'$2a$12$4C6S70ucnimQ3GGt.bwweueiWdN0tQHZsx1WGIDY4Tr98xPBNDciq', N'phuchntde150314@fpt.edu.vn', N'Huỳnh Ngô Triệu Phúc', N'Đà Nẵng', CAST(N'2022-01-13T16:10:58.953' AS DateTime), N'images/avatar/phuc.jpg', N'https://www.facebook.com/phuchnt0801', 0, 1)
+INSERT [dbo].[Account] ([userName], [userPassword], [userEmail], [userFullname], [userAddress], [userCreateDate], [userAvatar], [userFacebook], [userRole], [accountState]) VALUES (N'quang', N'$2a$12$xpzCte775DqAS8.EEA9.tuSDD.WNPcZ0k5DK5xOy6WIT8wSIXs3ry', N'quanglnnde150066@fpt.edu.vn', N'Lương Nguyễn Nhật Quang', N'Đà Nẵng', CAST(N'2022-01-13T16:09:56.000' AS DateTime), N'images/avatar/quang.jpg', N'https://www.facebook.com/profile.php?id=100008194183640', 0, 1)
 GO
 
 INSERT [dbo].[Category] ([categoryIcon], [categoryName]) VALUES ('fas fa-tshirt', N'Tee')
