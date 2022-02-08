@@ -41,7 +41,11 @@ public class AccountDAO extends GenericDAO {
         }
         return null;
     }
-
+    public static boolean isHaveUserName(String userName) throws SQLException{
+        String sql = "select * from Account where userName = ?";
+        List<Account> listAccount = query(sql, new AccountMapper(), userName);
+        return !listAccount.isEmpty();
+    }
     //UserRole 1: Admin, 0:User
     //AccountState 1: Active, 0: Deleted    
     public static int createAccount(String userName, String password, String userEmail) throws SQLException {
