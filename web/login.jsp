@@ -261,7 +261,7 @@
                 <span class="form-message"></span>
             </div>
             <button class="form-submit">Login</button>
-            <p class="desc-footer">Not created yet? <a href="">Create an account</a></p>
+            <p class="desc-footer">Not created yet? <a href="register.jsp">Create an account</a></p>
             <div class="back-home"><a href="" >Go back Home</a></div>
         </form>
 
