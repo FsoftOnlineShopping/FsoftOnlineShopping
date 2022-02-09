@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>COZA STORE LOGIN</title>
     <style>
         * {
             padding: 0;
@@ -254,7 +254,7 @@
                     </div>
                     <div style="display: flex; align-items: center;">
                         <label for="" class="form-label" style="font-weight: normal; padding: 0;">
-                           <a class="forgot-pass" href="">Forgot Password?</a> 
+                           <a class="forgot-pass" href="reset-password.jsp">Forgot Password?</a> 
                         </label>
                     </div>
                 </div>

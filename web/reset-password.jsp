@@ -1,6 +1,6 @@
 <%-- 
-    Document   : registerForm
-    Created on : Feb 8, 2022, 3:12:41 PM
+    Document   : reset-password
+    Created on : Feb 9, 2022, 10:26:02 AM
     Author     : ADMIN
 --%>
 
@@ -12,7 +12,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>COZA STORE REGISTER</title>
+        <title>COZA STORE FORGOT PASSWORD</title>
         <style>
             * {
                 padding: 0;
@@ -157,30 +157,11 @@
                 margin-top: 36px;
             }
 
-            .spacer-line {
-                width: 100%;
-                height: 50px;
+            .provide-text {
                 text-align: center;
-                font-size: 1.2rem;
-                position: relative;
-                margin-top: 20px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 20;
-                background-color: #fff
-            }
-
-            .spacer-line:before {
-                content: "";
-                width: 100%;
-                height: 1px;
-                border-bottom: solid 1px rgba(0, 0, 0, 0.2);
-                position: absolute;
-                left: 0;
-                top: 50%;
-                /* transform: translateY(50%, 0%); */
-                z-index: -1;
+                font-size: 1.4rem;
+                margin-bottom: 16px;
+                font-weight: 300;
             }
 
             .spacer-line span {
@@ -223,6 +204,68 @@
             b {
                 color: #717fe0;
             }
+            #form-2,
+            #form-3 {
+                display: none;
+            }
+
+            .loader {
+                border: 1rem solid #f3f3f3;
+                border-radius: 50%;
+                border-top: 1rem solid #717fe0;
+                border-bottom: 1rem solid #636d77;
+                width: 120px;
+                height: 120px;
+                -webkit-animation: spin 1.5s linear infinite;
+                /* Safari */
+                animation: spin 1.5s linear infinite;
+                margin-bottom: 1rem;
+                display:flex;
+                justify-content: center;
+                align-items: center;
+                margin: auto;
+            }
+            .loader-2 {
+                border: 1rem solid #f3f3f3;
+                border-radius: 50%;
+                border-left: 1rem solid #717fe0;
+                border-right: 1rem solid #636d77;
+                width: 80px;
+                height: 80px;
+                -webkit-animation: spin 1.5s linear infinite;
+                /* Safari */
+                animation: spin 1.5s linear infinite;
+            }
+
+            /* Safari */
+            @-webkit-keyframes spin {
+                0% {
+                    -webkit-transform: rotate(0deg);
+                }
+
+                100% {
+                    -webkit-transform: rotate(360deg);
+                }
+            }
+
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+            .processing{
+                text-align: center;
+                margin: auto;
+                display: none;
+            }
+            .processing span{
+                font-weight: bold;
+                font-size: 2rem;
+            }
         </style>
     </head>
 
@@ -230,59 +273,68 @@
         <div class="main">
 
             <form action="" method="POST" class="form" id="form-1">
-                <h3 class="heading">Register to COZA STORE</h3>
-                <p class="desc">A better apperance with Coza Store!</p>
+                <h3 class="heading">Reset password from COZA STORE</h3>
+                <p class="desc">Don't be panic! Reset your password within a second.</p>
 
                 <div class="spacer"></div>
-                <div class="">
-                    <div class="sign-in-google">
-                        <div class="google-logo"><img src="images/google-logo.png" alt=""></div>
-                        <a>Continue with Google</a>
-                    </div>
-                </div>
-                <div class="spacer-line"><span>or Register in with Username</span></div>
-                <div class="form-group">
-                    <label for="userName" class="form-label">Username* </label>
-                    <input id="userName" name="userName" type="text" placeholder="VD: cozastore" class="form-control">
-                    <span class="form-message"></span>
+
+                <div class="provide-text">Provide your account's username for which you want to reset your password!</span>
                 </div>
                 <div class="form-group">
-                    <label for="userEmail" class="form-label">Email*</label>
-                    <input id="userEmail" name="userEmail" type="text" placeholder="EX: cozaonlinestore@gmail.com"
-                           class="form-control">
+                    <input id="userName" name="userName" type="text" placeholder="Username: cozastore" class="form-control">
                     <span class="form-message"></span>
                 </div>
+                <button class="form-submit form-submit-1">Next</button>
+                <p class="desc-footer">Already have an account? <a href="login.jsp">Login</a></p>
+                <div class="back-home"><a href="">Go back Home</a></div>
+            </form>
+            <form action="" method="POST" class="form" id="form-2">
+                <h3 class="heading">Reset password from COZA STORE</h3>
+                <p class="desc">Don't be panic! Reset your password within a second.</p>
+
+                <div class="spacer"></div>
+
+                <div class="provide-text">We've sent a six ditgit code to your email address: <span
+                        class="emailAddress"></span> </div>
+                <div class="form-group">
+                    <input id="resetCode" name="resetCode" type="text" placeholder="Code: 123456" class="form-control">
+                    <span class="form-message"></span>
+                </div>
+                <button class="form-submit form-submit-2">Next</button>
+                <p class="desc-footer">Already have an account? <a href="login.jsp">Login</a></p>
+                <div class="back-home"><a href="">Go back Home</a></div>
+            </form>
+            <form action="" method="POST" class="form" id="form-3">
+                <h3 class="heading">Reset password from COZA STORE</h3>
+                <p class="desc">Welcome back, New Credentials!</p>
+
+                <div class="spacer"></div>
+                <div class="provide-text">Your identity has been verified. Set your new password!</div>
                 <div class="form-group">
                     <label for="userPassword" class="form-label">Password* </label>
-                    <input id="userPassword" name="userPassword" type="password" placeholder="Enter your password"
+                    <input id="userPassword" name="userPassword" type="password" placeholder="New password"
                            class="form-control">
                     <span class="form-message"></span>
                 </div>
                 <div class="form-group">
                     <label for="password_confirmation" class="form-label">Confirm Password*</label>
-                    <input id="password_confirmation" name="password_confirmation" placeholder="Confirm your password"
+                    <input id="password_confirmation" name="password_confirmation" placeholder="Confirm password"
                            type="password" class="form-control">
                     <span class="form-message"></span>
                 </div>
-                <div class="form-group">
-                    <div style="display: flex; align-items: center;">
-                        <input style="margin-right: 1rem;" id="privacy_confirmation" name="privacy_confirmation"
-                               placeholder="Nhập lại mật khẩu" type="checkbox" class="form-control">
-                        <label for="privacy_confirmation" class="form-label" style="font-weight: normal; padding: 0;">I
-                            accept the
-                            <b>Terms of Use</b> & <b>Privacy Policy</b>
-                        </label>
-                    </div>
-                    <span class="form-message"></span>
-                </div>
-                <button class="form-submit">Create Account</button>
+                <button class="form-submit form-submit-3">Update</button>
                 <p class="desc-footer">Already have an account? <a href="login.jsp">Login</a></p>
                 <div class="back-home"><a href="">Go back Home</a></div>
             </form>
+            <div class="processing">
+                <div class="loader"><div class="loader-2"></div></div>
+                <span>Hold on. We are processing...</span>
+            </div>
 
         </div>
         <script src="js/formValidation.js"></script>
         <script>
+
             // Mong muon của chúng ta khi sử dụng thư viện
             Validator({
                 form: '#form-1',
@@ -290,28 +342,68 @@
                 errorSelector: '.form-message',
                 rules: [
                     Validator.isRequired('#userName', 'Please fill in required field'),
+                ],
+                onSubmit: function (data) {
+                    console.log(data);
+                    handleSendEmail(data);
+                }
+            });
+            var entryLimit = 3;
+            var entryCount = 1;
+            Validator({
+                form: '#form-2',
+                formGroupSelector: '.form-group',
+                errorSelector: '.form-message',
+                rules: [
+                    Validator.isRequired('#resetCode', 'Please fill in required field'),
+                ],
+                onSubmit: function (data) {
+                    console.log(data);
+                    if (entryCount <= entryLimit) {
+                        var entryLeft = entryLimit - entryCount;
+                        var isCodeCheck = handleResetCode(data, entryLeft);
+                        if (!isCodeCheck) {
+                            entryCount++;
+                        } else {
+                            // success!
+                            entryCount = 0;
+                        }
+                    } else {
+                        document.querySelector("#form-2 .form-message").innerText = "Your trying attempts have exceeded the limit. Please try another time.";
+                        removeResetCode({removeResetCode: true});
+                    }
+
+                }
+            });
+            Validator({
+                form: '#form-3',
+                formGroupSelector: '.form-group',
+                errorSelector: '.form-message',
+                rules: [
                     Validator.isRequired('#userPassword', 'Please fill in required field'),
-                    Validator.minLength('#userPassword', 6, 'Please enter password at least 6 characters'),
-                    // Validator.isRequired('#avatar'),
-                    Validator.isRequired('#userEmail', 'Please fill in required field'),
-                    Validator.isEmail('#userEmail', 'Please enter valid email address'),
                     Validator.isRequired('#password_confirmation', 'Please fill in required field'),
                     Validator.isConfirmed('#password_confirmation', function () {
-                        return document.querySelector('#form-1 #userPassword').value;
-                    }, 'Re-entered password is incorrect'),
-                    // Validator.isRequired('input[name="gender"]'),
-                    Validator.isRequired('input[name="privacy_confirmation"]', 'Please accept Terms of Use & Privacy Policy'),
+                        return document.querySelector('#form-3 #userPassword').value;
+                    }, 'Re-entered password is incorrect')
                 ],
-                onSubmit: function (userInputData) {
-                    console.log(userInputData);
-                    var {password_confirmation, privacy_confirmation, ...creatAccountData} = userInputData;
-                    console.log(creatAccountData);
-                    register(creatAccountData);
-                }
-            })
-        </script>
-        <script src="js/handle-register.js"></script>
+                onSubmit: function (data) {
+                    console.log(data);
+                    var {password_confirmation, ...userPassword} = data;
+                    console.log(userPassword);
+                    handleResetPassword(userPassword);
 
+                }
+            });
+            // document.querySelector('.form-submit-1').onclick = function () {
+            //     var form2 = document.querySelector('#form-2');
+            //     var form1 = document.querySelector('#form-1');
+            //     form1.style.display = 'none';
+            //     // form2.style.display = 'block';
+            //     form2.classList.add('visible');
+            //     console.log("1")
+            // }
+        </script>
+        <script src="js/handle-reset-password.js"></script>
     </body>
 
 </html>

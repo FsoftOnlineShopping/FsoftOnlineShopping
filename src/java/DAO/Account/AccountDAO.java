@@ -59,7 +59,8 @@ public class AccountDAO extends GenericDAO {
 
     public static boolean updatePassword(String userName, String newPassword) throws SQLException {
         String sql = "update Account set userPassword = ? where userName = ?";
-        boolean update = update(sql, newPassword, userName);
+        String passwordHash = hashPassword(newPassword);
+        boolean update = update(sql, passwordHash, userName);
         return update;
     }
 
