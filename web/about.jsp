@@ -52,7 +52,6 @@
 		</h2>
 	</section>	
 
-
 	<!-- Content page -->
 	<section class="bg0 p-t-75 p-b-120">
 		<div class="container">
