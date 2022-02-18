@@ -223,6 +223,9 @@
             b {
                 color: #717fe0;
             }
+            a{
+                text-decoration: none;
+            }
         </style>
     </head>
 
@@ -237,7 +240,8 @@
                 <div class="">
                     <div class="sign-in-google">
                         <div class="google-logo"><img src="images/google-logo.png" alt=""></div>
-                        <a>Continue with Google</a>
+                        <a  href="https://accounts.google.com/o/oauth2/auth?scope=openid%20profile%20email&redirect_uri=http://localhost:8080/FsoftOnlineShopping/login-google&response_type=code
+        &client_id=699455472549-dhljh9s6ik6rrk5n75cpqf26p7qs1v79.apps.googleusercontent.com&approval_prompt=force">Continue with Google</a>
                     </div>
                 </div>
                 <div class="spacer-line"><span>or Register in with Username</span></div>

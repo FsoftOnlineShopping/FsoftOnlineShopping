@@ -43,9 +43,15 @@
         <!--===============================================================================================-->
     </head>
     <body class="animsition">
-
+        
         <!-- Header -->
         <header>
+            <c:if test="${isLoginGoogle == true}">
+            <script>
+                var myStorage = window.sessionStorage;
+                myStorage.setItem('currentAccount', JSON.stringify(${currentAccount}));
+            </script>
+        </c:if>
             <!-- Header desktop -->
             <div class="container-menu-desktop">
                 <!-- Topbar -->

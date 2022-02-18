@@ -6,17 +6,22 @@
 package Controller.Authen_Author;
 
 import DAO.Account.AccountDAO;
-import Utils.HttpUtil;
 import Model.Account;
+import Model.GG_OAuth2_UserClaims;
+import Utils.GoogleMailUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.math.BigDecimal;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +30,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ADMIN
  */
-public class RegisterAPI extends HttpServlet {
+@WebServlet(name = "LoginGoogle", urlPatterns = {"/login-google"})
+public class LoginGoogle extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,10 +50,10 @@ public class RegisterAPI extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegisterAPI</title>");
+            out.println("<title>Servlet LoginGoogle</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RegisterAPI at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet LoginGoogle at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -65,7 +71,43 @@ public class RegisterAPI extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String code = request.getParameter("code");
+        if (code == null || code.isEmpty()) {
+            RequestDispatcher dis = request.getRequestDispatcher("login.jsp");
+            dis.forward(request, response);
+        } else {
+            String accessToken = GoogleMailUtils.getToken(code);
+            GG_OAuth2_UserClaims googlePojo = GoogleMailUtils.getUserInfo(accessToken);
+            int createState = -1;
+            Account currentAccount = null;
+            try {
+                if (!AccountDAO.isHaveUserName(googlePojo.getSub())) {
+                    createState = AccountDAO.createAccount(googlePojo.getSub(), googlePojo.getSub(), googlePojo.getEmail());
+                    if(createState == 0){
+                        AccountDAO.updateUserInfo(googlePojo.getSub(), googlePojo.getEmail(), googlePojo.getName(), googlePojo.getLocale(), googlePojo.getPicture(), "");
+                    }
+                }
+                currentAccount = AccountDAO.getAccountByUserName(googlePojo.getSub());
+            } catch (SQLException ex) {
+                Logger.getLogger(LoginGoogle.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println(accessToken);
+            request.getSession().setAttribute("currentAccount", currentAccount);
+            request.setAttribute("isLoginGoogle", true);
+            
+            
+            ObjectMapper mapper = new ObjectMapper();
+//            ObjectNode rootNode = mapper.createObjectNode();
+//            rootNode.put("currentAccount", currentAccount.toString());
+
+            String dataReturn = mapper.writeValueAsString(currentAccount);
+            
+            
+            request.setAttribute("currentAccount", dataReturn);
+            RequestDispatcher dis = request.getRequestDispatcher("index.jsp");
+            dis.forward(request, response);
+        }
+//        processRequest(request, response);
     }
 
     /**
@@ -79,39 +121,7 @@ public class RegisterAPI extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("application/json");
-        Account registerAccount = HttpUtil.of(request.getReader()).toModel(Account.class);
-        String userName = registerAccount.getUserName();
-
-        try {
-            boolean isHaveUserName = AccountDAO.isHaveUserName(registerAccount.getUserName());
-            int createState = -1;
-            if (!isHaveUserName) {
-                createState = AccountDAO.createAccount(registerAccount.getUserName(), registerAccount.getUserPassword(), registerAccount.getUserEmail());
-                if (createState == 0) {
-                    registerAccount = AccountDAO.getAccountByUserName(userName);
-                    request.getSession().setAttribute("currentAccount", registerAccount);
-                }
-            }
-            ObjectMapper mapper = new ObjectMapper();
-            ObjectNode rootNode = mapper.createObjectNode();
-            rootNode.put("isHaveUserName", isHaveUserName);
-            rootNode.put("createState", (createState == 0));
-            rootNode.putPOJO("currentAccount", registerAccount);
-
-            String dataReturn = mapper.writeValueAsString(rootNode);
-            PrintWriter out = response.getWriter();
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            out.print(dataReturn);
-            out.flush();
-
-        } catch (SQLException ex) {
-            Logger.getLogger(RegisterAPI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        processRequest(request, response);
     }
 
     /**
