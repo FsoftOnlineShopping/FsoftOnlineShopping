@@ -74,6 +74,8 @@ public class GenericDAO {
                     statement.setTimestamp(index, (Timestamp) parameter);
                 } else if (parameter instanceof String) {
                     statement.setString(index, (String) parameter);
+                }else if (parameter == null) {
+                    statement.setNull(index, java.sql.Types.NULL);
                 }
             }
             return statement;

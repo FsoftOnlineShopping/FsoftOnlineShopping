@@ -46,7 +46,7 @@
         
         <!-- Header -->
         <header>
-            <c:if test="${isLoginGoogle == true}">
+            <c:if test="${(isLoginGoogle == true) or (isLoginFacebook == true)}">
             <script>
                 var myStorage = window.sessionStorage;
                 myStorage.setItem('currentAccount', JSON.stringify(${currentAccount}));

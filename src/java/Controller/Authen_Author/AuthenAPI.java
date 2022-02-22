@@ -91,7 +91,7 @@ public class AuthenAPI extends HttpServlet {
             Account currentAccount = AccountDAO.checkLogin(account.getUserName(), account.getUserPassword());
 
             if (currentAccount != null) {
-                System.out.println(currentAccount);
+//                System.out.println(currentAccount);
                 HttpSession session = request.getSession();
                 session.setAttribute("currentAccount", currentAccount);
             }
