@@ -28,6 +28,10 @@
         <servlet-name>ResetPasswordAPI</servlet-name>
         <servlet-class>Controller.Authen_Author.ResetPasswordAPI</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginFacebook</servlet-name>
+        <servlet-class>Controller.Authen_Author.LoginFacebook</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NewServlet</servlet-name>
         <url-pattern>/NewServlet</url-pattern>
@@ -55,6 +59,20 @@
     <servlet-mapping>
         <servlet-name>ResetPasswordAPI</servlet-name>
         <url-pattern>/api-resetPassword</url-pattern>
+    </servlet-mapping>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>FsoftOnlineShopping</web-resource-name>
+            <url-pattern>/*</url-pattern>
+            <http-method>GET</http-method>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <servlet-mapping>
+        <servlet-name>LoginFacebook</servlet-name>
+        <url-pattern>/login-facebook</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

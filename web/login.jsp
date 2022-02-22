@@ -106,30 +106,30 @@
         .form-message.invalid{
             color: #f33a58;
         }
-        .sign-in-google {
+        .sign-in-google, .sign-in-facebook {
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
             border-radius: 25rem;
             border: 1px solid rgba(0, 0, 0, 0.2);
-            padding: 0.875rem 0px;
+            padding: 0.875rem 5rem;
             cursor: pointer;
         }
 
-        .sign-in-google a {
+        .sign-in-google a, .sign-in-facebook a {
             background-color: #fff;
             font-weight: bold;
             border: none;
             font-size: 1.4rem;
         }
 
-        .google-logo {
+        .google-logo, .facebook-logo {
             width: 2rem;
             height: 2rem;
-            margin-right: 2rem;
+            margin-right: 3rem;
         }
 
-        .google-logo img {
+        .google-logo img, .facebook-logo img {
             width: 100%;
             height: 100%;
             object-fit: contain;
@@ -233,6 +233,12 @@
                     <div class="google-logo"><img src="images/google-logo.png" alt=""></div>
                     <a  href="https://accounts.google.com/o/oauth2/auth?scope=openid%20profile%20email&redirect_uri=http://localhost:8080/FsoftOnlineShopping/login-google&response_type=code
         &client_id=699455472549-dhljh9s6ik6rrk5n75cpqf26p7qs1v79.apps.googleusercontent.com&approval_prompt=force">Sign in with Google</a>
+                </div>
+            </div>
+            <div class="" style="margin-top: 1rem">
+                <div class="sign-in-facebook">
+                    <div class="facebook-logo"><img src="images/facebook-logo.png" alt=""></div>
+                    <a  href="https://www.facebook.com/v13.0/dialog/oauth?client_id=1345343302557931&redirect_uri=https://localhost:8443/FsoftOnlineShopping/login-facebook&scope=email,user_link">Sign in with Facebook</a>
                 </div>
             </div>
             <div class="spacer-line"><span>or Sign in with Username</span></div>
