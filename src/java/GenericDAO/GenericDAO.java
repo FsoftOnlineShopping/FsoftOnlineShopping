@@ -49,6 +49,7 @@ public class GenericDAO {
         } catch (SQLException e) {
             return null;
         } finally {
+            connection.setAutoCommit(true);
             if (connection != null) {
                 connection.close();
             }
@@ -109,6 +110,7 @@ public class GenericDAO {
             }
             return false;
         } finally {
+            connection.setAutoCommit(true);
             if (connection != null) {
                 connection.close();
             }
@@ -144,6 +146,7 @@ public class GenericDAO {
                 }
             }
         } finally {
+            connection.setAutoCommit(true);
             if (connection != null) {
                 connection.close();
             }
