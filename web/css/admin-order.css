@@ -1,0 +1,262 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 16, 2022, 8:36:14 AM
+    Author     : ADMIN
+*/
+
+.orders-title {
+  color: var(--text-bold);
+  margin-top: var(--m-4);
+  font-size: var(--h1-font-size);
+  font-weight: bold;
+}
+/* orders-status */
+.orders-status {
+  margin-top: var(--m-4);
+}
+.orders-status .order-card {
+  background-color: var(--white-color);
+  padding: var(--p-4);
+  margin-bottom: var(--m-3);
+  border-radius: var(--border-smaller);
+  min-width: 250px;
+  /* margin-right: var(--m-3); */
+  position: relative;
+  justify-content: space-around;
+  overflow: hidden;
+}
+.orders-status .order-card.border-green {
+  border-left: solid 4px #28a428;
+}
+.orders-status .order-card.border-blue {
+  border-left: solid 4px #3862e0;
+}
+.orders-status .order-card.border-orange {
+  border-left: solid 4px #ff674d;
+}
+.orders-status .order-card.border-red {
+  border-left: solid 4px #ff1a1a;
+}
+
+.order-card .icon {
+  color: var(--text-color);
+  font-size: var(--biggest-font-size);
+  margin-right: var(--m-6);
+  z-index: 1;
+  transition: 0.8s;
+}
+.order-card .body {
+  color: var(--text-color);
+  z-index: 1;
+  transition: 0.8s;
+}
+.order-card .number {
+  font-size: var(--biggest-font-size);
+  margin-bottom: var(--m-2);
+}
+/* Revenue Breakdown & Orders Status */
+.orders-analysis .card-header,
+.orders-status-analysis .card-header {
+  padding: var(--p-3);
+  background-color: #6200ea;
+  margin-top: var(--m-3);
+  border-top-left-radius: var(--border-normal);
+  border-top-right-radius: var(--border-normal);
+}
+.orders-analysis .card-title,
+.orders-status-analysis .card-title {
+  color: var(--white-color);
+  font-size: var(--h2-font-size);
+  margin-bottom: var(--m-1);
+}
+.orders-analysis .card-sub-title,
+.orders-status-analysis .card-sub-title {
+  color: var(--body-color);
+  opacity: 0.7;
+  font-size: var(--h3-font-size);
+}
+.orders-analysis .card-body,
+.orders-status-analysis .card-body {
+  padding: 0 var(--p-3);
+  background-color: var(--white-color);
+  border-bottom-left-radius: var(--border-normal);
+  border-bottom-right-radius: var(--border-normal);
+  height: 350px;
+  margin-bottom: var(--m-6);
+}
+.orders-analysis .card-body {
+  display: flex;
+  align-items: center;
+}
+.orders-status-analysis .card-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.orders-analysis .card-body .canvas-h-80 {
+  /* max-width: 500px; */
+  display: flex;
+}
+.orders-status-analysis .card-body .canvas-w-80 {
+  max-width: 300px;
+  /* max-height: 300px; */
+}
+
+.orders-analysis .actual-target-goal .title {
+  font-weight: 100;
+  color: var(--text-color);
+}
+.orders-analysis .actual-target-goal .number {
+  color: var(--text-bold);
+  font-size: var(--h2-font-size);
+}
+.actual-target-goal.positive .number {
+  color: #28a428;
+}
+.actual-target-goal.negative .number {
+  color: #ff1a1a;
+}
+/* Orders Table */
+.orders-overview .overview-header {
+  padding: var(--p-3);
+  background-color: #6200ea;
+  margin-top: var(--m-3);
+  border-top-left-radius: var(--border-normal);
+  border-top-right-radius: var(--border-normal);
+}
+.orders-overview .overview-title {
+  color: var(--white-color);
+  font-size: var(--h2-font-size);
+  margin-bottom: var(--m-1);
+}
+.orders-overview .overview-sub-title {
+  color: var(--body-color);
+  opacity: 0.7;
+  font-size: var(--h3-font-size);
+}
+.overview-function {
+  margin-bottom: var(--m-3);
+}
+.search,
+.sort-by,
+.filter {
+  margin-right: var(--m-3);
+}
+.sort-by label,
+.filter label {
+  color: var(--text-header);
+  margin-right: var(--m-1);
+}
+.overview-body {
+  background-color: var(--white-color);
+  padding: var(--m-3);
+  margin-bottom: var(--m-4);
+}
+/* orders status */
+.table-orders-overview .status {
+  background-color: var(--text-color);
+  color: var(--body-color);
+  padding: var(--p-1) var(--p-1);
+  border-radius: var(--border-small);
+  font-size: var(--smaller-font-size);
+}
+
+/* Mobile & table small*/
+@media screen and (max-width: 768px) {
+  .income-analysis {
+    padding: var(--p-2);
+  }
+  .card-body{
+    overflow-x: scroll;
+    overflow-y: scroll;
+  }
+  .card-body-over{
+    min-width: 400px;
+  }
+  .card-body::-webkit-scrollbar{
+    height: 5px;
+    width: 5px;
+  }
+  /* Track */
+  .card-body::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+  /* Handle */
+  .card-body::-webkit-scrollbar-thumb {
+    background: var(--text-color);
+    border-radius: 10px;
+  }
+  /* Handle on hover */
+  .card-body::-webkit-scrollbar-thumb:hover {
+    background: var(--text-header);
+  }
+  .actual-target-goal{
+    margin-bottom: var(--m-2);
+  }
+  .orders-analysis .card-body, .orders-status-analysis .card-body{
+    height: 450px;
+  }
+  .orders-status-analysis .card-body{
+    justify-content: unset;
+  }
+}
+/* Mobile < 740px */
+@media (max-width: 739px) {
+  .orders-status-analysis .card-body{
+    justify-content: center;
+  }
+  .orders-status-analysis .card-body{
+    height: 350px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .orders-status .order-card {
+    margin-right: 0;
+    min-width: 150px;
+  }
+  .orders-status .order-card .content {
+    white-space: nowrap;
+  }
+
+  .orders-status-analysis .card-body .canvas-w-80 {
+    max-width: 250px;
+    /* max-height: 300px; */
+  }
+  .orders-overview .overview-body {
+    overflow-x: scroll;
+  }
+  .orders-overview .table-orders-overview,
+  .orders-overview .overview-function,
+  .orders-overview .view-all {
+    min-width: 1070px;
+  }
+  .overview-body::-webkit-scrollbar{
+    height: 5px;
+  }
+  /* Track */
+  .overview-body::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+
+  /* Handle */
+  .overview-body::-webkit-scrollbar-thumb {
+    background: var(--text-color);
+    border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  .overview-body::-webkit-scrollbar-thumb:hover {
+    background: var(--text-header);
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .orders-analysis .card-body,
+  .orders-status-analysis .card-body {
+    height: 500px;
+  }
+}
