@@ -11,7 +11,7 @@
 					<a href="index.html">Home</a>
 					<ul class="sub-menu-m">
 						<li><a href="index.html">Homepage 1</a></li>
-						<li><a href="home-02.html">Homepage 2</a></li>
+						<li><a href="home-02.jsp">Homepage 2</a></li>
 						<li><a href="home-03.html">Homepage 3</a></li>
 					</ul>
 					<span class="arrow-main-menu-m">

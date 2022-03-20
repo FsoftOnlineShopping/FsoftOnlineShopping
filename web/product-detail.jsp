@@ -4,7 +4,14 @@
     Author     : ADMIN
 --%>
 
+<%@page import="DAO.Account.AccountDAO"%>
+<%@page import="Model.ProductComment"%>
+<%@page import="java.util.List"%>
+<%@page import="Model.Account"%>
+<%@page import="DAO.Product.ProductDAO"%>
+<%@page import="Model.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,6 +48,17 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
+
+<%
+    Account account = new Account();
+    account = (Account) session.getAttribute("currentAccount");
+    String pid = request.getParameter("productID");
+    int id = Integer.parseInt(pid);
+    Product pro = new ProductDAO().getProductById(id);
+    List<ProductComment> getListCommentByProID = new ProductDAO().getListCommentByProID(pro.getProductID());  
+    int size = getListCommentByProID.size();
+%>
+
 </head>
 <body class="animsition">
 	
@@ -65,13 +83,14 @@
 			</a>
 
 			<span class="stext-109 cl4">
-				Lightweight Jacket
+				<%= pro.getProductName() %>
 			</span>
 		</div>
 	</div>
 		
 
 	<!-- Product Detail -->
+        <form name="f" action="" method="post">
 	<section class="sec-product-detail bg0 p-t-65 p-b-60">
 		<div class="container">
 			<div class="row">
@@ -82,11 +101,11 @@
 							<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
 							<div class="slick3 gallery-lb">
-								<div class="item-slick3" data-thumb="images/product-detail-01.jpg">
+								<div class="item-slick3" data-thumb="<%= pro.getImageFolder()%>/front.jpg">
 									<div class="wrap-pic-w pos-relative">
-										<img src="images/product-detail-01.jpg" alt="IMG-PRODUCT">
+										<img src="<%= pro.getImageFolder()%>/front.jpg" alt="IMG-PRODUCT">
 
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-01.jpg">
+										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="<%= pro.getImageFolder()%>/front.jpg">
 											<i class="fa fa-expand"></i>
 										</a>
 									</div>
@@ -115,82 +134,89 @@
 						</div>
 					</div>
 				</div>
-					
-				<div class="col-md-6 col-lg-5 p-b-30">
-					<div class="p-r-50 p-t-5 p-lr-0-lg">
-						<h4 class="mtext-105 cl2 js-name-detail p-b-14">
-							Lightweight Jacket
-						</h4>
+				
+                               
+                                    <div class="col-md-6 col-lg-5 p-b-30">
+                                        <div class="p-r-50 p-t-5 p-lr-0-lg">
+                                            <h4 class="mtext-105 cl2 js-name-detail p-b-14">
+                                                <%= pro.getProductName()%>
+                                            </h4>
+                                            <span class="mtext-106 cl2">
+                                                $<%= pro.getProductPrice()%>
+                                            </span>
 
-						<span class="mtext-106 cl2">
-							$58.79
-						</span>
+                                            <p class="stext-102 cl3 p-t-23">
+                                                <%= pro.getProductDescription()%>
+                                            </p>
 
-						<p class="stext-102 cl3 p-t-23">
-							Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
-						</p>
-						
-						<!--  -->
-						<div class="p-t-33">
-							<div class="flex-w flex-r-m p-b-10">
-								<div class="size-203 flex-c-m respon6">
-									Size
-								</div>
+                                            <!--  -->
+                                            <div class="p-t-33">
+                                                <div class="flex-w flex-r-m p-b-10">
+                                                    <div class="size-203 flex-c-m respon6">
+                                                        Size
+                                                    </div>
 
-								<div class="size-204 respon6-next">
-									<div class="rs1-select2 bor8 bg0">
-										<select class="js-select2" name="time">
-											<option>Choose an option</option>
-											<option>Size S</option>
-											<option>Size M</option>
-											<option>Size L</option>
-											<option>Size XL</option>
-										</select>
-										<div class="dropDownSelect2"></div>
-									</div>
-								</div>
-							</div>
+                                                    <div class="size-204 respon6-next">
+                                                        <div class="rs1-select2 bor8 bg0">
+                                                            <select class="js-select2" name="time">
+                                                                <option>Choose an option</option>
+                                                                <option>Size S</option>
+                                                                <option>Size M</option>
+                                                                <option>Size L</option>
+                                                                <option>Size XL</option>
+                                                            </select>
+                                                            <div class="dropDownSelect2"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-							<div class="flex-w flex-r-m p-b-10">
-								<div class="size-203 flex-c-m respon6">
-									Color
-								</div>
+                                                <div class="flex-w flex-r-m p-b-10">
+                                                    <div class="size-203 flex-c-m respon6">
+                                                        Color
+                                                    </div>
 
-								<div class="size-204 respon6-next">
-									<div class="rs1-select2 bor8 bg0">
-										<select class="js-select2" name="time">
-											<option>Choose an option</option>
-											<option>Red</option>
-											<option>Blue</option>
-											<option>White</option>
-											<option>Grey</option>
-										</select>
-										<div class="dropDownSelect2"></div>
-									</div>
-								</div>
-							</div>
+                                                    <div class="size-204 respon6-next">
+                                                        <div class="rs1-select2 bor8 bg0">
+                                                            <select class="js-select2" name="time">
+                                                                <option>Choose an option</option>
+                                                                <option>Red</option>
+                                                                <option>Blue</option>
+                                                                <option>White</option>
+                                                                <option>Grey</option>
+                                                            </select>
+                                                            <div class="dropDownSelect2"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-							<div class="flex-w flex-r-m p-b-10">
-								<div class="size-204 flex-w flex-m respon6-next">
-									<div class="wrap-num-product flex-w m-r-20 m-tb-10">
-										<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-											<i class="fs-16 zmdi zmdi-minus"></i>
-										</div>
+                                                <div class="flex-w flex-r-m p-b-10">
+                                                    <div class="size-204 flex-w flex-m respon6-next">
+                                                        <div class="wrap-num-product flex-w m-r-20 m-tb-10">
+                                                            <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                                                                <i class="fs-16 zmdi zmdi-minus"></i>
+                                                            </div>
 
-										<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
+                                                            <input class="mtext-104 cl3 txt-center num-product" type="number" name="num" value="1">
 
-										<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-											<i class="fs-16 zmdi zmdi-plus"></i>
-										</div>
-									</div>
-
-									<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-										Add to cart
-									</button>
-								</div>
-							</div>	
-						</div>
-
+                                                            <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                                                <i class="fs-16 zmdi zmdi-plus"></i>
+                                                            </div>
+                                                        </div>
+                                                        <% 
+                                                            if(account != null){
+                                                                out.print("<button class=\"flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail\"  type=\"submit\" onclick=\"buy(" + pro.getProductID() + ")\"  value=\"Add to cart\">Add to cart</button>");
+                                                            }else{
+                                                                 out.print("<div class=\"flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 \"  onclick=\"showModal()\" >Add to cart</div>");
+                                                            }
+                                                        %>     
+<!--                                                    <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"  
+                                                                type="submit" onclick="buy(<%=pro.getProductID()%>)"  value="Add to cart">
+                                                                    Add to cart
+                                                         </button>-->
+                                                    </div>
+                                                </div>	
+                                            </div>
+                                                                                      
 						<!--  -->
 						<div class="flex-w flex-m p-l-100 p-t-40 respon7">
 							<div class="flex-m bor9 p-r-10 m-r-11">
@@ -214,6 +240,7 @@
 					</div>
 				</div>
 			</div>
+        </form>
 
 			<div class="bor10 m-t-50 p-t-43 p-b-40">
 				<!-- Tab01 -->
@@ -229,7 +256,7 @@
 						</li>
 
 						<li class="nav-item p-b-10">
-							<a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Reviews (1)</a>
+							<a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Reviews (<%= size %>)</a>
 						</li>
 					</ul>
 
@@ -309,40 +336,94 @@
 								<div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
 									<div class="p-b-30 m-lr-15-sm">
 										<!-- Review -->
+                                                                                <%
+                                                                                    for (ProductComment pc : getListCommentByProID) {
+                                                                                        Account getAccountByUserName = new AccountDAO().getAccountByUserName(pc.getUserName());
+                                                                                %>
 										<div class="flex-w flex-t p-b-68">
 											<div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
-												<img src="images/avatar-01.jpg" alt="AVATAR">
+                                                                                            <img style="object-fit: cover;" src="<%= getAccountByUserName.getUserAvatar() %>" alt="AVATAR">
 											</div>
 
 											<div class="size-207">
 												<div class="flex-w flex-sb-m p-b-17">
 													<span class="mtext-107 cl2 p-r-20">
-														Ariana Grande
+														<%= getAccountByUserName.getUserFullname() %>
 													</span>
-
-													<span class="fs-18 cl11">
-														<i class="zmdi zmdi-star"></i>
-														<i class="zmdi zmdi-star"></i>
-														<i class="zmdi zmdi-star"></i>
-														<i class="zmdi zmdi-star"></i>
-														<i class="zmdi zmdi-star-half"></i>
-													</span>
+                                                                                                        
+                                                                                                        <c:choose>
+                                                                                                            <c:when test = "<%= pc.getRating() == 0 %>">
+                                                                                                                <span class="fs-18 cl11">
+                                                                                                                    <i class="zmdi zmdi-star-outline"></i>
+                                                                                                                    <i class="zmdi zmdi-star-outline"></i>
+                                                                                                                    <i class="zmdi zmdi-star-outline"></i>
+                                                                                                                    <i class="zmdi zmdi-star-outline"></i>
+                                                                                                                    <i class="zmdi zmdi-star-outline"></i>
+                                                                                                                </span>
+                                                                                                            </c:when>
+                                                                                                            <c:when test = "<%= pc.getRating() == 1 %>">
+                                                                                                                <span class="fs-18 cl11">
+                                                                                                                    <i class="zmdi zmdi-star"></i>
+                                                                                                                    <i class="zmdi zmdi-star-outline"></i>
+                                                                                                                    <i class="zmdi zmdi-star-outline"></i>
+                                                                                                                    <i class="zmdi zmdi-star-outline"></i>
+                                                                                                                    <i class="zmdi zmdi-star-outline"></i>
+                                                                                                                </span>
+                                                                                                            </c:when>
+                                                                                                            <c:when test = "<%= pc.getRating() == 2 %>">
+                                                                                                                <span class="fs-18 cl11">
+                                                                                                                    <i class="zmdi zmdi-star"></i>
+                                                                                                                    <i class="zmdi zmdi-star"></i>
+                                                                                                                    <i class="zmdi zmdi-star-outline"></i>
+                                                                                                                    <i class="zmdi zmdi-star-outline"></i>
+                                                                                                                    <i class="zmdi zmdi-star-outline"></i>
+                                                                                                                </span>
+                                                                                                            </c:when>
+                                                                                                            <c:when test = "<%= pc.getRating() == 3 %>">
+                                                                                                                <span class="fs-18 cl11">
+                                                                                                                    <i class="zmdi zmdi-star"></i>
+                                                                                                                    <i class="zmdi zmdi-star"></i>
+                                                                                                                    <i class="zmdi zmdi-star"></i>
+                                                                                                                    <i class="zmdi zmdi-star-outline"></i>
+                                                                                                                    <i class="zmdi zmdi-star-outline"></i>
+                                                                                                                </span>
+                                                                                                            </c:when>
+                                                                                                            <c:when test = "<%= pc.getRating() == 4 %>">
+                                                                                                                <span class="fs-18 cl11">
+                                                                                                                    <i class="zmdi zmdi-star"></i>
+                                                                                                                    <i class="zmdi zmdi-star"></i>
+                                                                                                                    <i class="zmdi zmdi-star"></i>
+                                                                                                                    <i class="zmdi zmdi-star"></i>
+                                                                                                                    <i class="zmdi zmdi-star-outline"></i>
+                                                                                                                </span>
+                                                                                                            </c:when>
+                                                                                                            <c:when test = "<%= pc.getRating() == 5 %>">
+                                                                                                                <span class="fs-18 cl11">
+                                                                                                                    <i class="zmdi zmdi-star"></i>
+                                                                                                                    <i class="zmdi zmdi-star"></i>
+                                                                                                                    <i class="zmdi zmdi-star"></i>
+                                                                                                                    <i class="zmdi zmdi-star"></i>
+                                                                                                                    <i class="zmdi zmdi-star"></i>
+                                                                                                                </span>
+                                                                                                            </c:when>
+                                                                                                        </c:choose>
 												</div>
 
 												<p class="stext-102 cl6">
-													Quod autem in homine praestantissimum atque optimum est, id deseruit. Apud ceteros autem philosophos
+													<%= pc.getCommentContent() %>
 												</p>
 											</div>
 										</div>
+                                                                                <%}%>
 										
 										<!-- Add review -->
-										<form class="w-full">
+										<form class="w-full" action="addcomment" method="post">
 											<h5 class="mtext-108 cl2 p-b-7">
 												Add a review
 											</h5>
 
 											<p class="stext-102 cl6">
-												Your email address will not be published. Required fields are marked *
+												Please share with us what you think about this product!
 											</p>
 
 											<div class="flex-w flex-m p-t-50 p-b-23">
@@ -363,24 +444,16 @@
 											<div class="row p-b-25">
 												<div class="col-12 p-b-5">
 													<label class="stext-102 cl3" for="review">Your review</label>
-													<textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="review" name="review"></textarea>
-												</div>
-
-												<div class="col-sm-6 p-b-5">
-													<label class="stext-102 cl3" for="name">Name</label>
-													<input class="size-111 bor8 stext-102 cl2 p-lr-20" id="name" type="text" name="name">
-												</div>
-
-												<div class="col-sm-6 p-b-5">
-													<label class="stext-102 cl3" for="email">Email</label>
-													<input class="size-111 bor8 stext-102 cl2 p-lr-20" id="email" type="text" name="email">
+													<textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="comment" name="comment"></textarea>
 												</div>
 											</div>
-
-											<button class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10">
-												Submit
+                                                                                        
+                                                                                        <input type="hidden" name="commentProID" value="<%=pro.getProductID()%>">
+                                                                                        
+											<button class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10" >
+												Post
 											</button>
-										</form>
+                                                                                </form>
 									</div>
 								</div>
 							</div>
@@ -400,6 +473,7 @@
 			</span>
 		</div>
 	</section>
+
 
 
 	<!-- Related Products -->
@@ -701,7 +775,7 @@
 						<div class="p-l-25 p-r-30 p-lr-0-lg">
 							<div class="wrap-slick3 flex-sb flex-w">
 								<div class="wrap-slick3-dots"></div>
-								<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
+								<div style="z-index:1" class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
 								<div class="slick3 gallery-lb">
 									<div class="item-slick3" data-thumb="images/product-detail-01.jpg">
@@ -839,7 +913,9 @@
 			</div>
 		</div>
 	</div>
-
+        <div  onclick="exit()" id="modalSignIn" style=" z-index: 10; display: none; align-items: center; justify-content: center; position: absolute; top:0; left: 0; bottom: 0; right: 0;  background-color: rgba(0,0,0,0.6)" >
+            <h3 onclick="exit()" style="margin-top: 124px; padding: 40px; background-color: #6c7ae0; border-radius: 5px"> <a style="color:#fff" href="login.jsp">Please Sign in</a></h3>
+        </div>
 <!--===============================================================================================-->	
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
@@ -939,8 +1015,74 @@
 			})
 		});
 	</script>
+        
+        <script type="text/javascript">
+            function buy(productID) {
+                document.f.action="buy?productID=" + productID;
+                document.f.submit();
+            }
+        </script>
+        
+        <script>
+            function showModal(){
+                var modalSignIn = document.getElementById("modalSignIn");
+                modalSignIn.style.transition = "5s";
+                modalSignIn.style.display="flex";
+            }
+            function exit(){
+                var modalSignIn = document.getElementById("modalSignIn");
+                modalSignIn.style.display="none";
+            }
+        </script>
+        
+        <script>
+            function loadAjax(){
+                var comment= document.getElementById("comment").value;
+                if(comment.trim()==""){
+                    alert("All fields are Required");
+                    return false;
+                }
+                var url="ajaxrequestPage.jsp?username=";
+                if(window.XMLHttpRequest){
+                    request = new XMLHttpRequest();
+                } else if(window.ActiveXObject){
+                    request = new ActiveXObject("Microsoft.XMLHTTP");
+                }			
+                try{
+                    request.onreadystatechange=sendInfo;
+                    request.open("POST",url,true);
+                    request.send();
+                } catch(e){
+                    document.write(e);
+                }			
+            }
+            
+            function sendInfo(){
+                var p =	document.getElementById("print");
+
+                if(request.readyState ==1){
+                        var text = request.responseText;
+                        p.innerHTML="Please Wait...";
+                        console.log("1");
+                }
+
+                if(request.readyState ==2){
+                        var text = request.responseText;
+                        console.log("2");				
+                }
+                if(request.readyState ==3){
+                        var text = request.responseText;
+                        console.log("3");				
+                }
+                if(request.readyState ==4){
+                        var text = request.responseText;
+                        p.innerHTML=" Your Comment has been Posted  "+text;
+                }
+            }
+        </script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
 
 </body>
 </html>
+
