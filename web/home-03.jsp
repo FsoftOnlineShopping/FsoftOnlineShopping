@@ -43,7 +43,7 @@
 <!--===============================================================================================-->
 </head>
 <body class="animsition">
-	
+<c:set var="size" value="${sessionScope.size}"></c:set>	
 	<!-- Header -->
 	<header class="header-v3">
 		<!-- Header desktop -->
@@ -62,7 +62,7 @@
 					<!-- Icon header -->
 					<div class="wrap-icon-header flex-w flex-r-m h-full">							
 						<div class="flex-c-m h-full p-r-25 bor6">
-							<div class="icon-header-item cl0 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart" data-notify="2">
+							<div class="icon-header-item cl0 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart" data-notify="${size}">
 								<i class="zmdi zmdi-shopping-cart"></i>
 							</div>
 						</div>
@@ -87,7 +87,7 @@
 			<!-- Icon header -->
 			<div class="wrap-icon-header flex-w flex-r-m h-full m-r-15">
 				<div class="flex-c-m h-full p-r-5">
-					<div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart" data-notify="2">
+					<div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart" data-notify="${size}">
 						<i class="zmdi zmdi-shopping-cart"></i>
 					</div>
 				</div>

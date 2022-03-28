@@ -7,6 +7,7 @@ package Test;
  */
 import Controller.Authen_Author.ResetPasswordEmailAPI;
 import DAO.Account.AccountDAO;
+import DAO.Product.ProductDAO;
 import GenericDAO.GenericDAO;
 import Mail.resetPasswordEmail;
 import java.sql.SQLException;
@@ -29,6 +30,5 @@ public class TestAccountDAO {
 //        System.out.println(AccountDAO.hashPassword("admin"));
 //        System.out.println(AccountDAO.isHaveUserName("quang7"));
 //        System.out.println(AccountDAO.updateUserInfo("103523771469159071556", "quanglnnde150066@fpt.edu.vn", "103523771469159071556", "103523771469159071556", "103523771469159071556", ""));
-
     }
 }

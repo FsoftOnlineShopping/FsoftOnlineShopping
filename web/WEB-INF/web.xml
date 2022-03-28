@@ -32,6 +32,22 @@
         <servlet-name>LoginFacebook</servlet-name>
         <servlet-class>Controller.Authen_Author.LoginFacebook</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BuyServlet</servlet-name>
+        <servlet-class>Controller.Shopping_Cart.BuyServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCartServlet</servlet-name>
+        <servlet-class>Controller.Shopping_Cart.DeleteCartServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditCartProductServlet</servlet-name>
+        <servlet-class>Controller.Shopping_Cart.EditCartProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddComment</servlet-name>
+        <servlet-class>Controller.Shopping_Cart.AddComment</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NewServlet</servlet-name>
         <url-pattern>/NewServlet</url-pattern>
@@ -60,7 +76,7 @@
         <servlet-name>ResetPasswordAPI</servlet-name>
         <url-pattern>/api-resetPassword</url-pattern>
     </servlet-mapping>
-    <security-constraint>
+    <!--        <security-constraint>
         <web-resource-collection>
             <web-resource-name>FsoftOnlineShopping</web-resource-name>
             <url-pattern>/*</url-pattern>
@@ -69,10 +85,26 @@
         <user-data-constraint>
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
-    </security-constraint>
+    </security-constraint>-->
     <servlet-mapping>
         <servlet-name>LoginFacebook</servlet-name>
         <url-pattern>/login-facebook</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BuyServlet</servlet-name>
+        <url-pattern>/buy</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCartServlet</servlet-name>
+        <url-pattern>/deletecart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditCartProductServlet</servlet-name>
+        <url-pattern>/editcartproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddComment</servlet-name>
+        <url-pattern>/addcomment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
