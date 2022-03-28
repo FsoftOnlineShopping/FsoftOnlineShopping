@@ -26,26 +26,26 @@
                         <span class="title">Orders</span>
                     </a>
                 </li>
-                <li class="nav__item">
+<!--                <li class="nav__item">
                     <a href="#" class="nav__link d-flex">
                         <span class="icon"><i class='bx bx-line-chart'></i></span>
                         <span class="title">Statistics</span>
                     </a>
-                </li>
+                </li>-->
                 <li class="nav__item">
-                    <a href="#" class="nav__link d-flex">
+                    <a href="admin-product.jsp" class="nav__link d-flex">
                         <span class="icon"><i class='bx bx-package'></i></span>
                         <span class="title">Products</span>
                     </a>
                 </li>
                 <li class="nav__item">
-                    <a href="#" class="nav__link d-flex">
+                    <a href="admin-account.jsp" class="nav__link d-flex">
                         <span class="icon"><i class='bx bx-user'></i></span>
                         <span class="title">Accounts</span>
                     </a>
                 </li>
                 <li class="nav__item">
-                    <a href="#" class="nav__link d-flex">
+                    <a href="admin-category.jsp" class="nav__link d-flex">
                         <span class="icon"><i class='bx bx-category'></i></span>
                         <span class="title">Category</span>
                     </a>

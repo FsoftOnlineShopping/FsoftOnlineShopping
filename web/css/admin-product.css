@@ -1,0 +1,204 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 27, 2022, 11:49:51 PM
+    Author     : ADMIN
+*/
+
+
+.product-title {
+  color: var(--text-bold);
+  margin-top: var(--m-4);
+  font-size: var(--h1-font-size);
+  font-weight: bold;
+  margin-bottom: var(--m-4);
+}
+/* Overview funciton */
+.overview-function {
+  margin-bottom: var(--m-3);
+}
+.search,
+.sort-by,
+.filter {
+  margin-right: var(--m-3);
+}
+.sort-by label,
+.filter label {
+  color: var(--text-header);
+  margin-right: var(--m-1);
+}
+/* Product list */
+.product-item{
+  margin-bottom: var(--m-2);
+}
+.product-item .image-part {
+  position: relative;
+}
+.product-item .image-part .image {
+  height: 250px;
+  border-radius: var(--border-normal);
+}
+.product-item .image-part .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--border-normal);
+}
+.product-item .image-part .options {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+}
+.options .delete,
+.options .edit {
+  padding: var(--p-1);
+  margin-bottom: var(--m-1);
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.options .delete:hover,
+.options .edit:hover {
+  background-color: var(--primary-color);
+}
+.options .delete i,
+.options .edit i {
+  color: #fff;
+  font-size: var(--h2-font-size);
+}
+/* item body */
+.product-list .body-part .item-title {
+  margin-top: var(--m-2);
+  height: 50px;
+  overflow: hidden;
+  color: var(--text-header);
+}
+.product-list .body-part .item-price {
+  color: var(--primary-color);
+}
+/* Modal */
+.modal {
+  position: fixed;
+  background-color: var(--body-color);
+  z-index: 11;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+  padding: var(--p-4);
+  top: 20px;
+  border-radius: var(--border-normal);
+  overflow-y: scroll;
+  transition: opacity 0.3s ease-out;
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+}
+.modal.active {
+  opacity: 1;
+  height: auto;
+  max-height: 670px;
+  overflow-y: scroll;
+}
+.modal::-webkit-scrollbar {
+  width: 0px;
+}
+body{
+  position: relative;
+}
+.modal-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 10;
+  transition: opacity 0.3s ease-out;
+  opacity: 0;
+  overflow: hidden;
+  height: 0;
+}
+.modal-cover.active {
+  opacity: 1;
+  height: auto;
+}
+.modal-title {
+  font-size: var(--h1-font-size);
+  padding-bottom: var(--p-1);
+  margin-bottom: var(--m-1);
+  border-bottom: 1px solid #ccc;
+  color: var(--text-bold);
+}
+.modal-image-all {
+  color: var(--text-header);
+  margin-bottom: var(--m-2);
+  height: 150px;
+  overflow-y: scroll;
+  border-radius: var(--border-normal);
+}
+.modal-image-all::-webkit-scrollbar {
+  width: 0px;
+}
+.modal-image-all img {
+  width: 100%;
+  border-radius: var(--border-normal);
+}
+.modal-name {
+  color: var(--text-header);
+  margin-bottom: var(--m-2);
+}
+.modal-description {
+  color: var(--text-header);
+  margin-bottom: var(--m-2);
+}
+.modal-category {
+  color: var(--text-header);
+  margin-bottom: var(--m-2);
+}
+.modal-number {
+  color: var(--text-header);
+  margin-bottom: var(--m-2);
+}
+.modal-price {
+  color: var(--text-header);
+  margin-bottom: var(--m-2);
+}
+.modal-image {
+  color: var(--text-header);
+  margin-bottom: var(--m-2);
+}
+.modal-button {
+  text-align: end;
+}
+.modal-button button {
+  background-color: #6200ea;
+  color: #fff;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.modal-button button:hover {
+  background-color: var(--primary-color);
+}
+.modal-name div,
+.modal-description div,
+.modal-category div,
+.modal-number div,
+.modal-price div,
+.modal-image div {
+  margin-bottom: var(--m-1);
+}
+.modal-name input,
+.modal-description input,
+.modal-number input,
+.modal-price input,
+.modal-image input {
+  width: 100%;
+}
