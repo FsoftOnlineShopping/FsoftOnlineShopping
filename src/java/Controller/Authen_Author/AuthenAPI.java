@@ -8,6 +8,7 @@ package Controller.Authen_Author;
 import DAO.Account.AccountDAO;
 import Utils.HttpUtil;
 import Model.Account;
+import ModelResponse.AccountResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -89,14 +90,23 @@ public class AuthenAPI extends HttpServlet {
         System.out.println(account);
         try {
             Account currentAccount = AccountDAO.checkLogin(account.getUserName(), account.getUserPassword());
-
+            AccountResponse currentAccountResponse = null;
             if (currentAccount != null) {
 //                System.out.println(currentAccount);
+                 currentAccountResponse = 
+                        new AccountResponse(currentAccount.getUserEmail(), 
+                                currentAccount.getUserFullname(), 
+                                currentAccount.getUserAddress(), 
+                                currentAccount.getUserAvatar(),
+                                currentAccount.getUserFacebook(),
+                                currentAccount.getUserRole(),
+                                currentAccount.getAccountState());
                 HttpSession session = request.getSession();
                 session.setAttribute("currentAccount", currentAccount);
             }
+           
             ObjectMapper mapper = new ObjectMapper();
-            String currentAccountJson = mapper.writeValueAsString(currentAccount);
+            String currentAccountJson = mapper.writeValueAsString(currentAccountResponse);
             PrintWriter out = response.getWriter();
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");

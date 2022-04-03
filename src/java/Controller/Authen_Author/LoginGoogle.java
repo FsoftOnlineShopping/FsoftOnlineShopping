@@ -8,7 +8,9 @@ package Controller.Authen_Author;
 import DAO.Account.AccountDAO;
 import Model.Account;
 import Model.GG_OAuth2_UserClaims;
+import ModelResponse.AccountResponse;
 import Utils.GoogleMailUtils;
+import Utils.PasswordUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.io.IOException;
@@ -80,14 +82,24 @@ public class LoginGoogle extends HttpServlet {
             GG_OAuth2_UserClaims googlePojo = GoogleMailUtils.getUserInfo(accessToken);
             int createState = -1;
             Account currentAccount = null;
+            AccountResponse currentAccountResponse = null;
             try {
                 if (!AccountDAO.isHaveUserName(googlePojo.getSub())) {
-                    createState = AccountDAO.createAccount(googlePojo.getSub(), googlePojo.getSub(), googlePojo.getEmail());
+                    String password = PasswordUtils.generatePassword(8, true, true, true, true);
+                    createState = AccountDAO.createAccount(googlePojo.getSub(), password, googlePojo.getEmail());
                     if(createState == 0){
                         AccountDAO.updateUserInfo(googlePojo.getSub(), googlePojo.getEmail(), googlePojo.getName(), googlePojo.getLocale(), googlePojo.getPicture(), "");
                     }
                 }
                 currentAccount = AccountDAO.getAccountByUserName(googlePojo.getSub());
+                currentAccountResponse = 
+                        new AccountResponse(currentAccount.getUserEmail(), 
+                                currentAccount.getUserFullname(), 
+                                currentAccount.getUserAddress(), 
+                                currentAccount.getUserAvatar(),
+                                currentAccount.getUserFacebook(),
+                                currentAccount.getUserRole(),
+                                currentAccount.getAccountState());
             } catch (SQLException ex) {
                 Logger.getLogger(LoginGoogle.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -100,7 +112,7 @@ public class LoginGoogle extends HttpServlet {
 //            ObjectNode rootNode = mapper.createObjectNode();
 //            rootNode.put("currentAccount", currentAccount.toString());
 
-            String dataReturn = mapper.writeValueAsString(currentAccount);
+            String dataReturn = mapper.writeValueAsString(currentAccountResponse);
             
             
             request.setAttribute("currentAccount", dataReturn);

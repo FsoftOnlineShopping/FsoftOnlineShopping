@@ -48,6 +48,10 @@
         <servlet-name>AddComment</servlet-name>
         <servlet-class>Controller.Shopping_Cart.AddComment</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminDashboardAPI</servlet-name>
+        <servlet-class>Controller.Admin_Dashboard.AdminDashboardAPI</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NewServlet</servlet-name>
         <url-pattern>/NewServlet</url-pattern>
@@ -105,6 +109,10 @@
     <servlet-mapping>
         <servlet-name>AddComment</servlet-name>
         <url-pattern>/addcomment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminDashboardAPI</servlet-name>
+        <url-pattern>/admin-dashboard-api</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -41,11 +41,13 @@ public class AccountDAO extends GenericDAO {
         }
         return null;
     }
-    public static boolean isHaveUserName(String userName) throws SQLException{
+
+    public static boolean isHaveUserName(String userName) throws SQLException {
         String sql = "select * from Account where userName = ?";
         List<Account> listAccount = query(sql, new AccountMapper(), userName);
         return !listAccount.isEmpty();
     }
+
     //UserRole 1: Admin, 0:User
     //AccountState 1: Active, 0: Deleted    
     public static int createAccount(String userName, String password, String userEmail) throws SQLException {
@@ -77,4 +79,11 @@ public class AccountDAO extends GenericDAO {
         return passwordHash;
     }
 
+    public static int countNewUsers(int dayMax) throws SQLException {
+        String sql = "select *\n"
+                + "from Account\n"
+                + "where DATEDIFF(day, userCreateDate, GETDATE()) < ?";
+        List<Account> listAccount = query(sql, new AccountMapper(), dayMax);
+        return !listAccount.isEmpty() ? listAccount.size(): 0;
+    }
 }

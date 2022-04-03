@@ -217,6 +217,64 @@
         a{
                 text-decoration: none;
             }
+            
+            .loader {
+                border: 1rem solid #f3f3f3;
+                border-radius: 50%;
+                border-top: 1rem solid #717fe0;
+                border-bottom: 1rem solid #636d77;
+                width: 120px;
+                height: 120px;
+                -webkit-animation: spin 1.5s linear infinite;
+                /* Safari */
+                animation: spin 1.5s linear infinite;
+                margin-bottom: 1rem;
+                display:flex;
+                justify-content: center;
+                align-items: center;
+                margin: auto;
+            }
+            .loader-2 {
+                border: 1rem solid #f3f3f3;
+                border-radius: 50%;
+                border-left: 1rem solid #717fe0;
+                border-right: 1rem solid #636d77;
+                width: 80px;
+                height: 80px;
+                -webkit-animation: spin 1.5s linear infinite;
+                /* Safari */
+                animation: spin 1.5s linear infinite;
+            }
+
+            /* Safari */
+            @-webkit-keyframes spin {
+                0% {
+                    -webkit-transform: rotate(0deg);
+                }
+
+                100% {
+                    -webkit-transform: rotate(360deg);
+                }
+            }
+
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+            .processing{
+                text-align: center;
+                margin: auto;
+                display: none;
+            }
+            .processing span{
+                font-weight: bold;
+                font-size: 2rem;
+            }
     </style>
 </head>
 
@@ -274,8 +332,12 @@
             <p class="desc-footer">Not created yet? <a href="register.jsp">Create an account</a></p>
             <div class="back-home"><a href="" >Go back Home</a></div>
         </form>
-
+        <div class="processing">
+                <div class="loader"><div class="loader-2"></div></div>
+                <span>Hold on. We are processing...</span>
+        </div>
     </div>
+    
     <script src="js/formValidation.js"></script>
     <script>
         // Mong muon của chúng ta khi sử dụng thư viện
