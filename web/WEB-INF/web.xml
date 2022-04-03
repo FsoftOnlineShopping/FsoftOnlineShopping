@@ -16,6 +16,10 @@
         <servlet-name>RegisterAPI</servlet-name>
         <servlet-class>Controller.Authen_Author.RegisterAPI</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ResetPasswordEmailAPI</servlet-name>
+        <servlet-class>Controller.Authen_Author.ResetPasswordEmailAPI</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NewServlet</servlet-name>
         <url-pattern>/NewServlet</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>RegisterAPI</servlet-name>
         <url-pattern>/api-register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPasswordEmailAPI</servlet-name>
+        <url-pattern>/api-resetPasswordEmail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

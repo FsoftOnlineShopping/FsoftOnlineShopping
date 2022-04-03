@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,15 +57,20 @@
 		<div class="container">
 			<div class="flex-w flex-sb-m p-b-52">
 				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
+                          
+                                    
+					<button onclick="location.href='ProductControl';" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${empty categoryID ? "how-active1" : ""} " data-filter="*">
 						All Products
 					</button>
-
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
-						Women
+                                 
+                                    <c:forEach items="${listC}" var="e">
+                                        
+					<button onclick="location.href='CategoryControl?categoryID=${e.categoryID}';" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${e.categoryID == categoryID ? "how-active1" : ""}" data-filter=".women">
+						${e.categoryName}
 					</button>
-
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
+                                        
+                                    </c:forEach>
+<!--					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
 						Men
 					</button>
 
@@ -78,7 +84,7 @@
 
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".watches">
 						Watches
-					</button>
+					</button>-->
 				</div>
 
 				<div class="flex-w flex-c-m m-tb-10">
@@ -96,15 +102,17 @@
 				</div>
 				
 				<!-- Search product -->
+                                <form action="SearchControl" method="post">
 				<div class="dis-none panel-search w-full p-t-10 p-b-15">
 					<div class="bor8 dis-flex p-l-15">
-						<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+						<button type="submit" class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
 							<i class="zmdi zmdi-search"></i>
 						</button>
 
-						<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
+						<input class="mtext-107 cl2 size-114 plh2 p-r-15" name="txt" type="text" placeholder="Search">
 					</div>	
 				</div>
+                                    </form>
 
 				<!-- Filter -->
 				<div class="dis-none panel-filter w-full p-t-10">
@@ -116,16 +124,16 @@
 
 							<ul>
 								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
+									<a href="ProductControl" class="filter-link stext-106 trans-04">
 										Default
 									</a>
 								</li>
 
-								<li class="p-b-6">
+<!--								<li class="p-b-6">
 									<a href="#" class="filter-link stext-106 trans-04">
 										Popularity
 									</a>
-								</li>
+								</li>-->
 
 								<li class="p-b-6">
 									<a href="#" class="filter-link stext-106 trans-04">
@@ -134,19 +142,19 @@
 								</li>
 
 								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
+									<a href="SortControl?sort=NN" class="filter-link stext-106 trans-04 filter-link-active">
 										Newness
 									</a>
 								</li>
-
+                                                                            
 								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
+									<a href="SortControl?sort=LH" class="filter-link stext-106 trans-04">
 										Price: Low to High
 									</a>
 								</li>
 
 								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
+									<a href="SortControl?sort=HL" class="filter-link stext-106 trans-04">
 										Price: High to Low
 									</a>
 								</li>
@@ -160,38 +168,38 @@
 
 							<ul>
 								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
+									<a href="ProductControl" class="filter-link stext-106 trans-04 filter-link-active">
 										All
 									</a>
 								</li>
 
 								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										$0.00 - $50.00
+									<a href="SortControl?sort=P1" class="filter-link stext-106 trans-04">
+										$0.00 - $10.00
 									</a>
 								</li>
 
 								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										$50.00 - $100.00
+									<a href="SortControl?sort=P2" class="filter-link stext-106 trans-04">
+										$10.00 - $25.00
 									</a>
 								</li>
 
 								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										$100.00 - $150.00
+									<a href="SortControl?sort=P3" class="filter-link stext-106 trans-04">
+										$25.00 - $40.00
 									</a>
 								</li>
 
 								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										$150.00 - $200.00
+									<a href="SortControl?sort=P4" class="filter-link stext-106 trans-04">
+										$40.00 - $50.00
 									</a>
 								</li>
 
 								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										$200.00+
+									<a href="SortControl?sort=P5" class="filter-link stext-106 trans-04">
+										$50.00+
 									</a>
 								</li>
 							</ul>
@@ -203,17 +211,16 @@
 							</div>
 
 							<ul>
+                                                            <c:forEach items="${listCo}" var="e">
 								<li class="p-b-6">
-									<span class="fs-15 lh-12 m-r-6" style="color: #222;">
-										<i class="zmdi zmdi-circle"></i>
-									</span>
+									
 
-									<a href="#" class="filter-link stext-106 trans-04">
-										Black
+									<a href="ColorControl?colorID=${e.colorID}" class="filter-link stext-106 trans-04">
+										${e.colorName}
 									</a>
 								</li>
-
-								<li class="p-b-6">
+                                                            </c:forEach>
+<!--								<li class="p-b-6">
 									<span class="fs-15 lh-12 m-r-6" style="color: #4272d7;">
 										<i class="zmdi zmdi-circle"></i>
 									</span>
@@ -261,11 +268,11 @@
 									<a href="#" class="filter-link stext-106 trans-04">
 										White
 									</a>
-								</li>
+								</li>-->
 							</ul>
 						</div>
 
-						<div class="filter-col4 p-b-27">
+<!--						<div class="filter-col4 p-b-27">
 							<div class="mtext-102 cl2 p-b-15">
 								Tags
 							</div>
@@ -291,17 +298,18 @@
 									Crafts
 								</a>
 							</div>
-						</div>
+						</div>-->
 					</div>
 				</div>
 			</div>
 
 			<div class="row isotope-grid">
+                            <c:forEach items="${listP}" var="o">
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
 					<!-- Block2 -->
 					<div class="block2">
 						<div class="block2-pic hov-img0">
-							<img src="images/product-01.jpg" alt="IMG-PRODUCT">
+							<img src="${o.imageFolder}/${o.productID} (1).jpg" alt="IMG-PRODUCT">
 
 							<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 								Quick View
@@ -311,11 +319,11 @@
 						<div class="block2-txt flex-w flex-t p-t-14">
 							<div class="block2-txt-child1 flex-col-l ">
 								<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-									Esprit Ruffle Shirt
+									${o.productName}
 								</a>
 
 								<span class="stext-105 cl3">
-									$16.64
+									$${o.productPrice}
 								</span>
 							</div>
 
@@ -328,9 +336,11 @@
 						</div>
 					</div>
 				</div>
+                                </c:forEach>
+                              
 
-				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-					<!-- Block2 -->
+<!--				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+					 Block2 
 					<div class="block2">
 						<div class="block2-pic hov-img0">
 							<img src="images/product-02.jpg" alt="IMG-PRODUCT">
@@ -362,7 +372,7 @@
 				</div>
 
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item men">
-					<!-- Block2 -->
+					 Block2 
 					<div class="block2">
 						<div class="block2-pic hov-img0">
 							<img src="images/product-03.jpg" alt="IMG-PRODUCT">
@@ -394,7 +404,7 @@
 				</div>
 
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-					<!-- Block2 -->
+					 Block2 
 					<div class="block2">
 						<div class="block2-pic hov-img0">
 							<img src="images/product-04.jpg" alt="IMG-PRODUCT">
@@ -426,7 +436,7 @@
 				</div>
 
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-					<!-- Block2 -->
+					 Block2 
 					<div class="block2">
 						<div class="block2-pic hov-img0">
 							<img src="images/product-05.jpg" alt="IMG-PRODUCT">
@@ -458,7 +468,7 @@
 				</div>
 
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item watches">
-					<!-- Block2 -->
+					 Block2 
 					<div class="block2">
 						<div class="block2-pic hov-img0">
 							<img src="images/product-06.jpg" alt="IMG-PRODUCT">
@@ -490,7 +500,7 @@
 				</div>
 
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-					<!-- Block2 -->
+					 Block2 
 					<div class="block2">
 						<div class="block2-pic hov-img0">
 							<img src="images/product-07.jpg" alt="IMG-PRODUCT">
@@ -522,7 +532,7 @@
 				</div>
 
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-					<!-- Block2 -->
+					 Block2 
 					<div class="block2">
 						<div class="block2-pic hov-img0">
 							<img src="images/product-08.jpg" alt="IMG-PRODUCT">
@@ -554,7 +564,7 @@
 				</div>
 
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item shoes">
-					<!-- Block2 -->
+					 Block2 
 					<div class="block2">
 						<div class="block2-pic hov-img0">
 							<img src="images/product-09.jpg" alt="IMG-PRODUCT">
@@ -586,7 +596,7 @@
 				</div>
 
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-					<!-- Block2 -->
+					 Block2 
 					<div class="block2">
 						<div class="block2-pic hov-img0">
 							<img src="images/product-10.jpg" alt="IMG-PRODUCT">
@@ -618,7 +628,7 @@
 				</div>
 
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item men">
-					<!-- Block2 -->
+					 Block2 
 					<div class="block2">
 						<div class="block2-pic hov-img0">
 							<img src="images/product-11.jpg" alt="IMG-PRODUCT">
@@ -650,7 +660,7 @@
 				</div>
 
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item men">
-					<!-- Block2 -->
+					 Block2 
 					<div class="block2">
 						<div class="block2-pic hov-img0">
 							<img src="images/product-12.jpg" alt="IMG-PRODUCT">
@@ -682,7 +692,7 @@
 				</div>
 
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-					<!-- Block2 -->
+					 Block2 
 					<div class="block2">
 						<div class="block2-pic hov-img0">
 							<img src="images/product-13.jpg" alt="IMG-PRODUCT">
@@ -714,7 +724,7 @@
 				</div>
 
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-					<!-- Block2 -->
+					 Block2 
 					<div class="block2">
 						<div class="block2-pic hov-img0">
 							<img src="images/product-14.jpg" alt="IMG-PRODUCT">
@@ -746,7 +756,7 @@
 				</div>
 
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item watches">
-					<!-- Block2 -->
+					 Block2 
 					<div class="block2">
 						<div class="block2-pic hov-img0">
 							<img src="images/product-15.jpg" alt="IMG-PRODUCT">
@@ -778,7 +788,7 @@
 				</div>
 
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-					<!-- Block2 -->
+					 Block2 
 					<div class="block2">
 						<div class="block2-pic hov-img0">
 							<img src="images/product-16.jpg" alt="IMG-PRODUCT">
@@ -807,7 +817,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div>-->
 			</div>
 
 			<!-- Load more -->
@@ -1035,30 +1045,23 @@
 		$('.js-addwish-b2, .js-addwish-detail').on('click', function(e){
 			e.preventDefault();
 		});
-
 		$('.js-addwish-b2').each(function(){
 			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
 			$(this).on('click', function(){
 				swal(nameProduct, "is added to wishlist !", "success");
-
 				$(this).addClass('js-addedwish-b2');
 				$(this).off('click');
 			});
 		});
-
 		$('.js-addwish-detail').each(function(){
 			var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
-
 			$(this).on('click', function(){
 				swal(nameProduct, "is added to wishlist !", "success");
-
 				$(this).addClass('js-addedwish-detail');
 				$(this).off('click');
 			});
 		});
-
 		/*---------------------------------------------*/
-
 		$('.js-addcart-detail').each(function(){
 			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
 			$(this).on('click', function(){
@@ -1078,7 +1081,6 @@
 				scrollingThreshold: 1000,
 				wheelPropagation: false,
 			});
-
 			$(window).on('resize', function(){
 				ps.update();
 			})
