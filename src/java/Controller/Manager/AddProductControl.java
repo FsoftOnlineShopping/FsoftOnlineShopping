@@ -54,13 +54,11 @@ public class AddProductControl extends HttpServlet {
         String category = formFields.get("category").get(0);
         String[] color = formFields.get("color").toArray(new String[0]);
         String[] size = formFields.get("size").toArray(new String[0]);
-        productDAO_1.addProduct(pname, price, number, des, category);
-    
-        Product p = productDAO_1.getProductByName(pname).get(0);
-        int id = p.getProductID();
+   
+        int id = productDAO_1.addProduct(pname, price, number, des, category);
         String productImagePath = "images/productImage/" + id;
       
-        productDAO_1.editImageFolderProduct(productImagePath, p.getProductID());
+        productDAO_1.editImageFolderProduct(productImagePath, id);
         productDAO_1.addColorProduct(id, color);
         productDAO_1.addSizeProduct(id, size);
         
@@ -68,7 +66,7 @@ public class AddProductControl extends HttpServlet {
         List<UploadItem> uploadItems = new ArrayList<>();
         
         fileItems.forEach(fi -> {
-            UploadItem ui = new UploadItem(fi, id + " (" + (fileItems.indexOf(fi)+1) + ')');
+            UploadItem ui = new UploadItem(fi, id + " (" + (fileItems.indexOf(fi)+1) + ")");
             uploadItems.add(ui);
         });
         

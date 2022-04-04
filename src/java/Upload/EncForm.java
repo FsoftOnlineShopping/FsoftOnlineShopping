@@ -94,7 +94,7 @@ public class EncForm {
 
         System.out.println("File Path:" + uploadFilePath);
         
-        return "/DuniExchange/" + relativeSavePath + "/" + path;
+        return relativeSavePath + "/" + path;
     }
     
     public static List<String> uploadFile(UploadItem[] items, String relativeSavePath, HttpServletRequest request, ServletContext servletContext){

@@ -72,7 +72,7 @@ public class EditProductControl extends HttpServlet {
          List<UploadItem> uploadItems = new ArrayList<>();
         
         fileItems.forEach(fi -> {
-            UploadItem ui = new UploadItem(fi, pid + " (" + (fileItems.indexOf(fi)+1) + ')');
+            UploadItem ui = new UploadItem(fi, pid + " (" + (fileItems.indexOf(fi)+1) + ")");
             uploadItems.add(ui);
         });
 

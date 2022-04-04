@@ -12,6 +12,7 @@ import Model.ProductSize;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -236,20 +237,29 @@ public class productDAO_1 {
         }
         
     }
-    public static void addProduct(String name, String price, String number, String des, String category){
+    public static int addProduct(String name, String price, String number, String des, String category){
         String query = " INSERT [dbo].[Product] ([categoryID], [ProductName], [productPrice], [productNumber], [productDescription]) "
                 + "VALUES (?,?,?,?,?)";
          try {
             conn = new DBConnection().makeConnection();
-            ps = conn.prepareStatement(query);
+            ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, category);
             ps.setString(2, name);
             ps.setString(3, price);
             ps.setString(4, number);
             ps.setString(5, des);
-            ps.executeQuery();  
+            ps.executeUpdate();
+            
+            ResultSet generatedKeys = ps.getGeneratedKeys();
+            
+            if(generatedKeys.next()){
+                return generatedKeys.getInt(1);
+            }
         } catch (Exception e) {
+            e.printStackTrace();
         }
+         
+        return -1;
     }
     public static void addColorProduct(int productID, String[] color){
         for(int i = 0; i <= color.length - 1 ; i++){
