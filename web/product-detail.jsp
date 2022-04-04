@@ -4,6 +4,7 @@
     Author     : ADMIN
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -74,25 +75,28 @@
 	<!-- Product Detail -->
 	<section class="sec-product-detail bg0 p-t-65 p-b-60">
 		<div class="container">
+             
+                
 			<div class="row">
 				<div class="col-md-6 col-lg-7 p-b-30">
 					<div class="p-l-25 p-r-30 p-lr-0-lg">
 						<div class="wrap-slick3 flex-sb flex-w">
 							<div class="wrap-slick3-dots"></div>
 							<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
-
+                                                        
 							<div class="slick3 gallery-lb">
-								<div class="item-slick3" data-thumb="images/product-detail-01.jpg">
+                                                        <c:forEach items="${images}" var="image">
+								<div class="item-slick3" data-thumb="${image}">
 									<div class="wrap-pic-w pos-relative">
-										<img src="images/product-detail-01.jpg" alt="IMG-PRODUCT">
+										<img src="${image}" alt="IMG-PRODUCT">
 
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-01.jpg">
+										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="${image}">
 											<i class="fa fa-expand"></i>
 										</a>
 									</div>
 								</div>
-
-								<div class="item-slick3" data-thumb="images/product-detail-02.jpg">
+                                                        </c:forEach>
+<!--								<div class="item-slick3" data-thumb="images/product-detail-02.jpg">
 									<div class="wrap-pic-w pos-relative">
 										<img src="images/product-detail-02.jpg" alt="IMG-PRODUCT">
 
@@ -110,7 +114,7 @@
 											<i class="fa fa-expand"></i>
 										</a>
 									</div>
-								</div>
+								</div>-->
 							</div>
 						</div>
 					</div>
@@ -890,30 +894,23 @@
 		$('.js-addwish-b2, .js-addwish-detail').on('click', function(e){
 			e.preventDefault();
 		});
-
 		$('.js-addwish-b2').each(function(){
 			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
 			$(this).on('click', function(){
 				swal(nameProduct, "is added to wishlist !", "success");
-
 				$(this).addClass('js-addedwish-b2');
 				$(this).off('click');
 			});
 		});
-
 		$('.js-addwish-detail').each(function(){
 			var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
-
 			$(this).on('click', function(){
 				swal(nameProduct, "is added to wishlist !", "success");
-
 				$(this).addClass('js-addedwish-detail');
 				$(this).off('click');
 			});
 		});
-
 		/*---------------------------------------------*/
-
 		$('.js-addcart-detail').each(function(){
 			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
 			$(this).on('click', function(){
@@ -933,7 +930,6 @@
 				scrollingThreshold: 1000,
 				wheelPropagation: false,
 			});
-
 			$(window).on('resize', function(){
 				ps.update();
 			})

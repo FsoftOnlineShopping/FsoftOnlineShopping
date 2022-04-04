@@ -549,7 +549,9 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 .btn-hide-modal-search:hover {
   opacity: 1;
 }
-
+.hide {
+     visibility: hidden;
+}
 .wrap-search-header {
   width: 960px;
   max-width: 100%;

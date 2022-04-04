@@ -66,6 +66,8 @@ public class categoryDAO {
             e.printStackTrace();
         } return listbyC;
     }
+    
+    
     public static void main(String[] args) {
        
         

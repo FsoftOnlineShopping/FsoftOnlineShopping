@@ -43,6 +43,5 @@ public class colorDAO {
         return listCo;
     }
 
-    public static void main(String[] args) {
-    }
+   
 }

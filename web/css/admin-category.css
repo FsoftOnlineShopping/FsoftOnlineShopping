@@ -1,0 +1,196 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 28, 2022, 12:02:30 AM
+    Author     : ADMIN
+*/
+.categorys-title {
+  color: var(--text-bold);
+  margin-top: var(--m-4);
+  font-size: var(--h1-font-size);
+  font-weight: bold;
+}
+/* categorys-status */
+.categorys-status {
+  margin-top: var(--m-4);
+}
+.categorys-status .category-card {
+  background-color: var(--white-color);
+  padding: var(--p-4);
+  margin-bottom: var(--m-3);
+  border-radius: var(--border-smaller);
+  min-width: 250px;
+  /* margin-right: var(--m-3); */
+  position: relative;
+  justify-content: space-around;
+  overflow: hidden;
+}
+.categorys-status .category-card.border-green {
+  border-right: solid 4px #28a428;
+  border-left: solid 4px #28a428;
+}
+.categorys-status .category-card.border-blue {
+  border-right: solid 4px #3862e0;
+  border-left: solid 4px #3862e0;
+}
+.categorys-status .category-card.border-orange {
+  border-right: solid 4px #ff674d;
+  border-left: solid 4px #ff674d;
+}
+.categorys-status .category-card.border-red {
+  border-right: solid 4px #ff1a1a;
+  border-left: solid 4px #ff1a1a;
+}
+
+.category-card .icon {
+  color: var(--text-color);
+  font-size: var(--biggest-font-size);
+  margin-right: var(--m-6);
+  z-index: 1;
+  transition: 0.8s;
+}
+.category-card .body {
+  color: var(--text-color);
+  z-index: 1;
+  transition: 0.8s;
+}
+.category-card .number {
+  font-size: var(--biggest-font-size);
+  margin-bottom: var(--m-2);
+}
+
+/* categorys Table */
+.categorys-overview .overview-header {
+  padding: var(--p-3);
+  background-color: #076302;
+  margin-top: var(--m-3);
+  border-top-left-radius: var(--border-normal);
+  border-top-right-radius: var(--border-normal);
+}
+.categorys-overview .overview-title {
+  color: var(--white-color);
+  font-size: var(--h2-font-size);
+  margin-bottom: var(--m-1);
+}
+.categorys-overview .overview-sub-title {
+  color: var(--body-color);
+  opacity: 0.7;
+  font-size: var(--h3-font-size);
+}
+.overview-function {
+  margin-bottom: var(--m-3);
+}
+.search,
+.sort-by,
+.filter {
+  margin-right: var(--m-3);
+}
+.sort-by label,
+.filter label {
+  color: var(--text-header);
+  margin-right: var(--m-1);
+}
+.overview-body {
+  background-color: var(--white-color);
+  padding: var(--m-3);
+  margin-bottom: var(--m-4);
+}
+/* category table */
+.edit {
+  cursor: pointer;
+  font-size: var(--h2-font-size);
+}
+/* modal */
+
+/* Modal */
+.modal {
+  position: fixed;
+  background-color: var(--body-color);
+  z-index: 11;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+  padding: var(--p-4);
+  top: 20px;
+  border-radius: var(--border-normal);
+  overflow-y: scroll;
+  transition: opacity 0.3s ease-out;
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+}
+.modal.active {
+  opacity: 1;
+  height: auto;
+  max-height: 670px;
+  overflow-y: scroll;
+}
+.modal::-webkit-scrollbar {
+  width: 0px;
+}
+body {
+  position: relative;
+}
+.modal-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 10;
+  transition: opacity 0.3s ease-out;
+  opacity: 0;
+  overflow: hidden;
+  height: 0;
+}
+.modal-cover.active {
+  opacity: 1;
+  height: auto;
+}
+.modal-title {
+  font-size: var(--h1-font-size);
+  padding-bottom: var(--p-1);
+  margin-bottom: var(--m-1);
+  border-bottom: 1px solid #ccc;
+  color: var(--text-bold);
+}
+.modal-name,
+.modal-icon,
+.modal-code,
+.modal-id {
+  color: var(--text-header);
+  margin-bottom: var(--m-2);
+}
+
+.modal-name div,
+.modal-icon div,
+.modal-code div,
+.modal-id div {
+  margin-bottom: var(--m-1);
+}
+.modal-name input,
+.modal-icon input,
+.modal-code input,
+.modal-id input {
+  width: 100%;
+}
+
+.modal-button {
+  text-align: end;
+}
+.modal-button button:hover {
+    background-color: var(--primary-color);
+  }
+.modal-button button {
+  background-color: #6200ea;
+  color: #fff;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+

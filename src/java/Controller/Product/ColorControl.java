@@ -44,10 +44,10 @@ public class ColorControl extends HttpServlet {
             String colorID = request.getParameter("colorID");
             request.setAttribute("listCo", listCo);
             
-            System.out.println("colorID = " + colorID);
+ 
 
             List<Product> listbyCo = ProductColorDAO.getProductByColorID(colorID);       
-            System.out.println(listbyCo); 
+             
             
             request.setAttribute("colorID", colorID);
             request.setAttribute("listP", listbyCo);

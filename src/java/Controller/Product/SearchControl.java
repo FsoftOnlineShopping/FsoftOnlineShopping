@@ -39,15 +39,19 @@ public class SearchControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        request.setCharacterEncoding("UTF-8");
         String txtSearch = request.getParameter("txt");
-       
+        List<Category> listC = categoryDAO.getAllCategory();
+        List<Color> listCo = colorDAO.getAllColor();
+            
         List<Product> listN = productDAO.getProductByName(txtSearch);
         
         
         request.setAttribute("listP", listN);
-
-        request.getRequestDispatcher("ProductControl").forward(request, response);
+        request.setAttribute("listC", listC);
+        request.setAttribute("listCo", listCo);
+        request.setAttribute("txtS", txtSearch);
+        request.getRequestDispatcher("product.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

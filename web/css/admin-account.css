@@ -1,0 +1,188 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 27, 2022, 11:59:52 PM
+    Author     : ADMIN
+*/
+.accounts-title {
+  color: var(--text-bold);
+  margin-top: var(--m-4);
+  font-size: var(--h1-font-size);
+  font-weight: bold;
+}
+/* accounts-status */
+.accounts-status {
+  margin-top: var(--m-4);
+}
+.accounts-status .account-card {
+  background-color: var(--white-color);
+  padding: var(--p-4);
+  margin-bottom: var(--m-3);
+  border-radius: var(--border-smaller);
+  min-width: 250px;
+  /* margin-right: var(--m-3); */
+  position: relative;
+  justify-content: space-around;
+  overflow: hidden;
+}
+.accounts-status .account-card.border-green {
+  border-top: solid 4px #28a428;
+  border-bottom: solid 4px #28a428;
+}
+.accounts-status .account-card.border-blue {
+  border-top: solid 4px #3862e0;
+  border-bottom: solid 4px #3862e0;
+}
+.accounts-status .account-card.border-orange {
+  border-top: solid 4px #ff674d;
+  border-bottom: solid 4px #ff674d;
+}
+.accounts-status .account-card.border-red {
+  border-top: solid 4px #ff1a1a;
+  border-bottom: solid 4px #ff1a1a;
+}
+
+.account-card .icon {
+  color: var(--text-color);
+  font-size: var(--biggest-font-size);
+  margin-right: var(--m-6);
+  z-index: 1;
+  transition: 0.8s;
+}
+.account-card .body {
+  color: var(--text-color);
+  z-index: 1;
+  transition: 0.8s;
+}
+.account-card .number {
+  font-size: var(--biggest-font-size);
+  margin-bottom: var(--m-2);
+}
+
+/* Accounts Table */
+.accounts-overview .overview-header {
+  padding: var(--p-3);
+  background-color: #076302;
+  margin-top: var(--m-3);
+  border-top-left-radius: var(--border-normal);
+  border-top-right-radius: var(--border-normal);
+}
+.accounts-overview .overview-title {
+  color: var(--white-color);
+  font-size: var(--h2-font-size);
+  margin-bottom: var(--m-1);
+}
+.accounts-overview .overview-sub-title {
+  color: var(--body-color);
+  opacity: 0.7;
+  font-size: var(--h3-font-size);
+}
+.overview-function {
+  margin-bottom: var(--m-3);
+}
+.search,
+.sort-by,
+.filter {
+  margin-right: var(--m-3);
+}
+.sort-by label,
+.filter label {
+  color: var(--text-header);
+  margin-right: var(--m-1);
+}
+.overview-body {
+  background-color: var(--white-color);
+  padding: var(--m-3);
+  margin-bottom: var(--m-4);
+}
+/* Account table */
+.table-account-overview {
+  table-layout: fixed;
+  min-width: 700px;
+}
+.table-account-overview td img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+.table-150-ellipsis {
+  width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* Status */
+.status.active {
+  background-color: #28a428;
+}
+.status.disable {
+  opacity: 0.5;
+  background-color: #666276;
+}
+.status.set-active {
+  background-color: #28a428;
+}
+.status.set-disable {
+  background-color: #666276;
+}
+.status.set-active:active,
+.status.set-disable:active {
+  opacity: 0.7;
+}
+.status.admin {
+  background-color: #ff1a1a;
+}
+.status.user {
+  background-color: #3862e0;
+}
+.status.set-admin {
+  background-color: #ff1a1a;
+  cursor: pointer;
+}
+.status.set-admin:active,
+.status.set-user:active {
+  opacity: 0.7;
+}
+.status.set-user {
+  background-color: #3862e0;
+  cursor: pointer;
+}
+.status {
+  background-color: var(--text-color);
+  color: var(--body-color);
+  padding: var(--p-1) var(--p-1);
+  border-radius: var(--border-small);
+  font-size: var(--smaller-font-size);
+}
+/* table over-flow */
+.overview-function,
+.table-account-overview {
+  min-width: 1160px;
+}
+.overview-body {
+  overflow: scroll;
+  overflow-y: hidden;
+}
+.overview-body::-webkit-scrollbar {
+  height: 5px;
+}
+
+/* Track */
+.overview-body::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+/* Handle */
+.overview-body::-webkit-scrollbar-thumb {
+  background: var(--text-color);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.overview-body::-webkit-scrollbar-thumb:hover {
+  background: var(--text-header);
+}
+
+

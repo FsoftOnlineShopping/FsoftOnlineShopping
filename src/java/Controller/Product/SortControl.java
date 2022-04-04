@@ -55,31 +55,39 @@ public class SortControl extends HttpServlet {
       
         if(sort.equals("LH")){     
            listSortO = productDAO.getProductByOrder("ASC");
-           request.setAttribute("listP", listSortO);   
+           request.setAttribute("listP", listSortO); 
+           request.setAttribute("id", 2);
         }else if(sort.equals("HL")) {
             listSortO = productDAO.getProductByOrder("DESC");
             request.setAttribute("listP", listSortO); 
+            request.setAttribute("id", 3);
         } else if(sort.equals("NN")){
             listSortO = productDAO.getProductByNewID();
-            request.setAttribute("listP", listSortO);  
+            request.setAttribute("listP", listSortO); 
+            request.setAttribute("id", 4);
+            
         }else
         if(sort.equals("P1")){
             listSortP = productDAO.getProductByPrice("BETWEEN 0 AND 10");
             request.setAttribute("listP", listSortP);
+            request.setAttribute("id", 5);
         } else if(sort.equals("P2")){
             listSortP = productDAO.getProductByPrice("BETWEEN 10 AND 25");
             request.setAttribute("listP", listSortP);
+            request.setAttribute("id", 6);
         }else if(sort.equals("P3")){
             listSortP = productDAO.getProductByPrice("BETWEEN 25 AND 40");
             request.setAttribute("listP", listSortP);
+            request.setAttribute("id", 7);
         }else if(sort.equals("P4")){
             listSortP = productDAO.getProductByPrice("BETWEEN 40 AND 50");
             request.setAttribute("listP", listSortP);
+            request.setAttribute("id", 8);
         }else if(sort.equals("P5")){
             listSortP = productDAO.getProductByPrice("> 50");
             request.setAttribute("listP", listSortP);
+            request.setAttribute("id", 9);
         }
-        
         
         
         

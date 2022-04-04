@@ -49,6 +49,7 @@ public class GenericDAO {
         } catch (SQLException e) {
             return null;
         } finally {
+            connection.setAutoCommit(true);
             if (connection != null) {
                 connection.close();
             }
@@ -74,6 +75,8 @@ public class GenericDAO {
                     statement.setTimestamp(index, (Timestamp) parameter);
                 } else if (parameter instanceof String) {
                     statement.setString(index, (String) parameter);
+                }else if (parameter == null) {
+                    statement.setNull(index, java.sql.Types.NULL);
                 }
             }
             return statement;
@@ -107,6 +110,7 @@ public class GenericDAO {
             }
             return false;
         } finally {
+            connection.setAutoCommit(true);
             if (connection != null) {
                 connection.close();
             }
@@ -142,6 +146,7 @@ public class GenericDAO {
                 }
             }
         } finally {
+            connection.setAutoCommit(true);
             if (connection != null) {
                 connection.close();
             }
