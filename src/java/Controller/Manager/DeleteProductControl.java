@@ -5,7 +5,7 @@
  */
 package Controller.Manager;
 
-import DAO.Product.productDAO;
+import DAO.Product.productDAO_1;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -36,7 +36,7 @@ public class DeleteProductControl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String productID = request.getParameter("productID");
-        productDAO.deleteProduct(productID);
+        productDAO_1.deleteProduct(productID);
         
         String productImagePath = "images/productImage/" + productID;
   

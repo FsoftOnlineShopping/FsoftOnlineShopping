@@ -5,7 +5,7 @@
  */
 package Controller.LoadMore;
 
-import DAO.Product.productDAO;
+import DAO.Product.productDAO_1;
 import Model.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,7 +37,7 @@ public class loadMoreControl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String amount = request.getParameter("amount"); 
         int iamount = Integer.parseInt(amount);
-        List<Product> list = productDAO.getNext8Product(iamount);
+        List<Product> list = productDAO_1.getNext8Product(iamount);
         PrintWriter out = response.getWriter();
         for (Product o: list ){
             out.println(

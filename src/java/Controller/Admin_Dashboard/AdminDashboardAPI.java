@@ -3,22 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.Authen_Author;
+package Controller.Admin_Dashboard;
 
 import DAO.Account.AccountDAO;
+import DAO.Cart.Dashboard_CartDAO;
 import Model.Account;
-import Utils.FacebookLoginUtils;
-import ModelResponse.AccountResponse;
-import Utils.FacebookLoginUtils;
-import Utils.PasswordUtils;
+import Model.Cart;
+import ModelResponse.AccountDashboard;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.restfb.types.User;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ADMIN
  */
-public class LoginFacebook extends HttpServlet {
+public class AdminDashboardAPI extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,10 +46,10 @@ public class LoginFacebook extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginFacebook</title>");
+            out.println("<title>Servlet AdminDashboardAPI</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginFacebook at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AdminDashboardAPI at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -68,52 +67,48 @@ public class LoginFacebook extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String code = request.getParameter("code");
-
-        if (code == null || code.isEmpty()) {
-            RequestDispatcher dis = request.getRequestDispatcher("login.jsp");
-            dis.forward(request, response);
-        } else {
-            String accessToken = FacebookLoginUtils.getToken(code);
-            User user = FacebookLoginUtils.getUserInfo(accessToken);
-
-            int createState = -1;
-            Account currentAccount = null;
-            AccountResponse currentAccountResponse = null;
+//        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        Account currentAccount = (Account) request.getSession().getAttribute("currentAccount");
+        if (currentAccount != null && currentAccount.getUserRole() == 1) {
             try {
-                if (!AccountDAO.isHaveUserName(user.getId())) {
-                    String password = PasswordUtils.generatePassword(8, true, true, true, true);
-                    createState = AccountDAO.createAccount(user.getId(), password, user.getEmail());
-                    if (createState == 0) {
-                        String imageUrl = "http://graph.facebook.com/" + user.getId() + "/picture?type=large&redirect=true&width=500&height=500";
-                        AccountDAO.updateUserInfo(user.getId(), user.getEmail(), user.getName(), user.getLocale(), imageUrl, user.getLink());
-                    }
+                int newUsers = AccountDAO.countNewUsers(60);
+                int newOrders = Dashboard_CartDAO.countNewOrders(60);
+                float totalIncome = Dashboard_CartDAO.countTotalIncome();
+
+                float[] incomeThisMonth = new float[10], incomeLastMonth = new float[10];
+                int j = 0;
+                for (int i = 1; i <= 30; i += 3) {                   
+                    incomeThisMonth[j] = Dashboard_CartDAO.countIncomeThisMonth(i, i + 2);                   
+                    incomeLastMonth[j] = Dashboard_CartDAO.countIncomeLastMonth(i, i + 2);   
+                    j++;
                 }
-                currentAccount = AccountDAO.getAccountByUserName(user.getId());
-                currentAccountResponse = 
-                        new AccountResponse(currentAccount.getUserEmail(), 
-                                currentAccount.getUserFullname(), 
-                                currentAccount.getUserAddress(), 
-                                currentAccount.getUserAvatar(),
-                                currentAccount.getUserFacebook(),
-                                currentAccount.getUserRole(),
-                                currentAccount.getAccountState());
+                
+                ArrayList<AccountDashboard> listAccount = Dashboard_CartDAO.getTopOrders();
+                ArrayList<Cart> listCart = Dashboard_CartDAO.getLatestOrders();
+
+                ObjectMapper mapper = new ObjectMapper();
+                ObjectNode rootNode = mapper.createObjectNode();
+
+                rootNode.put("newUsers", newUsers);
+                rootNode.put("newOrders", newOrders);
+                rootNode.put("totalIncome", totalIncome);
+                rootNode.putPOJO("incomeThisMonth", incomeThisMonth);
+                rootNode.putPOJO("incomeLastMonth", incomeLastMonth);
+                rootNode.putPOJO("topCustomers", listAccount);
+                rootNode.putPOJO("latestOrders", listCart);
+
+                String dataReturn = mapper.writeValueAsString(rootNode);
+
+                PrintWriter out = response.getWriter();
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                out.print(dataReturn);
+                out.flush();
+
             } catch (SQLException ex) {
-                Logger.getLogger(LoginGoogle.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AdminDashboardAPI.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println(accessToken);
-            request.getSession().setAttribute("currentAccount", currentAccount);
-            request.setAttribute("isLoginFacebook", true);
-
-            ObjectMapper mapper = new ObjectMapper();
-//            ObjectNode rootNode = mapper.createObjectNode();
-//            rootNode.put("currentAccount", currentAccount.toString());
-
-            String dataReturn = mapper.writeValueAsString(currentAccountResponse);
-
-            request.setAttribute("currentAccount", dataReturn);
-            RequestDispatcher dis = request.getRequestDispatcher("index.jsp");
-            dis.forward(request, response);
         }
     }
 

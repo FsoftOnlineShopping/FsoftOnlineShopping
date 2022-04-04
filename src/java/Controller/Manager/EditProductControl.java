@@ -5,7 +5,7 @@
  */
 package Controller.Manager;
 
-import DAO.Product.productDAO;
+import DAO.Product.productDAO_1;
 import Model.Product;
 import Upload.EncForm;
 import Upload.EncFormResult;
@@ -64,11 +64,11 @@ public class EditProductControl extends HttpServlet {
         String[] size = formFields.get("size").toArray(new String[0]);
     
         
-        productDAO.editProduct(pname, price, number, des, category, pid);
-        productDAO.deleteColorProduct(Integer.parseInt(pid));
-        productDAO.deleteSizeProduct(Integer.parseInt(pid));
-        productDAO.addColorProduct(Integer.parseInt(pid), color);
-        productDAO.addSizeProduct(Integer.parseInt(pid), size);
+        productDAO_1.editProduct(pname, price, number, des, category, pid);
+        productDAO_1.deleteColorProduct(Integer.parseInt(pid));
+        productDAO_1.deleteSizeProduct(Integer.parseInt(pid));
+        productDAO_1.addColorProduct(Integer.parseInt(pid), color);
+        productDAO_1.addSizeProduct(Integer.parseInt(pid), size);
          List<UploadItem> uploadItems = new ArrayList<>();
         
         fileItems.forEach(fi -> {

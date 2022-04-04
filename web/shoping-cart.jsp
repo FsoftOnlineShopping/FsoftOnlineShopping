@@ -4,7 +4,16 @@
     Author     : ADMIN
 --%>
 
+<%@page import="java.util.Map"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="DAO.Product.ProductDAO"%>
+<%@page import="Model.Cart"%>
+<%@page import="Model.CartProduct"%>
+<%@page import="java.util.List"%>
+<%@page import="DAO.Account.AccountDAO"%>
+<%@page import="Model.Account"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,53 +85,30 @@
 									<th class="column-5">Total</th>
 								</tr>
 
+                                                        <c:set var="o" value="${sessionScope.cart}"/>
+                                                        <c:set var="total" value="${0}"/>
+                                                        <c:forEach items="${o.items}" var="i">
 								<tr class="table_row">
 									<td class="column-1">
-										<div class="how-itemcart1">
-											<img src="images/item-cart-04.jpg" alt="IMG">
-										</div>
+                                                                            <a href="deletecart?productID=${i.product.productID}">
+                                                                                <div class="how-itemcart1" >     
+                                                                                    <img src="${i.product.imageFolder}/front.jpg" alt="IMG">
+                                                                                </div>
+                                                                            </a>
 									</td>
-									<td class="column-2">Fresh Strawberries</td>
-									<td class="column-3">$ 36.00</td>
+                                                                        <td class="column-2">${i.product.productName}</td>
+									<td class="column-3">$${i.product.productPrice}</td>
 									<td class="column-4">
-										<div class="wrap-num-product flex-w m-l-auto m-r-0">
-											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-minus"></i>
-											</div>
-
-											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value="1">
-
-											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-plus"></i>
-											</div>
+										<div class="wrap-num-product flex-w m-l-auto m-r-0">	
+                                                                                        <a class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m" href="editcartproduct?num=-1&id=${i.product.productID}">-</a>								                          
+											<input class="mtext-104 cl3 txt-center num-product" type="number" value="${i.quantity}">		
+                                                                                        <a class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m" href="editcartproduct?num=1&id=${i.product.productID}">+</a>		
 										</div>
 									</td>
-									<td class="column-5">$ 36.00</td>
+									<td class="column-5">$${i.quantity * i.price}</td>
 								</tr>
-
-								<tr class="table_row">
-									<td class="column-1">
-										<div class="how-itemcart1">
-											<img src="images/item-cart-05.jpg" alt="IMG">
-										</div>
-									</td>
-									<td class="column-2">Lightweight Jacket</td>
-									<td class="column-3">$ 16.00</td>
-									<td class="column-4">
-										<div class="wrap-num-product flex-w m-l-auto m-r-0">
-											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-minus"></i>
-											</div>
-
-											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product2" value="1">
-
-											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-plus"></i>
-											</div>
-										</div>
-									</td>
-									<td class="column-5">$ 16.00</td>
-								</tr>
+                                                        <c:set var="total" value="${total + i.quantity * i.price}" />
+                                                        </c:forEach>
 							</table>
 						</div>
 
@@ -157,7 +143,7 @@
 
 							<div class="size-209">
 								<span class="mtext-110 cl2">
-									$79.65
+									$<c:out value="${total}"></c:out>
 								</span>
 							</div>
 						</div>
@@ -215,7 +201,7 @@
 
 							<div class="size-209 p-t-1">
 								<span class="mtext-110 cl2">
-									$79.65
+									$<c:out value="${total}"></c:out>
 								</span>
 							</div>
 						</div>

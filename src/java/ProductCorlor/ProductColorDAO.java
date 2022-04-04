@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DAO.ProductColor;
+package ProductCorlor;
 
-import DAO.Product.productDAO;
+import DAO.Product.productDAO_1;
 import DBConnection.DBConnection;
 import Model.Product;
 import java.sql.Connection;
@@ -39,7 +39,7 @@ public class ProductColorDAO {
             while(rs.next()){
                 String productID = Integer.toString(rs.getInt(1));
                 System.out.println(productID);
-                products.add(productDAO.getProductByID(productID));
+                products.add(productDAO_1.getProductByID(productID));
             }
         } catch (Exception e){
             e.printStackTrace();

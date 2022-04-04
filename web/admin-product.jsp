@@ -36,27 +36,7 @@
             <jsp:include page="admin-header-aside-importer.jsp"></jsp:include>
                 <!-- Right Side/ Content -->
                 <div class="main">
-                    <div class="top-bar d-flex justify-content-between">
-                        <div class="top-bar__left d-flex align-items-center">
-                            <div class="toggle d-flex align-items-center">
-                                <div class="toggle-menu d-flex align-items-center"><i class='bx bx-menu'></i></div>
-                            </div>
-                            <div class="change-theme d-flex align-items-center">
-                                <div class="theme-sun d-none d-flex align-items-center"><i class='bx bx-sun'></i></div>
-                                <div class="theme-moon  d-flex align-items-center"><i class='bx bx-moon'></i></div>
-                            </div>
-                        </div>
-                        <div class="top-bar__right d-flex align-items-center justify-content-end">
-                            <div class="notification d-flex align-items-center"><i class='bx bx-bell'></i></div>
-                            <div class="user d-flex  align-items-center">
-                                <div class="user-image"><img src="images/avatar/quang.jpg" alt="Quang"></div>
-                                <div class="user-content">
-                                    <div class="user-welcome">Welcome</div>
-                                    <div class="user-name">Luong Nguyen Nhat Quang</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <jsp:include page="admin-header-importer.jsp"></jsp:include>
                     <div class="product">
                         <nav class="breadcrumb">
                             <ol class="breadcrumb-list d-flex">
@@ -205,7 +185,7 @@
         <script src="https://phpcoder.tech/multiselect/js/jquery.multiselect.js"></script>
         <script src="font-awesome-pro-master/js/pro.min.js"></script>
         <script type="text/javascript" src="js/admin-general.js"></script>
-         <script src="js/SelectBox.js" type="text/javascript"></script>
+
         <script>
                                                             //            Define active nav
                                                             var nav__itemLists = document.querySelectorAll(".nav__item");

@@ -7,7 +7,7 @@ package Controller.Manager;
 
 import DAO.Category.categoryDAO;
 import DAO.Color.colorDAO;
-import DAO.Product.productDAO;
+import DAO.Product.productDAO_1;
 import Model.Category;
 import Model.Color;
 import Model.Product;
@@ -41,7 +41,7 @@ public class SearchProductAdmin extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         String txtSearch = request.getParameter("txt");
-        List<Product> listN = productDAO.getProductByName(txtSearch);
+        List<Product> listN = productDAO_1.getProductByName(txtSearch);
         PrintWriter out = response.getWriter();
         for(Product o: listN){
             out.print("<div  class=\"col l-3\">\n" +

@@ -7,7 +7,7 @@ package Controller.Manager;
 
 import DAO.Category.categoryDAO;
 import DAO.Color.colorDAO;
-import DAO.Product.productDAO;
+import DAO.Product.productDAO_1;
 import Model.Category;
 import Model.Color;
 import Model.Product;
@@ -42,11 +42,11 @@ public class LoadProductControl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String id = request.getParameter("pid");
-        Product product = productDAO.getProductByID(id);
-        List<ProductColor> productColor = productDAO.getColorIDByProductID(Integer.parseInt(id));
+        Product product = productDAO_1.getProductByID(id);
+        List<ProductColor> productColor = productDAO_1.getColorIDByProductID(Integer.parseInt(id));
         List<Category> listC = categoryDAO.getAllCategory();
         List<Color> listCo = colorDAO.getAllColor();
-        List<ProductSize> productSize = productDAO.getSizeByProductID(Integer.parseInt(id));
+        List<ProductSize> productSize = productDAO_1.getSizeByProductID(Integer.parseInt(id));
 
         try (PrintWriter out = response.getWriter()) {
             out.println(" \n"

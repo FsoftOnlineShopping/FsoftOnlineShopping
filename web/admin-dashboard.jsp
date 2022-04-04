@@ -29,29 +29,9 @@
         <div class="container">
             <!--header-aside-->
             <jsp:include page="admin-header-aside-importer.jsp"></jsp:include>
-            <!-- Right Side/ Content -->
-            <div class="main">
-                <div class="top-bar d-flex justify-content-between">
-                    <div class="top-bar__left d-flex align-items-center">
-                        <div class="toggle d-flex align-items-center">
-                            <div class="toggle-menu d-flex align-items-center"><i class='bx bx-menu'></i></div>
-                        </div>
-                        <div class="change-theme d-flex align-items-center">
-                            <div class="theme-sun d-none d-flex align-items-center"><i class='bx bx-sun'></i></div>
-                            <div class="theme-moon  d-flex align-items-center"><i class='bx bx-moon'></i></div>
-                        </div>
-                    </div>
-                    <div class="top-bar__right d-flex align-items-center justify-content-end">
-                        <div class="notification d-flex align-items-center"><i class='bx bx-bell'></i></div>
-                        <div class="user d-flex  align-items-center">
-                            <div class="user-image"><img src="images/avatar/quang.jpg" alt="Quang"></div>
-                            <div class="user-content">
-                                <div class="user-welcome">Welcome</div>
-                                <div class="user-name">Luong Nguyen Nhat Quang</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!-- Right Side/ Content -->
+                <div class="main">
+                <jsp:include page="admin-header-importer.jsp"></jsp:include>
                 <div class="dashboard">
                     <nav class="breadcrumb">
                         <ol class="breadcrumb-list d-flex">
@@ -118,7 +98,7 @@
                                 <div class="top-customers">
                                     <div class="title">Top Customers</div>
                                     <table class="table table-top-customers">
-                                        <tr>
+<!--                                        <tr>
                                             <th>User</th>
                                             <th>Total Orders</th>
                                             <th>Total Spending</th>
@@ -147,7 +127,7 @@
                                             <td>Nguyen Thu Nhi</td>
                                             <td>630</td>
                                             <td>$145,891</td>
-                                        </tr>
+                                        </tr>-->
                                     </table>
                                     <div class="view-all"><a href="#">View All</a></div>
                                 </div>
@@ -156,7 +136,7 @@
                                 <div class="latest-orders">
                                     <div class="title">Latest Orders</div>
                                     <table class="table table-latest-order">
-                                        <tr>
+<!--                                        <tr>
                                             <th>Order ID</th>
                                             <th>User</th>
                                             <th>Total Price</th>
@@ -197,7 +177,7 @@
                                             <td>$145,891</td>
                                             <td>24 Dec 2014</td>
                                             <td><span class="status shipping">Shipping</span></td>
-                                        </tr>
+                                        </tr>-->
                                     </table>
                                     <div class="view-all"><a href="#">View All</a></div>
                                 </div>
@@ -219,67 +199,8 @@
         <script type="text/javascript" src="js/admin-general.js"></script>
         <!-- Chart JS -->
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script>
-            // const labels = [
-            //     'January',
-            //     'February',
-            //     'March',
-            //     'April',
-            //     'May',
-            //     'June',
-            // ];
-            const labels = ['3', '6', '9', '10', '12', '15', '18', '21', '24', '27', '30'];
-            const data = {
-                labels: labels,
-                datasets: [{
-                        label: 'Income this Month',
-                        backgroundColor: '#fd5631',
-                        borderColor: '#fd5631',
-                        cubicInterpolationMode: 'monotone',
-                        data: [6, 23, 14, 6, 26, 12, 45, 23, 34, 56, 45]
-                    }, {
-                        label: 'Income last Month',
-                        backgroundColor: '#28a428',
-                        cubicInterpolationMode: 'monotone',
-                        borderDash: [20, 5],
-                        borderColor: '#28a428',
-                        data: [0, 10, 5, 15, 30, 24, 26, 34, 42, 26, 15],
-                    }]
-            };
-            const config = {
-                type: 'line',
-                data: data,
-                options: {
-                    scales: {
-                        x: {
-                            grid: {
-                                display: false
-                            }
-                        },
-                        y: {
-                            grid: {
-                                display: false
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            labels: {
-                                boxWidth: 10,
-                                boxHeight: 10,
-                                usePointStyle: true,
-                                pointStyle: 'circle',
-                            },
-                        }
-                    },
-
-                }
-            };
-            const myChart = new Chart(
-                    document.getElementById('income-analysis'),
-                    config
-                    );
-        </script>
+      
+        <script src="js/handle-render-admin-dashboard.js"></script>
 
     </body>
 

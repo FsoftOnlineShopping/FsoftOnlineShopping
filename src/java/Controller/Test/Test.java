@@ -5,7 +5,7 @@
  */
 package Controller.Test;
 
-import DAO.Product.productDAO;
+import DAO.Product.productDAO_1;
 import Model.Product;
 import java.io.File;
 import java.io.IOException;
@@ -37,7 +37,7 @@ public class Test extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Product p = productDAO.getProductByID("5");
+        Product p = productDAO_1.getProductByID("5");
         File path = new File(request.getServletContext().getRealPath("."));
         
         File dir = new File(path + "/" + p.getImageFolder());

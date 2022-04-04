@@ -7,7 +7,7 @@ package Controller.Manager;
 
 import DAO.Category.categoryDAO;
 import DAO.Color.colorDAO;
-import DAO.Product.productDAO;
+import DAO.Product.productDAO_1;
 import Model.Category;
 import Model.Color;
 import Model.Product;
@@ -39,7 +39,7 @@ public class ProductManagerControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        List<Product> listP = productDAO.getAllProduct();
+        List<Product> listP = productDAO_1.getAllProduct();
         List<Category> listC = categoryDAO.getAllCategory(); 
         List<Color> listCo = colorDAO.getAllColor();
         

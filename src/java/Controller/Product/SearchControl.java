@@ -7,7 +7,7 @@ package Controller.Product;
 
 import DAO.Category.categoryDAO;
 import DAO.Color.colorDAO;
-import DAO.Product.productDAO;
+import DAO.Product.productDAO_1;
 import Model.Category;
 import Model.Color;
 import Model.Product;
@@ -44,7 +44,7 @@ public class SearchControl extends HttpServlet {
         List<Category> listC = categoryDAO.getAllCategory();
         List<Color> listCo = colorDAO.getAllColor();
             
-        List<Product> listN = productDAO.getProductByName(txtSearch);
+        List<Product> listN = productDAO_1.getProductByName(txtSearch);
         
         
         request.setAttribute("listP", listN);

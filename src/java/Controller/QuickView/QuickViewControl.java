@@ -6,7 +6,7 @@
 package Controller.QuickView;
 
 import DAO.Color.colorDAO;
-import DAO.Product.productDAO;
+import DAO.Product.productDAO_1;
 import Model.Color;
 import Model.Product;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -44,7 +44,7 @@ public class QuickViewControl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("aplication/json;charset=UTF-8");
         String id = request.getParameter("pid");
-        Product p = productDAO.getProductByID(id);
+        Product p = productDAO_1.getProductByID(id);
         File path = new File(request.getServletContext().getRealPath("."));
         List<Color> listCo = colorDAO.getAllColor();
         File dir = new File(path + "/" + p.getImageFolder());

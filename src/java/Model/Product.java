@@ -7,13 +7,18 @@ package Model;
 
 /**
  *
- * @author Admin
+ * <<<<<<< HEAD
+ * @a
+ *
+ * uthor Admin =======
+ * @author ハン >>>>>>> 28a1197cceeb5de555abc543508922b2ae4477ce
  */
 public class Product {
+
     private int productID;
     private int categoryID;
     private String productName;
-    private double productPrice;
+    private float productPrice;
     private int productNumber;
     private String productDescription;
     private String imageFolder;
@@ -21,7 +26,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(int productID, int categoryID, String productName, double productPrice, int productNumber, String productDescription, String imageFolder) {
+    public Product(int productID, int categoryID, String productName, float productPrice, int productNumber, String productDescription, String imageFolder) {
         this.productID = productID;
         this.categoryID = categoryID;
         this.productName = productName;
@@ -55,11 +60,11 @@ public class Product {
         this.productName = productName;
     }
 
-    public double getProductPrice() {
+    public float getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(double productPrice) {
+    public void setProductPrice(float productPrice) {
         this.productPrice = productPrice;
     }
 
@@ -91,6 +96,5 @@ public class Product {
     public String toString() {
         return "Product{" + "productID=" + productID + ", categoryID=" + categoryID + ", productName=" + productName + ", productPrice=" + productPrice + ", productNumber=" + productNumber + ", productDescription=" + productDescription + ", imageFolder=" + imageFolder + '}';
     }
-    
+
 }
-    

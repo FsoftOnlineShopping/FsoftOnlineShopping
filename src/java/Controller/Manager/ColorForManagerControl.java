@@ -7,7 +7,7 @@ package Controller.Manager;
 
 import DAO.Category.categoryDAO;
 import DAO.Color.colorDAO;
-import DAO.ProductColor.ProductColorDAO;
+import ProductCorlor.ProductColorDAO;
 import Model.Category;
 import Model.Color;
 import Model.Product;

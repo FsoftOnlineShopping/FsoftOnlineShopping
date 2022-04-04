@@ -34,6 +34,7 @@
                 </li>-->
                 <li class="nav__item">
                     <a href="ProductManagerControl" class="nav__link d-flex">
+
                         <span class="icon"><i class='bx bx-package'></i></span>
                         <span class="title">Products</span>
                     </a>
@@ -50,12 +51,14 @@
                         <span class="title">Category</span>
                     </a>
                 </li>
-                <li class="nav__item">
+
+<!--                <li class="nav__item">
                     <a href="#" class="nav__link d-flex">
                         <span class="icon"><i class='bx bx-food-menu'></i></span>
                         <span class="title">Profile</span>
                     </a>
-                </li>
+                </li>-->
+
                 <li class="nav__item">
                     <a href="#" class="nav__link d-flex">
                         <span class="icon"><i class='bx bx-log-out'></i></span>
@@ -65,5 +68,8 @@
             </ul>
         </div>
     </nav>
+
+    <script src="js/handle-sign-out-admin.js"></script>
+
 </aside>
 

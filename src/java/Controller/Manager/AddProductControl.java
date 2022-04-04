@@ -5,7 +5,7 @@
  */
 package Controller.Manager;
 
-import DAO.Product.productDAO;
+import DAO.Product.productDAO_1;
 import Model.Product;
 import Upload.EncForm;
 import Upload.EncFormResult;
@@ -54,15 +54,15 @@ public class AddProductControl extends HttpServlet {
         String category = formFields.get("category").get(0);
         String[] color = formFields.get("color").toArray(new String[0]);
         String[] size = formFields.get("size").toArray(new String[0]);
-        productDAO.addProduct(pname, price, number, des, category);
+        productDAO_1.addProduct(pname, price, number, des, category);
     
-        Product p = productDAO.getProductByName(pname).get(0);
+        Product p = productDAO_1.getProductByName(pname).get(0);
         int id = p.getProductID();
         String productImagePath = "images/productImage/" + id;
       
-        productDAO.editImageFolderProduct(productImagePath, p.getProductID());
-        productDAO.addColorProduct(id, color);
-        productDAO.addSizeProduct(id, size);
+        productDAO_1.editImageFolderProduct(productImagePath, p.getProductID());
+        productDAO_1.addColorProduct(id, color);
+        productDAO_1.addSizeProduct(id, size);
         
 //        upload
         List<UploadItem> uploadItems = new ArrayList<>();

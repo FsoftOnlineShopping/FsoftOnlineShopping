@@ -346,7 +346,7 @@
                 </div>
 
                 <!-- Load more -->
-                <c:if test="${categoryID == null && id == null}">
+               <c:if test="${isShow == null}">
                     <div class="flex-c-m flex-w w-full p-t-45">
                         <button onclick="loadMore()" id="loadmore" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
                             Load More

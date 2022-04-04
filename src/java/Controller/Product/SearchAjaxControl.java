@@ -5,7 +5,7 @@
  */
 package Controller.Product;
 
-import DAO.Product.productDAO;
+import DAO.Product.productDAO_1;
 import Model.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,7 +37,7 @@ public class SearchAjaxControl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         String txtSearch = request.getParameter("txt");
-        List<Product> listN = productDAO.getProductByName(txtSearch);
+        List<Product> listN = productDAO_1.getProductByName(txtSearch);
         PrintWriter out = response.getWriter();
         for(Product o: listN){
             out.println(

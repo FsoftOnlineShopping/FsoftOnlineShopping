@@ -6,8 +6,8 @@
 package Controller.Product;
 
 import DAO.Color.colorDAO;
-import DAO.Product.productDAO;
-import DAO.ProductColor.ProductColorDAO;
+import DAO.Product.productDAO_1;
+import ProductCorlor.ProductColorDAO;
 import Model.Color;
 import Model.Product;
 import Model.ProductColor;
@@ -51,6 +51,7 @@ public class ColorControl extends HttpServlet {
             
             request.setAttribute("colorID", colorID);
             request.setAttribute("listP", listbyCo);
+            request.setAttribute("isShow", false);
             request.getRequestDispatcher("ProductControl").forward(request, response);
     }
      

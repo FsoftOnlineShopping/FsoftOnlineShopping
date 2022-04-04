@@ -57,7 +57,7 @@ public class categoryDAO {
             listbyC.add(new Product(rs.getInt("productID"), 
                           rs.getInt("categoryID"), 
                           rs.getString("productName"), 
-                          rs.getDouble("productPrice"), 
+                          rs.getFloat("productPrice"), 
                           rs.getInt("productNumber"), 
                           rs.getString("productDescription"), 
                           rs.getString("imageFolder")));    

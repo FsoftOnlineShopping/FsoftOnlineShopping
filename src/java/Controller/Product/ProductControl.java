@@ -7,7 +7,7 @@ package Controller.Product;
 
 import DAO.Category.categoryDAO;
 import DAO.Color.colorDAO;
-import DAO.Product.productDAO;
+import DAO.Product.productDAO_1;
 import Model.Account;
 import Model.Category;
 import Model.Color;
@@ -44,7 +44,7 @@ public class ProductControl extends HttpServlet {
         //getdata
         
         List<Product> listP = (List<Product>)request.getAttribute("listP");
-                if(listP == null) listP = productDAO.getProductTop8();
+                if(listP == null) listP = productDAO_1.getProductTop8();
         
         List<Category> listC = categoryDAO.getAllCategory(); 
         List<Color> listCo = colorDAO.getAllColor();
@@ -53,7 +53,7 @@ public class ProductControl extends HttpServlet {
         //setdata
         request.setAttribute("id", 1);
         request.setAttribute("listP", listP);
-        request.setAttribute("n", productDAO.getAllProduct().size());
+        request.setAttribute("n", productDAO_1.getAllProduct().size());
         request.setAttribute("listC", listC);
         request.setAttribute("listCo", listCo);
         request.getRequestDispatcher("product.jsp").forward(request, response);

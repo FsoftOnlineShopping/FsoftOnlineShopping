@@ -7,7 +7,7 @@ package Controller.Product;
 
 import DAO.Category.categoryDAO;
 import DAO.Color.colorDAO;
-import DAO.Product.productDAO;
+import DAO.Product.productDAO_1;
 import Model.Category;
 import Model.Color;
 import Model.Product;
@@ -54,43 +54,43 @@ public class SortControl extends HttpServlet {
         List<Product> listSortP;
       
         if(sort.equals("LH")){     
-           listSortO = productDAO.getProductByOrder("ASC");
+           listSortO = productDAO_1.getProductByOrder("ASC");
            request.setAttribute("listP", listSortO); 
            request.setAttribute("id", 2);
         }else if(sort.equals("HL")) {
-            listSortO = productDAO.getProductByOrder("DESC");
+            listSortO = productDAO_1.getProductByOrder("DESC");
             request.setAttribute("listP", listSortO); 
             request.setAttribute("id", 3);
         } else if(sort.equals("NN")){
-            listSortO = productDAO.getProductByNewID();
+            listSortO = productDAO_1.getProductByNewID();
             request.setAttribute("listP", listSortO); 
             request.setAttribute("id", 4);
             
         }else
         if(sort.equals("P1")){
-            listSortP = productDAO.getProductByPrice("BETWEEN 0 AND 10");
+            listSortP = productDAO_1.getProductByPrice("BETWEEN 0 AND 10");
             request.setAttribute("listP", listSortP);
             request.setAttribute("id", 5);
         } else if(sort.equals("P2")){
-            listSortP = productDAO.getProductByPrice("BETWEEN 10 AND 25");
+            listSortP = productDAO_1.getProductByPrice("BETWEEN 10 AND 25");
             request.setAttribute("listP", listSortP);
             request.setAttribute("id", 6);
         }else if(sort.equals("P3")){
-            listSortP = productDAO.getProductByPrice("BETWEEN 25 AND 40");
+            listSortP = productDAO_1.getProductByPrice("BETWEEN 25 AND 40");
             request.setAttribute("listP", listSortP);
             request.setAttribute("id", 7);
         }else if(sort.equals("P4")){
-            listSortP = productDAO.getProductByPrice("BETWEEN 40 AND 50");
+            listSortP = productDAO_1.getProductByPrice("BETWEEN 40 AND 50");
             request.setAttribute("listP", listSortP);
             request.setAttribute("id", 8);
         }else if(sort.equals("P5")){
-            listSortP = productDAO.getProductByPrice("> 50");
+            listSortP = productDAO_1.getProductByPrice("> 50");
             request.setAttribute("listP", listSortP);
             request.setAttribute("id", 9);
         }
         
         
-        
+      request.setAttribute("isShow", false);
         request.getRequestDispatcher("product.jsp").forward(request, response);
         
     }
