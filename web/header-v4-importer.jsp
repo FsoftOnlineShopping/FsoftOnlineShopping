@@ -60,7 +60,9 @@
 							</li>
 
 							<li>
-								<a href="product.jsp">Shop</a>
+
+								<a href="ProductControl">Shop</a>
+
 							</li>
 
 							<li class="label1" data-label1="hot">
@@ -206,7 +208,7 @@
 					<button class="flex-c-m trans-04">
 						<i class="zmdi zmdi-search"></i>
 					</button>
-					<input class="plh3" type="text" name="search" placeholder="Search...">
+                                            <input class="plh3" type="text" name="search" placeholder="Search...">
 				</form>
 			</div>
 		</div>

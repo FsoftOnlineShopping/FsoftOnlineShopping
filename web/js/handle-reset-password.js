@@ -4,9 +4,6 @@
  * and open the template in the editor.
  */
 
-
-// username, mat khau moi, bien checkReset = true;
-// Khi ma
 const resetPasswordAPI = 'http://localhost:8080/FsoftOnlineShopping/api-resetPassword';
 const resetPasswordEmailAPI = 'http://localhost:8080/FsoftOnlineShopping/api-resetPasswordEmail';
 const resetPasswordCodeAPI = 'http://localhost:8080/FsoftOnlineShopping/api-resetPasswordCode';
@@ -148,3 +145,4 @@ function handleResetPassword(data) {
                 formMessage3.classList.add('invalid');
             })
 }
+

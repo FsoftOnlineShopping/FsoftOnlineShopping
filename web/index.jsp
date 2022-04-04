@@ -104,7 +104,7 @@
                                 </li>
 
                                 <li>
-                                    <a href="product.html">Shop</a>
+                                    <a href="ProductControl">Shop</a>
                                 </li>
 
                                 <li class="label1" data-label1="hot">
@@ -1201,7 +1201,6 @@
             </div>
 
             <!-- Modal1 -->
-        <jsp:include page="quick-view-modal-importer.jsp"></jsp:include>
 
         <!--===============================================================================================-->	
         <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -1253,37 +1252,29 @@
             $('.js-addwish-b2').on('click', function (e) {
                 e.preventDefault();
             });
-
             $('.js-addwish-b2').each(function () {
                 var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
                 $(this).on('click', function () {
                     swal(nameProduct, "is added to wishlist !", "success");
-
                     $(this).addClass('js-addedwish-b2');
                     $(this).off('click');
                 });
             });
-
             $('.js-addwish-detail').each(function () {
                 var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
-
                 $(this).on('click', function () {
                     swal(nameProduct, "is added to wishlist !", "success");
-
                     $(this).addClass('js-addedwish-detail');
                     $(this).off('click');
                 });
             });
-
             /*---------------------------------------------*/
-
             $('.js-addcart-detail').each(function () {
                 var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
                 $(this).on('click', function () {
                     swal(nameProduct, "is added to cart !", "success");
                 });
             });
-
         </script>
         <!--===============================================================================================-->
         <script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
@@ -1296,7 +1287,6 @@
                     scrollingThreshold: 1000,
                     wheelPropagation: false,
                 });
-
                 $(window).on('resize', function () {
                     ps.update();
                 })

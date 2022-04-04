@@ -20,6 +20,7 @@
         <servlet-name>ResetPasswordEmailAPI</servlet-name>
         <servlet-class>Controller.Authen_Author.ResetPasswordEmailAPI</servlet-class>
     </servlet>
+
     <servlet>
         <servlet-name>ResetPasswordCodeAPI</servlet-name>
         <servlet-class>Controller.Authen_Author.ResetPasswordCodeAPI</servlet-class>
@@ -52,6 +53,7 @@
         <servlet-name>AdminDashboardAPI</servlet-name>
         <servlet-class>Controller.Admin_Dashboard.AdminDashboardAPI</servlet-class>
     </servlet>
+
     <servlet-mapping>
         <servlet-name>NewServlet</servlet-name>
         <url-pattern>/NewServlet</url-pattern>
@@ -72,6 +74,7 @@
         <servlet-name>ResetPasswordEmailAPI</servlet-name>
         <url-pattern>/api-resetPasswordEmail</url-pattern>
     </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>ResetPasswordCodeAPI</servlet-name>
         <url-pattern>/api-resetPasswordCode</url-pattern>
@@ -114,6 +117,7 @@
         <servlet-name>AdminDashboardAPI</servlet-name>
         <url-pattern>/admin-dashboard-api</url-pattern>
     </servlet-mapping>
+
     <session-config>
         <session-timeout>
             30

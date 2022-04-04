@@ -30,8 +30,6 @@
         <div class="container">
             <!--header-aside-->
             <jsp:include page="admin-header-aside-importer.jsp"></jsp:include>
-                <!-- Right Side/ Content -->
-                <!-- Right Side/ Content -->
                 <div class="main">
                 <jsp:include page="admin-header-importer.jsp"></jsp:include>
                 <div class="accounts">

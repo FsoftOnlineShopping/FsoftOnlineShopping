@@ -141,19 +141,19 @@
     });
 
     // init Isotope
-    $(window).on('load', function () {
-        var $grid = $topeContainer.each(function () {
-            $(this).isotope({
-                itemSelector: '.isotope-item',
-                layoutMode: 'fitRows',
-                percentPosition: true,
-                animationEngine : 'best-available',
-                masonry: {
-                    columnWidth: '.isotope-item'
-                }
-            });
-        });
-    });
+//    $(window).on('load', function () {
+//        var $grid = $topeContainer.each(function () {
+//            $(this).isotope({
+//                itemSelector: '.isotope-item',
+//                layoutMode: 'fitRows',
+//                percentPosition: true,
+//                animationEngine : 'best-available',
+//                masonry: {
+//                    columnWidth: '.isotope-item'
+//                }
+//            });
+//        });
+//    });
 
     var isotopeButton = $('.filter-tope-group button');
 
@@ -218,7 +218,8 @@
         var numProduct = Number($(this).next().val());
         if(numProduct > 0) $(this).next().val(numProduct - 1);
     });
-
+    
+    console.log('add event');
     $('.btn-num-product-up').on('click', function(){
         var numProduct = Number($(this).prev().val());
         $(this).prev().val(numProduct + 1);
@@ -280,3 +281,8 @@
 
 
 })(jQuery);
+
+
+function showModal(){
+    $('.js-modal1').addClass('show-modal1');
+}

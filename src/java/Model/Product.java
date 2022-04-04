@@ -7,9 +7,14 @@ package Model;
 
 /**
  *
- * @author ハン
+ * <<<<<<< HEAD
+ * @a
+ *
+ * uthor Admin =======
+ * @author ハン >>>>>>> 28a1197cceeb5de555abc543508922b2ae4477ce
  */
 public class Product {
+
     private int productID;
     private int categoryID;
     private String productName;
@@ -86,4 +91,10 @@ public class Product {
     public void setImageFolder(String imageFolder) {
         this.imageFolder = imageFolder;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" + "productID=" + productID + ", categoryID=" + categoryID + ", productName=" + productName + ", productPrice=" + productPrice + ", productNumber=" + productNumber + ", productDescription=" + productDescription + ", imageFolder=" + imageFolder + '}';
+    }
+
 }

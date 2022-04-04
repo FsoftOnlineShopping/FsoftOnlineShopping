@@ -8,9 +8,13 @@ package Controller.Authen_Author;
 import DAO.Account.AccountDAO;
 import Model.Account;
 import Model.GG_OAuth2_UserClaims;
+
+import Utils.GoogleMailUtils;
+
 import ModelResponse.AccountResponse;
 import Utils.GoogleMailUtils;
 import Utils.PasswordUtils;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.io.IOException;
@@ -113,8 +117,7 @@ public class LoginGoogle extends HttpServlet {
 //            rootNode.put("currentAccount", currentAccount.toString());
 
             String dataReturn = mapper.writeValueAsString(currentAccountResponse);
-            
-            
+                 
             request.setAttribute("currentAccount", dataReturn);
             RequestDispatcher dis = request.getRequestDispatcher("index.jsp");
             dis.forward(request, response);

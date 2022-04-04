@@ -199,10 +199,9 @@
         <script type="text/javascript" src="js/admin-general.js"></script>
         <!-- Chart JS -->
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script>
-            
-        </script>
+      
         <script src="js/handle-render-admin-dashboard.js"></script>
+
     </body>
 
 </html>

@@ -7,6 +7,7 @@ package Controller.Authen_Author;
 
 import DAO.Account.AccountDAO;
 import Model.Account;
+import Utils.FacebookLoginUtils;
 import ModelResponse.AccountResponse;
 import Utils.FacebookLoginUtils;
 import Utils.PasswordUtils;
@@ -78,7 +79,7 @@ public class LoginFacebook extends HttpServlet {
 
             int createState = -1;
             Account currentAccount = null;
-             AccountResponse currentAccountResponse = null;
+            AccountResponse currentAccountResponse = null;
             try {
                 if (!AccountDAO.isHaveUserName(user.getId())) {
                     String password = PasswordUtils.generatePassword(8, true, true, true, true);

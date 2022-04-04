@@ -171,7 +171,7 @@ body.dark-theme .nav__item {
 .user-name {
   font-size: var(--normal-font-size);
   font-weight: 300;
-   min-width: 170px; 
+  min-width: 170px; 
   max-width: 200px;
   overflow: hidden;
   color: var(--text-color);
