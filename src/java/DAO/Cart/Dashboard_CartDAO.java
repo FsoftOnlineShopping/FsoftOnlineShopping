@@ -103,9 +103,9 @@ public class Dashboard_CartDAO {
     public static ArrayList<Cart> getLatestOrders() {
         List<Cart> listCart = new ArrayList<>();
         String sql = "select top 5 a.cartID, b.userFullname, a.couponID, a.paymentMethodID, a.paymentDate, a.deliverDate, a.cartStatus, a.totalPrice\n"
-                + "from Cart a\n"
-                + "INNER JOIN Account b\n"
-                + "on a.userName = b.userName";
+                + "from Cart a, Account b\n"
+                + "where a.userName = b.userName\n"
+                + "order by cartID desc";
 
         con = DBConnection.makeConnection();
         try {
