@@ -59,11 +59,11 @@ public class LoadProductControl extends HttpServlet {
                     + "                </div>\n"        
                     + "                <div class=\"modal-name\">\n"
                     + "                    <div>Product Name<font color=\"red\" id=\"message-pname\"></font></div>\n"
-                    + "                    <input type=\"text\" name=\"name\" id=\"pname\" value=\"" + product.getProductName() + "\">\n"
+                    + "                    <input type=\"text\" name=\"name\" id=\"pname\" value=\"" + product.getProductName() + "\" required>\n"
                     + "                </div>\n"
                     + "                <div class=\"modal-description\">\n"
                     + "                    <div>Product Description</div>\n"
-                    + "                    <input type=\"text\" name=\"des\" value=\"" + product.getProductDescription() + "\">\n"
+                    + "                    <input type=\"text\" name=\"des\" value=\"" + product.getProductDescription() + "\" required>\n"
                     + "                </div>\n"
                     + "                <div class=\"modal-category\">\n"
                     + "                      <div> Category </div>\n"
@@ -142,17 +142,17 @@ public class LoadProductControl extends HttpServlet {
                     + "</div>\n"
                     + "                <div class=\"modal-number\">\n"
                     + "                    <div>Product Number</div>\n"
-                    + "                    <input type=\"number\" min=\"0\" name=\"number\" value=\"" + product.getProductNumber() + "\">\n"
+                    + "                    <input type=\"number\" min=\"0\" name=\"number\" value=\"" + product.getProductNumber() + "\" required>\n"
                     + "                </div>\n"
                     + "                <div class=\"modal-price\">\n"
                     + "                    <div>Product Price</div>\n"
-                    + "                    <input type=\"number\" min=\"0\" name=\"price\" value=\"" + product.getProductPrice() + "\">\n"
+                    + "                    <input type=\"number\" min=\"0\" name=\"price\" value=\"" + product.getProductPrice() + "\" required>\n"
                     + "                </div>\n"
                     + "                <div class=\"modal-image\">\n" +
 "                    <div>Product Image</div>\n" +
 
-"                                    <input name=\"image\" type=\"file\" size=\"60\"  id=\"file-upload-1\" accept=\"image/png, image/jpeg\"   />\n" +
-                            "                    <div>Detail Image</div>\n" +
+//"                                    <input name=\"image\" type=\"file\" size=\"60\"  id=\"file-upload-1\" accept=\"image/png, image/jpeg\"   />\n" +
+//                            "                    <div>Detail Image</div>\n" +
 "                                    <input name=\"images\" type=\"file\" size=\"60\" id=\"file-upload-2\" accept=\"image/png, image/jpeg\" multiple />\n" +
 "                   \n" +
 "                </div>\n" +

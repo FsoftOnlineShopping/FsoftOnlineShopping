@@ -71,6 +71,7 @@
                             </button>
 
                         </c:forEach>
+
                         <!--					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
                                                                         Men
                                                                 </button>
@@ -99,6 +100,7 @@
                             <i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
                             <i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
                             Search
+
                         </div>
                     </div>
 
@@ -346,7 +348,7 @@
                 </div>
 
                 <!-- Load more -->
-               <c:if test="${isShow == null}">
+                <c:if test="${isShow == null}">
                     <div class="flex-c-m flex-w w-full p-t-45">
                         <button onclick="loadMore()" id="loadmore" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
                             Load More

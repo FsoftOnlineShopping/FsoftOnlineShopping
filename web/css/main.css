@@ -513,7 +513,34 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   flex-grow: unset;
 }
 
+/*-----------------------------------------*/
+.pic-property {
+    object-fit: cover;
+    height: 300px;
+    filter: blur(0.8px);
+}
+.outer {
+  background-color: pink;
+  width: 200px;
+  position: relative;
+  display: inline-block;
+  margin: 100px 20px;
+}
 
+.inner {
+  font-size: 20px;
+  font-color: #878787;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: #DDD;
+}
+
+.rotate {
+    -moz-transform: translateX(-50%) translateY(-50%) rotate(-90deg);
+  -webkit-transform: translateX(-50%) translateY(-50%) rotate(-90deg);
+  transform:  translateX(-50%) translateY(-50%) rotate(-90deg);
+}
 /*------------------------------------------------------------------
 [ Modal search ]*/
 .modal-search-header {
@@ -2016,7 +2043,7 @@ input.num-product::-webkit-inner-spin-button {
 
 /*---------------------------------------------*/
 .block1-txt:hover {
-  background-color: rgba(103,117,214,0.8);
+  background-color: rgba(180, 180, 180, 0.5);
 }
 
 .block1-txt:hover .block1-txt-child2 {
@@ -2350,7 +2377,10 @@ input.num-product::-webkit-inner-spin-button {
 .ltext-102 {
   font-family: Poppins-Bold;
   font-size: 28px;
-  line-height: 1.1;
+  line-height: 8;
+  text-shadow: 2px 1px 	rgb(221, 221, 187, 0.5);
+  
+ 
 }
 
 .ltext-103 {
@@ -2412,8 +2442,14 @@ input.num-product::-webkit-inner-spin-button {
   line-height: 1.2857;
 }
 
-
-
+/*---------------------------------------------*/
+.searchIcon{
+    position: relative;
+}
+.formSearch{
+    position: absolute;
+    display: none;
+}
 
 /*==================================================================
     SIZE SIZE SIZE SIZE SIZE SIZE SIZE SIZE SIZE SIZE SIZE SIZE SIZE 
