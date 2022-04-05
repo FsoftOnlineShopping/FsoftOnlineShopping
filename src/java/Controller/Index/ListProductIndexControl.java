@@ -3,32 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.Manager;
+package Controller.Index;
 
+import DAO.Category.categoryDAO;
+import DAO.Color.colorDAO;
 import DAO.Product.productDAO_1;
+import Model.Account;
+import Model.Category;
+import Model.Color;
 import Model.Product;
-import Upload.EncForm;
-import Upload.EncFormResult;
-import Upload.UploadItem;
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.fileupload.FileItem;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "AddProductControl", urlPatterns = {"/AddProductControl"})
-public class AddProductControl extends HttpServlet {
+@WebServlet(name = "ListProductIndexControl", urlPatterns = {"/ListProductIndexControl"})
+public class ListProductIndexControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,38 +40,22 @@ public class AddProductControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        EncFormResult encFormData = new EncForm().getEncFormData(request, request.getServletContext());
-        List<FileItem> fileItems = encFormData.getFileItems();
-        HashMap<String, List<String>> formFields = encFormData.getFormFields();
-
-        String pname = formFields.get("name").get(0);
-        String price = formFields.get("price").get(0);
-        String number = formFields.get("number").get(0);
-        String des = formFields.get("des").get(0);
-        String category = formFields.get("category").get(0);
-        String[] color = formFields.get("color").toArray(new String[0]);
-        String[] size = formFields.get("size").toArray(new String[0]);
-   
-        int id = productDAO_1.addProduct(pname, price, number, des, category);
-        String productImagePath = "images/productImage/" + id;
-      
-        productDAO_1.editImageFolderProduct(productImagePath, id);
-        productDAO_1.addColorProduct(id, color);
-        productDAO_1.addSizeProduct(id, size);
+        //getdata
         
-//        upload
-        List<UploadItem> uploadItems = new ArrayList<>();
+        List<Product> listP = (List<Product>)request.getAttribute("listP");
+                if(listP == null) listP = productDAO_1.getProductTop8();
         
-        fileItems.forEach(fi -> {
-            UploadItem ui = new UploadItem(fi, id + " (" + (fileItems.indexOf(fi)+1) + ")");
-            uploadItems.add(ui);
-        });
+        List<Category> listC = categoryDAO.getAllCategory(); 
+        List<Color> listCo = colorDAO.getAllColor();
+        Account currentAccount = (Account) request.getSession().getAttribute("currentAccount");
         
-        List<String> uploadFile = EncForm.uploadFile(uploadItems.toArray(new UploadItem[]{}), productImagePath, request, request.getServletContext());
-        
-        System.out.println("uploaded: " + uploadFile);
-        response.sendRedirect("ProductManagerControl");
+        //setdata
+        request.setAttribute("id", 1);
+        request.setAttribute("listP", listP);
+        request.setAttribute("n", productDAO_1.getAllProduct().size());
+        request.setAttribute("listC", listC);
+        request.setAttribute("listCo", listCo);
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

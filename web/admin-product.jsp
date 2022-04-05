@@ -138,11 +138,11 @@
                         </div>
                         <div class="modal-name">
                             <div>Product Name</div>
-                            <input type="text" name="name" value="${detail.productName}">
+                            <input type="text" name="name" value="${detail.productName}" required>
                         </div>
                         <div class="modal-description">
                             <div>Product Description</div>
-                            <input type="text" name="des" value="${detail.productDescription}">
+                            <input type="text" name="des" value="${detail.productDescription}" required>
                         </div>
                         <div class="modal-category">
                             <div> Category </div>
@@ -154,11 +154,11 @@
                         </div>
                         <div class="modal-number">
                             <div>Product Number</div>
-                            <input type="number" min="0" name="number" value="${detail.productNumber}">
+                            <input type="number" min="0" name="number" value="${detail.productNumber}" required>
                         </div>
                         <div class="modal-price">
                             <div>Product Price</div>
-                            <input type="number" min="0" name="number" value="${detail.productPrice}">
+                            <input type="number" min="0" name="number" value="${detail.productPrice}" required>
                         </div>
                         <div class="modal-image">
                             <div>Product Image</div>
