@@ -169,6 +169,7 @@
                         alert("must choose at least one size");
                         isError = true;
                     }
+                    if()
 
                     return !isError;
                 }                                    

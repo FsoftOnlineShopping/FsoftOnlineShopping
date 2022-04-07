@@ -128,7 +128,7 @@
             </div>
 
             <section class="modal" id="modal">
-                <form id="edit-form" action="EditProductControl" method="post" onsubmit="return validate()" enctype="multipart/form-data">
+                <form id="add-form" action="EditProductControl" method="post" onsubmit="return validate()" enctype="multipart/form-data">
                     <div class="modal-title">
                         Update This Product
                     </div>
