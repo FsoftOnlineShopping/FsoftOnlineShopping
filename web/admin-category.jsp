@@ -4,6 +4,7 @@
     Author     : ADMIN
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,100 +34,115 @@
                 <!-- Right Side/ Content -->
                 <div class="main">
                 <jsp:include page="admin-header-importer.jsp"></jsp:include>
-                <div class="categorys">
-                    <nav class="breadcrumb">
-                        <ol class="breadcrumb-list d-flex">
-                            <li class="breadcrumb-items breadcrumb-prev"><a href="">Home</a></li>
-                            <span><i class="far fa-chevron-right"></i></span>
-                            <li class="breadcrumb-items breadcrumb-current"><a href="">Categories</a></li>
-                        </ol>
-                    </nav>
-                    <div class="categorys-title">
-                        Categories Management
-                    </div>
-                    <div class="categorys-status">
-                        <div class="row">
-                            <div class="col c-12">
-                                <div class="row">
-                                    <div class="col l-3 m-6 c-12">
-                                        <div class="category-card border-green align-items-center d-flex">
-                                            <div class="icon"><i class='bx bx-duplicate'></i></div>
-                                            <div class="body">
-                                                <div class="number">1,995</div>
-                                                <div class="content">New Category</div>
+                    <div class="categorys">
+                        <nav class="breadcrumb">
+                            <ol class="breadcrumb-list d-flex">
+                                <li class="breadcrumb-items breadcrumb-prev"><a href="">Home</a></li>
+                                <span><i class="far fa-chevron-right"></i></span>
+                                <li class="breadcrumb-items breadcrumb-current"><a href="">Categories</a></li>
+                            </ol>
+                        </nav>
+                        <div class="categorys-title">
+                            Categories Management
+                        </div>
+
+                        <div class="categorys-status">
+                            <div class="row">
+                                <div class="col c-12">
+                                    <div class="row">
+                                        <div class="col l-3 m-6 c-12">
+                                            <div class="category-card border-green align-items-center d-flex">
+                                                <div class="icon"><i class='bx bx-duplicate'></i></div>
+                                                <div class="body">
+                                                    <div class="number">1,995</div>
+                                                    <div class="content">New Category</div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col l-3 m-6 c-12">
-                                        <div class="category-card border-blue align-items-center d-flex">
-                                            <div class="icon"><i class='bx bx-category'></i></div>
-                                            <div class="body">
-                                                <div class="number">1,294</div>
-                                                <div class="content">Total Category</div>
+                                        <div class="col l-3 m-6 c-12">
+                                            <div class="category-card border-blue align-items-center d-flex">
+                                                <div class="icon"><i class='bx bx-category'></i></div>
+                                                <div class="body">
+                                                    <div class="number">1,294</div>
+                                                    <div class="content">Total Category</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <section class="categorys-main">
-                        <div class="categorys-overview">
-                            <div class="overview-header">
-                                <div class="overview-title">categorys Breakdown</div>
-                                <div class="overview-sub-title">Details and history</div>
-                            </div>
-                            <div class="overview-body">
-                                <div class="overview-function d-flex align-items-center">
-                                    <div class="search">
-                                        <input type="text" name="search" placeholder="Search...">
-                                    </div>
+
+                        <section class="categorys-main">
+                            <div class="categorys-overview">
+                                <div class="overview-header">
+                                    <div class="overview-title">categorys Breakdown</div>
+                                    <div class="overview-sub-title">Details and history</div>
+                                </div>
+                                <div class="overview-body">
+                                    <div class="overview-function d-flex align-items-center">
+                                        <form action="SearchCategoryAdmin" method="post">
+                                            <div class="search">
+                                                <input oninput="searchAjax(this)" value="${txtS}" name="txt" type="text" placeholder="Search">
+                                            <button type="submit">
+                                               Search
+                                            </button>
+                                        </div>
+                                    </form>
                                     <div class="sort-by d-flex align-items-center">
                                         <label for="form-orders" class="d-flex align-items-center"><i
                                                 class='bx bx-sort'></i><span>Sort by:</span></label>
-                                        <select name="form-orders" id="form-orders" class="form-select">
-                                            <option value="default" selected="">Default</option>
-                                            <option value="">Category Name: A to Z</option>
-                                            <option value="">Category Name: Z to A</option>
-                                            <option value="">Category Icon: A to Z</option>
-                                            <option value="">Category Icon: Z to A</option>
+                                        <select name="form-orders" id="form-orders" class="form-select" onchange="window.location=this.value">
+                                            <option value="LoadCategoryControl" selected="">Default</option>
+                                            <option value="SortCategoryAdmin?sort=M">Category Name: A to Z</option>
+                                            <option value="SortCategoryAdmin?sort=C">Category Name: Z to A</option>
+                                            
                                         </select>
                                     </div>
-                                    <div class="export"><a class="primary-btn" href="#"><button class="primary-btn"
-                                                                                                type="button" name="export">Export To Excel</button></a></div>
+                                    <div><a class="primary-btn" href="add-category.jsp"><button class="primary-btn"
+                                                                                                type="button">Add category</button></a></div>
                                 </div>
                                 <table class="table table-category-overview">
+
                                     <tr>
                                         <th scope="col">Category ID</th>
                                         <th scope="col">Category Name</th>
-                                        <th scope="col">Category code</th>
-                                        <th scope="col">Category Icon</th>
+
                                     </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Shopping Bag</td>
-                                        <td>fas fa-shopping-bag</td>
-                                        <td><i class="fas fa-shopping-bag"></i></td>
-                                        <td>
-                                            <div class="edit d-flex justify-content-center align-items-center">
-                                                <i class='bx bxs-edit'></i>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Shopping Bag</td>
-                                        <td>fas fa-shopping-bag</td>
-                                        <td><i class="fas fa-shopping-bag"></i></td>
-                                        <td>
-                                            <div class="edit d-flex justify-content-center align-items-center">
-                                                <i class='bx bxs-edit'></i>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    <!--                                    <tr>
+                                                                            <td>1</td>
+                                                                            <td>Shopping Bag</td>
+                                                                            <td>fas fa-shopping-bag</td>
+                                                                            <td><i class="fas fa-shopping-bag"></i></td>
+                                                                            <td>
+                                                                                <div class="edit d-flex justify-content-center align-items-center">
+                                                                                    <i class='bx bxs-edit'></i>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>-->
+
+                                    <c:forEach items="${listC}" var="o"> 
+
+                                        <tr id="category-form">
+
+                                            <td>${o.categoryID}</td>
+                                            <td>${o.categoryName}</td>
+
+                                            <!--                                        <td><i class="fas fa-shopping-bag"></i></td>-->
+                                            <td>
+                                                <div class="edit d-flex justify-content-center align-items-center">
+                                                    <i class='bx bxs-edit' onclick="getCategory(${o.categoryID});"> </i>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+
+
+
+                                    </c:forEach>
 
                                 </table>
-                                <div class="view-all"><a href="#">Load More</a></div>
+
                             </div>
 
                         </div>
@@ -135,34 +151,28 @@
             </div>
         </div>
         <section class="modal" id="modal">
+            <form id="edit-form" action="EditCategoryControl" method="post">
             <div class="modal-title">
                 Update This Category
             </div>
-            <div class="modal-body">
-                <div class="modal-id">
-                    <div>Category ID</div>
-                    <input type="text" name="categoryID" value="1" disabled>
-                </div>
+            
+            <div id="modal-body" class="modal-body">
+                <input type="hidden" name="cid" value="${detail.categoryID}">
                 <div class="modal-name">
                     <div>Category Name</div>
-                    <input type="text" name="categoryID" value="Shopping bag">
+                    <input type="text" name="cname" value="${detail.categoryName}">
                 </div>
-                <div class="modal-icon">
-                    <div>Category Icon</div>
-                    <i class="fas fa-shopping-bag"></i>
-                </div>
-                <div class="modal-code">
-                    <div>Category Code</div>
-                    <input type="text" name="categoryID" value="fas fa-shopping-bag">
-                </div>
-                <div class="modal-button"><button type="button">Save</button></div>
+                
+                <div class="modal-button"><button type="button" onclick="validate()">Save</button></div>
 
             </div>
+            </form>
         </section>
     </div>
     <div id="modal-cover" class="modal-cover">
     </div>
     <!-- font awsomwe pro-->
+    
     <script src="font-awesome-pro-master/js/pro.min.js"></script>
     <script type="text/javascript" src="js/admin-general.js"></script>
     <script>
@@ -186,6 +196,77 @@
         var nav__itemLists = document.querySelectorAll(".nav__item");
         nav__itemLists[4].classList.add("real-active", "active");
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function searchAjax(param) {
+            var txtSearch = param.value;
+            $.ajax({
+                url: "/FsoftOnlineShopping/SearchCategoryAdmin",
+                type: "get", //send it through get method
+                data: {
+                    txt: txtSearch
+                },
+                success: function (data) {
+                    var row = document.getElementById("category-form");
+                    row.innerHTML = data;
+                },
+                error: function (xhr) {
+                    //Do Something to handle error
+                }
+            })
+
+        }
+        
+
+        function showModal() {
+            const modal = document.querySelector('#modal');
+            const modalCover = document.querySelector('#modal-cover');
+
+            modal.classList.add('active');
+            modalCover.classList.add('active');
+        }
+        
+        function validate(){
+            var name = $("#name").val();
+            console.log("check " + name);
+            $.ajax({
+                url: "EditCategoryControl",
+                type: "GET",
+                data: {
+                    cname: name
+                },
+                success: function(data) {
+                    console.log(data);
+                    if(data == "not_exist") {
+                        $("#edit-form").submit();
+                    } else if (data == "exist") {
+                        alert("Category name exist!");
+                    } else alert("Error");                
+                }
+            });
+        }
+    </script>
+    <script>
+            function getCategory(cid) {
+                var id = cid;
+                $.ajax({
+                    url: "/FsoftOnlineShopping/LoadEditCategory",
+                    type: "get", //send it through get method
+                    data: {
+                        caid: id
+                    },
+                    success: function (data) {
+                        var row = document.getElementById("modal-body");
+                        row.innerHTML = data;
+                        
+                        
+                    },
+                    error: function (xhr) {
+                        //Do Something to handle error
+                    }
+                })
+            }
+        </script>
 </body>
 
 </html>
