@@ -6,6 +6,7 @@
 package DAO.Product;
 
 import DBConnection.DBConnection;
+import Model.Color;
 import Model.Product;
 import Model.ProductComment;
 import java.sql.Connection;
@@ -124,5 +125,5 @@ public class ProductDAO {
         }
         return pcList;
     }
-    
+ 
 }

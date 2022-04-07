@@ -5,14 +5,14 @@
  */
 package Controller.Shopping_Cart;
 
-import DAO.Product.ProductDAO;
+import DAO.Cart.CartDAO;
 import Model.Account;
+import Model.Cart;
 import Model.CartItem;
-import Model.Item;
-import Model.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import java.sql.Date;
+import java.sql.Timestamp;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author ハン
  */
-public class BuyServlet extends HttpServlet {
+public class BillServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,10 +42,10 @@ public class BuyServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet BuyServlet</title>");            
+            out.println("<title>Servlet BillServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet BuyServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet BillServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -77,39 +77,43 @@ public class BuyServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession(true);
+        HttpSession session = request.getSession();
+        CartItem cartItem = null;
+        CartDAO cdao = new CartDAO();
+        Object o = session.getAttribute("cart");
+//      available
+        if (o != null) {
+            cartItem = (CartItem) o;
+        }
         Account account = null;
         account = (Account) session.getAttribute("currentAccount");
         if (account == null) {
             response.sendRedirect("login.jsp");
             return;
-        }
-        CartItem cartItem = null;
-        Object o = session.getAttribute("cart");
-//      available
-        if (o != null) {
-            cartItem = (CartItem) o;
         } else {
-            cartItem = new CartItem();
+            String userName = account.getUserName();
+            String couponID = "0";
+            String address = request.getParameter("address");
+            String phone = request.getParameter("phone");
+            String payment = request.getParameter("payment");
+            int paymentMethodID = 0;
+            if("Momo".equals(payment)) {
+                paymentMethodID = 1;
+            } if("CreditCard".equals(payment)) {
+                paymentMethodID = 2;
+            } if("Bank".equals(payment)) {
+                paymentMethodID = 3;
+            } if("COD".equals(payment)) {
+                paymentMethodID = 4;  // COD
+            } 
+            Date paymentDate = new Date(System.currentTimeMillis());
+            Date deliverDate = new Date(System.currentTimeMillis());
+            float totalPrice = cartItem.getTotalMoney();                 
+            Cart c = new Cart(userName, couponID, paymentMethodID, paymentDate, deliverDate, 0, totalPrice);
+            cdao.addCart(c, cartItem);
+            session.removeAttribute("cart");
+            request.getRequestDispatcher("shoping-cart.jsp").forward(request, response);
         }
-        String tnum = request.getParameter("num");
-        String tid = request.getParameter("productID");
-        int num, id;
-        try {
-            num = Integer.parseInt(tnum);
-            id = Integer.parseInt(tid);
-            ProductDAO proDao = new ProductDAO();
-            Product p = proDao.getProductById(id);
-            float price = (float) (p.getProductPrice());
-            Item t = new Item(p, num, price);
-            cartItem.addItem(t);
-        } catch (Exception e) {
-            num = 1;
-        }
-        List<Item> list = cartItem.getItems();
-        session.setAttribute("cart", cartItem);
-        session.setAttribute("size", list.size());
-        request.getRequestDispatcher("ProductDetailControl").forward(request, response);
     }
 
     /**

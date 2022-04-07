@@ -45,7 +45,7 @@ public class QuickViewControl extends HttpServlet {
         response.setContentType("aplication/json;charset=UTF-8");
         String id = request.getParameter("pid");
         Product p = productDAO_1.getProductByID(id);
-        File path = new File(request.getServletContext().getRealPath("."));
+        File path = new File(request.getServletContext().getRealPath("/"));
         List<Color> listCo = colorDAO.getAllColor();
         File dir = new File(path + "/" + p.getImageFolder());
         List<String> images = Arrays.asList(dir.listFiles())

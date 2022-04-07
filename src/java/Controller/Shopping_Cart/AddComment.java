@@ -10,7 +10,6 @@ import Model.Account;
 import Model.ProductComment;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -75,14 +74,15 @@ public class AddComment extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        HttpSession session = request.getSession(true);
+        Account account = null;
+        account = (Account) session.getAttribute("currentAccount");
+        if (account == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
         try {
-            HttpSession session = request.getSession(true);
-            Account account = null;
-            account = (Account) session.getAttribute("currentAccount");
-            if (account == null) {
-                response.sendRedirect("login.jsp");
-                return;
-            }
             int proId = Integer.parseInt(request.getParameter("commentProID"));
             String userName = account.getUserName();
             String userFullName = account.getUserFullname();
@@ -93,9 +93,9 @@ public class AddComment extends HttpServlet {
             ProductComment pc = new ProductComment(proId, userName, commentContent, rating);
             ProductDAO pdao = new ProductDAO();
             int n = pdao.insertComment(pc);
-            request.getRequestDispatcher("product-detail.jsp?productID=" + proId).forward(request, response);
         } catch (Exception e) {
         }
+        request.getRequestDispatcher("ProductDetailControl").forward(request, response);
     }
 
     /**

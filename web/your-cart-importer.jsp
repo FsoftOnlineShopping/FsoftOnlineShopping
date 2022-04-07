@@ -29,7 +29,7 @@
 					<li class="header-cart-item flex-w flex-t m-b-12">
                                                 <a href="deletecart?productID=${i.product.productID}">
                                                     <div class="header-cart-item-img">
-							<img src="${i.product.imageFolder}/front.jpg" alt="IMG">
+							<img src="${i.product.imageFolder}/${i.product.productID} (1).jpg" alt="IMG">
                                                     </div>
                                                 </a>       
 						<div class="header-cart-item-txt p-t-8">

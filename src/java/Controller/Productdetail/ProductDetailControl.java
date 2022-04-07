@@ -3,30 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.Product;
+package Controller.Productdetail;
 
 import DAO.Color.colorDAO;
+import DAO.Product.ProductDAO;
 import DAO.Product.productDAO_1;
-import ProductCorlor.ProductColorDAO;
 import Model.Color;
 import Model.Product;
 import Model.ProductColor;
+import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
  *
- * @author Admin
+ * @author ハン
  */
-@WebServlet(name = "ColorControl", urlPatterns = {"/ColorControl"})
-public class ColorControl extends HttpServlet {
+@WebServlet(name = "ProductDetailControl", urlPatterns = {"/ProductDetailControl"})
+public class ProductDetailControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,21 +44,43 @@ public class ColorControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-            List<Color> listCo = colorDAO.getAllColor();
-            String colorID = request.getParameter("colorID");
-            request.setAttribute("listCo", listCo);
+        ProductDAO pdao = new ProductDAO();
+        productDAO_1 pdao1 = new productDAO_1();
+        Product p;
+        String tid = request.getParameter("productID");
+        int id;
+        try {
+            id = Integer.parseInt(tid);
+            p = pdao.getProductById(id);
+            List<ProductColor> pColor = pdao1.getColorIDByProductID(id);
+            List<Color> color = colorDAO.getAllColor();
+            List<String> colorName = new ArrayList<>();
+            for (ProductColor c : pColor) {
+                for (Color co : color) {
+                    if (c.getColorID() == co.getColorID()) {
+                        colorName.add(co.getColorName());
+                    }
+                }
+            }
             
- 
-
-            List<Product> listbyCo = ProductColorDAO.getProductByColorID(colorID);       
-             
-            
-            request.setAttribute("colorID", colorID);
-            request.setAttribute("listP", listbyCo);
-            request.setAttribute("isShow", false);
-            request.getRequestDispatcher("ProductControl").forward(request, response);
+            File path = new File(request.getServletContext().getRealPath("/"));
+            File dir = new File(path + "/" + p.getImageFolder());
+            List<String> images = Arrays.asList(dir.listFiles())
+                    .stream()
+                    .map(f -> {
+                        return path.toURI().relativize(f.toURI()).getPath();
+                    })
+                    .collect(Collectors.toList());
+            System.out.println(path);
+            System.out.println(images);
+            request.setAttribute("images", images);
+            request.setAttribute("colorName", colorName);
+            request.getRequestDispatcher("product-detail.jsp").forward(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(ProductDetailControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-     
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

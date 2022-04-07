@@ -5,8 +5,8 @@
  */
 package Controller.LoadMore;
 
-import DAO.Product.productDAO_1;
-import Model.Product;
+import DAO.Cart.CartDAO;
+import Model.Cart;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -18,10 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Admin
- */ 
-@WebServlet(name = "loadMoreControl", urlPatterns = {"/loadMoreControl"})
-public class loadMoreControl extends HttpServlet {
+ * @author ハン
+ */
+@WebServlet(name = "LoadMoreAdminOrder", urlPatterns = {"/LoadMoreAdminOrder"})
+public class LoadMoreAdminOrder extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,46 +37,45 @@ public class loadMoreControl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String amount = request.getParameter("amount"); 
         int iamount = Integer.parseInt(amount);
-        List<Product> list = productDAO_1.getNext8Product(iamount);
+        CartDAO cdao = new CartDAO();
+        List<Cart> list = cdao.getNext10Cart(iamount);
         PrintWriter out = response.getWriter();
-        for (Product o: list ){
-            out.println(
-            "                                <div class=\"col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women\">\n" +
-"					<!-- Block2 -->\n" +
-"                                        \n" +
-"					<div id=\"content\" class=\"number block2\">\n" +
-"                                             \n" +
-"						<div class=\"block2-pic hov-img0\">\n" +
-"							<img src=\""+o.getImageFolder()+"/"+o.getProductID()+" (1).jpg\" alt=\"IMG-PRODUCT\">\n" +
-"\n" +
-"							<button onclick=\"quickView("+ o.getProductID() +");showModal()\"><a href=\"#\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\">\n" +
-"								Quick View\n" +
-"							</a></button>\n" +
-"						</div>\n" +
-"\n" +
-"						<div class=\"block2-txt flex-w flex-t p-t-14\">\n" +
-"							<div class=\"block2-txt-child1 flex-col-l \">\n" +
-"								<a href=\"ProductDetailControl?productID="+o.getProductID()+"\" class=\"stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6\">\n" +
-"									"+o.getProductName()+"\n" +
-"								</a>\n" +
-"\n" +
-"								<span class=\"stext-105 cl3\">\n" +
-"									$"+o.getProductPrice()+"\n" +
-"								</span>\n" +
-"							</div>\n" +
-"							<div class=\"block2-txt-child2 flex-r p-t-3\">\n" +
-"								<a href=\"#\" class=\"btn-addwish-b2 dis-block pos-relative js-addwish-b2\">\n" +
-"									<img class=\"icon-heart1 dis-block trans-04\" src=\"images/icons/icon-heart-01.png\" alt=\"ICON\">\n" +
-"									<img class=\"icon-heart2 dis-block trans-04 ab-t-l\" src=\"images/icons/icon-heart-02.png\" alt=\"ICON\">\n" +
-"								</a>\n" +
-"							</div>\n" +
-"						</div>\n" +
-"					</div>\n" +
-"				</div>"
-            );
+        for (Cart o: list ){
+            int payment = o.getPaymentMethodID();
+            String paymentMethod = "";
+            if (payment == 1) {
+                paymentMethod = "Momo";
+            } if (payment ==2) {
+                paymentMethod = "Credit Card";
+            } if (payment == 3) {
+                paymentMethod = "Bank";
+            } if (payment == 4) {
+                paymentMethod = "COD";
+            }
+            out.println("<tr>\n" +
+"                                            <th>ID</th>\n" +
+"                                            <th>Username</th>\n" +
+"                                            <th>Payment Date</th>\n" +
+"                                            <th>Deliver Date</th>  \n" +
+"                                            <th>Coupon</th>\n" +
+"                                            <th>Payment Method</th>\n" +
+"                                            <th>Discount</th>\n" +
+"                                            <th>Bill Total</th>\n" +
+"                                            <th>Status</th>\n" +
+"                                        </tr>\n" +
+"                                        <tr>\n" +
+"                                            <td>#"+o.getCartID()+"</td>\n" +
+"                                            <td>"+o.getUserName()+"</td>\n" +
+"                                            <td>"+o.getPaymentDate()+"</td>\n" +
+"                                            <td>"+o.getDeliverDate()+"</td>\n" +
+"                                            <td>"+o.getCouponID()+"</td>\n" +
+"                                            <td>"+paymentMethod+"</td>\n" +
+"                                            <td>-$0</td>\n" +
+"                                            <td>$"+o.getTotalPrice()+"</td>\n" +
+"                                            <td><span class=\"status paid\">Paid</span></td>\n" +
+"                                        </tr>");
    
         }
-       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

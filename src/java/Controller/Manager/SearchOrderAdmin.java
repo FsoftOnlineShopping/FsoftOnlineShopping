@@ -3,14 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.Product;
+package Controller.Manager;
 
-import DAO.Color.colorDAO;
-import DAO.Product.productDAO_1;
-import ProductCorlor.ProductColorDAO;
-import Model.Color;
-import Model.Product;
-import Model.ProductColor;
+import DAO.Cart.CartDAO;
+import Model.Cart;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -20,13 +16,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
  *
- * @author Admin
+ * @author ハン
  */
-@WebServlet(name = "ColorControl", urlPatterns = {"/ColorControl"})
-public class ColorControl extends HttpServlet {
+@WebServlet(name = "SearchOrderAdmin", urlPatterns = {"/SearchOrderAdmin"})
+public class SearchOrderAdmin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,21 +35,36 @@ public class ColorControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-            List<Color> listCo = colorDAO.getAllColor();
-            String colorID = request.getParameter("colorID");
-            request.setAttribute("listCo", listCo);
-            
- 
-
-            List<Product> listbyCo = ProductColorDAO.getProductByColorID(colorID);       
-             
-            
-            request.setAttribute("colorID", colorID);
-            request.setAttribute("listP", listbyCo);
-            request.setAttribute("isShow", false);
-            request.getRequestDispatcher("ProductControl").forward(request, response);
+        request.setCharacterEncoding("UTF-8");
+        String txtSearch = request.getParameter("txt");
+        CartDAO cdao = new CartDAO();
+        List<Cart> listN = cdao.getCartById(txtSearch);
+        PrintWriter out = response.getWriter();
+        for(Cart o: listN){
+            out.print("                                        <tr>\n" +
+"                                            <th>ID</th>\n" +
+"                                            <th>Username</th>\n" +
+"                                            <th>Payment Date</th>\n" +
+"                                            <th>Deliver Date</th>  \n" +
+"                                            <th>Coupon</th>\n" +
+"                                            <th>Payment Method</th>\n" +
+"                                            <th>Discount</th>\n" +
+"                                            <th>Bill Total</th>\n" +
+"                                            <th>Status</th>\n" +
+"                                        </tr><tr>\n" +
+"                                        <td>#"+o.getCartID()+"</td>\n" +
+"                                        <td>"+o.getUserName()+"</td>\n" +
+"                                        <td>"+o.getPaymentDate()+"</td>\n" +
+"                                        <td>"+o.getDeliverDate()+"</td>\n" +
+"                                        <td>"+o.getCouponID()+"</td>\n" +
+"                                        <td>"+o.getPaymentMethodID()+"</td>\n" +
+"                                        <td>-$0</td>\n" +
+"                                        <td>$"+o.getTotalPrice()+"</td>\n" +
+"                                        <td><span class=\"status paid\">Paid</span></td>\n" +
+"                                    </tr>");
+        }
     }
-     
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

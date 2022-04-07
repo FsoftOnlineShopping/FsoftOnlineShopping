@@ -5,25 +5,33 @@
  */
 package Controller.Shopping_Cart;
 
-import DAO.Product.ProductDAO;
+import Controller.Admin_Dashboard.AdminDashboardAPI;
+import DAO.Account.AccountDAO;
+import DAO.Cart.CartDAO;
+import DAO.Cart.Dashboard_CartDAO;
 import Model.Account;
-import Model.CartItem;
-import Model.Item;
-import Model.Product;
+import Model.Cart;
+import ModelResponse.AccountDashboard;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ハン
  */
-public class BuyServlet extends HttpServlet {
+@WebServlet(name = "AdminOrderControl", urlPatterns = {"/AdminOrderControl"})
+public class AdminOrderControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,10 +50,10 @@ public class BuyServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet BuyServlet</title>");            
+            out.println("<title>Servlet AdminOrderControl</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet BuyServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AdminOrderControl at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,7 +71,38 @@ public class BuyServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        Account currentAccount = (Account) request.getSession().getAttribute("currentAccount");
+        CartDAO cdao = new CartDAO();
+        if (currentAccount != null && currentAccount.getUserRole() == 1) {
+            int newOrders = cdao.countNewOrders(60);
+            float totalIncome = Dashboard_CartDAO.countTotalIncome();
+            float[] incomeThisMonth = new float[10], incomeLastMonth = new float[10];
+            int j = 0;
+            for (int i = 1; i <= 30; i += 3) {
+                incomeThisMonth[j] = Dashboard_CartDAO.countIncomeThisMonth(i, i + 2);
+                incomeLastMonth[j] = Dashboard_CartDAO.countIncomeLastMonth(i, i + 2);
+                j++;
+            }
+            ArrayList<AccountDashboard> listAccount = Dashboard_CartDAO.getTopOrders();
+            ArrayList<Cart> listCart = Dashboard_CartDAO.getLatestOrders();
+            
+            request.setAttribute("newOrders", newOrders);
+            request.getRequestDispatcher("admin-order.jsp").forward(request, response);
+            ObjectMapper mapper = new ObjectMapper();
+            ObjectNode rootNode = mapper.createObjectNode();
+            rootNode.put("newOrders", newOrders);
+            rootNode.put("totalIncome", totalIncome);
+            rootNode.putPOJO("incomeThisMonth", incomeThisMonth);
+            rootNode.putPOJO("incomeLastMonth", incomeLastMonth);
+            rootNode.putPOJO("topCustomers", listAccount);
+            rootNode.putPOJO("latestOrders", listCart);
+            String dataReturn = mapper.writeValueAsString(rootNode);
+            PrintWriter out = response.getWriter();
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            out.print(dataReturn);
+            out.flush();
+        }
     }
 
     /**
@@ -77,39 +116,7 @@ public class BuyServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession(true);
-        Account account = null;
-        account = (Account) session.getAttribute("currentAccount");
-        if (account == null) {
-            response.sendRedirect("login.jsp");
-            return;
-        }
-        CartItem cartItem = null;
-        Object o = session.getAttribute("cart");
-//      available
-        if (o != null) {
-            cartItem = (CartItem) o;
-        } else {
-            cartItem = new CartItem();
-        }
-        String tnum = request.getParameter("num");
-        String tid = request.getParameter("productID");
-        int num, id;
-        try {
-            num = Integer.parseInt(tnum);
-            id = Integer.parseInt(tid);
-            ProductDAO proDao = new ProductDAO();
-            Product p = proDao.getProductById(id);
-            float price = (float) (p.getProductPrice());
-            Item t = new Item(p, num, price);
-            cartItem.addItem(t);
-        } catch (Exception e) {
-            num = 1;
-        }
-        List<Item> list = cartItem.getItems();
-        session.setAttribute("cart", cartItem);
-        session.setAttribute("size", list.size());
-        request.getRequestDispatcher("ProductDetailControl").forward(request, response);
+        processRequest(request, response);
     }
 
     /**

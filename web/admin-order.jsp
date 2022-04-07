@@ -4,7 +4,11 @@
     Author     : ADMIN
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="Model.Cart"%>
+<%@page import="DAO.Cart.CartDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,6 +28,10 @@
         <!-- Style Admin General css -->
         <link rel="stylesheet" href="css/admin-general.css">
         <title>Orders</title>
+        <%
+            CartDAO cdao = new CartDAO();
+            ArrayList<Cart> list = cdao.getListCart();
+        %>
     </head>
 
     <body>
@@ -52,7 +60,7 @@
                                         <div class="order-card border-green align-items-center d-flex">
                                             <div class="icon"><i class='bx bx-cart'></i></div>
                                             <div class="body">
-                                                <div class="number">1,995</div>
+                                                <div class="number">${newOrders}</div>
                                                 <div class="content">New Orders</div>
                                             </div>
                                         </div>
@@ -61,7 +69,7 @@
                                         <div class="order-card border-orange align-items-center d-flex">
                                             <div class="icon"><i class='bx bxs-discount'></i></div>
                                             <div class="body">
-                                                <div class="number">-$2,064</div>
+                                                <div class="number">-$0</div>
                                                 <div class="content">Discount</div>
                                             </div>
                                         </div>
@@ -70,8 +78,8 @@
                                         <div class="order-card border-red align-items-center d-flex">
                                             <div class="icon"><i class='bx bx-barcode-reader'></i></div>
                                             <div class="body">
-                                                <div class="number">3,164</div>
-                                                <div class="content">Use Coupons</div>
+                                                <div class="number">${totalOrder}</div>
+                                                <div class="content">Total Orders</div>
                                             </div>
                                         </div>
                                     </div>
@@ -79,8 +87,8 @@
                                         <div class="order-card border-blue align-items-center d-flex">
                                             <div class="icon"><i class='bx bx-coin-stack'></i></div>
                                             <div class="body">
-                                                <div class="number">$5,180</div>
-                                                <div class="content">Total Orders</div>
+                                                <div class="number">$${totalIncome}</div>
+                                                <div class="content">Total Income</div>
                                             </div>
                                         </div>
                                     </div>
@@ -150,20 +158,19 @@
                             <div class="overview-body">
                                 <div class="overview-function d-flex align-items-center">
                                     <div class="search">
-                                        <input type="text" name="search" placeholder="Search...">
+                                        <input oninput="searchAjax(this)" value="${txtS}" name="txt" type="text" placeholder="Search...">
                                     </div>
                                     <div class="sort-by d-flex align-items-center">
-                                        <label for="form-orders" class="d-flex align-items-center"><i class='bx bx-sort'></i><span>Sort by:</span></label>
-                                        <select name="form-orders"  id="form-orders" class="form-select">
-                                            <option value="default" selected="">Default</option>
-                                            <option value="AtoZ">Full Name: A to Z</option>
-                                            <option value="ZtoA">Full Name: Z to A</option>
-                                            <option value="orderDateNewest">Order date: Newest</option>
-                                            <option value="orderDateOldest">Order date: Oldest</option>
-                                            <option value="orderPayDateNewest">Order Pay date: Newest</option>
-                                            <option value="orderPayDateOldest">Order Pay date: Oldest</option>
-                                            <option value="billTotalLargeToSmall">Bill Total: Large to small</option>
-                                            <option value="billTotalSmallToLarge">Bill Total: Small to large</option>
+                                        <label for="form-orders" class="d-flex align-items-center"><i class='bx bx-sort'></i><span>Sort by:</span></label>                                  
+                                        <select name="form-orders"  id="form-orders" class="form-select" onchange="window.location=this.value">
+                                            <option value="" disabled selected>Select your option</option>
+                                            <option value="CartManagerControl">Default</option>
+                                            <option value="CartSortingControl?sortID=AToZ">Full Name: A to Z</option>
+                                            <option value="CartSortingControl?sortID=ZtoA">Full Name: Z to A</option>
+                                            <option value="CartSortingControl?sortID=orderDateNewest">Order date: Newest</option>
+                                            <option value="CartSortingControl?sortID=orderDateOldest">Order date: Oldest</option>
+                                            <option value="CartSortingControl?sortID=billTotalLargeToSmall">Bill Total: Large to small</option>
+                                            <option value="CartSortingControl?sortID=billTotalSmallToLarge">Bill Total: Small to large</option>
                                         </select>
                                     </div>
                                     <div class="filter d-flex align-items-center">
@@ -176,83 +183,69 @@
                                     <div class="export"><a class="primary-btn" href="#"><button class="primary-btn" type="button" name="export">Export To Excel</button></a></div>
                                 </div>
                                 <table class="table table-orders-overview">
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>User</th>
-                                        <th>Payment Date</th>
-                                        <th>Deliver Date</th>  
-                                        <th>Coupon</th>
-                                        <th>Payment Method</th>
-                                        <th>Discount</th>
-                                        <th>Bill Total</th>
-                                        <th>Status</th>
-                                    </tr>
-                                    <tr>
-                                        <td>#199</td>
-                                        <td>Luong Nguyen Nhat Quang</td>
-                                        <td>12 Jun 2022</td>
-                                        <td>15 Jun 2022</td>
-                                        <td>ST20K</td>
-                                        <td>Momo</td>
-                                        <td>-$2,894</td>
-                                        <td>$32,894</td>
-                                        <td><span class="status paid">Paid</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>#200</td>
-                                        <td>Manh Khoi</td>
-                                        <td>23 May 2022</td>
-                                        <td>27 May 2022</td>
-                                        <td>GD40K</td>
-                                        <td>NH Vietcombank</td>
-                                        <td>-$1,824</td>
-                                        <td>$10,894</td>
-                                        <td><span class="status shipping">Shipping</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>#201</td>
-                                        <td>Huynh Ngo Trieu Phuc</td>
-                                        <td>23 Jan 2021</td>
-                                        <td>2 Feb 2021</td>
-                                        <td></td>
-                                        <td>Tien Mat</td>
-                                        <td>-$0</td>
-                                        <td>$110,894</td>
-                                        <td><span class="status pending">Pending</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>#202</td>
-                                        <td>Minh</td>
-                                        <td>23 Oct 2021</td>
-                                        <td>2 Sep 2021</td>
-                                        <td></td>
-                                        <td>Tien Mat</td>
-                                        <td>-$0</td>
-                                        <td>$986</td>
-                                        <td><span class="status refund">Refund</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>#203</td>
-                                        <td>Nguyen Thu Nhi</td>
-                                        <td>14 Oct 2021</td>
-                                        <td>2 Sep 2021</td>
-                                        <td>NM200K</td>
-                                        <td>Visa Card</td>
-                                        <td>-$450</td>
-                                        <td>$145,891</td>
-                                        <td><span class="status paid">Paid</span></td>
-                                    </tr>
+                                    <tbody id="order-tag">
+                                        <input type="hidden" id="numOfOrder" value="${totalOrder}">
+                                        <c:forEach items="${listC}" var="o">
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Username</th>
+                                                <th>Payment Date</th>
+                                                <th>Deliver Date</th>  
+                                                <th>Coupon</th>
+                                                <th>Payment Method</th>
+                                                <th>Discount</th>
+                                                <th>Bill Total</th>
+                                                <th>Status</th>
+                                            </tr>
+                                            <tr>
+                                                <td>#${o.cartID}</td>
+                                                <td>${o.userName}</td>
+                                                <td>${o.paymentDate}</td>
+                                                <td>${o.deliverDate}</td>
+                                                <td>${o.couponID}</td>
+                                                <td>
+                                                    <c:set var="payment" value="${o.paymentMethodID}"></c:set>
+                                                    <c:choose>
+                                                        <c:when test = "${payment == 1}">
+                                                            Momo
+                                                        </c:when>
+                                                        <c:when test = "${payment == 2}">
+                                                            Credit Card
+                                                        </c:when>
+                                                        <c:when test = "${payment == 3}">
+                                                            Bank
+                                                        </c:when>
+                                                        <c:when test = "${payment == 4}">
+                                                            COD
+                                                        </c:when>  
+                                                        <c:otherwise>
+                                                            Not paid
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </td>
+                                                <td>-$0</td>
+                                                <td>$${o.totalPrice}</td>
+                                                <td><span class="status paid">Paid</span></td>
+                                            </tr>                                    
+                                        </c:forEach>
+                                    </tbody>
                                 </table>
-                                <div class="view-all"><a href="#">Load More</a></div>
+                                    <!-- Load more -->
+                                    <c:if test="${isShow == null}">
+                                        <div onclick="loadMore()" id="loadmore" role="button" class="view-all">Load More</a></div>
+                                    </c:if>                              
                             </div>
-
                         </div>
                     </section>
                 </div>
             </div>
         </div>
         <!-- font awsomwe pro-->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="font-awesome-pro-master/js/pro.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://phpcoder.tech/multiselect/js/jquery.multiselect.js"></script>
+        
         <script>
 //            Define active nav
             var nav__itemLists = document.querySelectorAll(".nav__item");
@@ -373,6 +366,48 @@
                     config_pie
                     );
         </script>
+        <script>
+            function searchAjax(param) {
+                var txtSearch = param.value;
+                $.ajax({
+                    url: "/FsoftOnlineShopping/SearchOrderAdmin",
+                    type: "get", //send it through get method
+                    data: {
+                        txt: txtSearch
+                    },
+                    success: function (data) {
+                        var row = document.getElementById("order-tag");
+                        row.innerHTML = data;
+                    },
+                    error: function (xhr) {
+                        //Do Something to handle error
+                    }
+                })
+            }
+        </script>
+        
+        <script>
+        function loadMore() {         
+            var table = document.getElementsByClassName('table table-orders-overview')[0];
+            var amount = table.rows.length/2;
+            $.ajax({
+                url: "/FsoftOnlineShopping/LoadMoreAdminOrder",
+                type: "get", //send it through get method
+                data: {
+                    amount: amount
+                },
+                success: function (data) {
+                    console.log('success');
+                    var row = document.getElementById("order-tag");
+                    row.innerHTML += data;
+                },
+                error: function (xhr) {
+                    //Do Something to handle error
+                }
+            });
+            if ((amount + 10) >= Number(document.getElementById("numOfOrder").value))
+                document.getElementById("loadmore").style.display = 'none';
+        }
+        </script>
     </body>
-
 </html>
