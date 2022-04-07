@@ -5,6 +5,7 @@
  */
 package Model;
 
+import java.sql.Timestamp;
 import java.sql.Date;
 
 /**
@@ -26,6 +27,16 @@ public class Cart {
 
     public Cart(int cartID, String userName, String couponID, int paymentMethodID, Date paymentDate, Date deliverDate, int cartStatus, float totalPrice) {
         this.cartID = cartID;
+        this.userName = userName;
+        this.couponID = couponID;
+        this.paymentMethodID = paymentMethodID;
+        this.paymentDate = paymentDate;
+        this.deliverDate = deliverDate;
+        this.cartStatus = cartStatus;
+        this.totalPrice = totalPrice;
+    }
+    
+    public Cart(String userName, String couponID, int paymentMethodID, Date paymentDate, Date deliverDate, int cartStatus, float totalPrice) {
         this.userName = userName;
         this.couponID = couponID;
         this.paymentMethodID = paymentMethodID;

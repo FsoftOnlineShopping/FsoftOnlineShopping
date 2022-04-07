@@ -21,7 +21,7 @@
                     </a>
                 </li>
                 <li class="nav__item">
-                    <a href="admin-order.jsp" class="nav__link d-flex">
+                    <a href="CartManagerControl" class="nav__link d-flex">
                         <span class="icon"><i class='bx bx-cart'></i></span>
                         <span class="title">Orders</span>
                     </a>

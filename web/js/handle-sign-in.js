@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-const authenAPI = 'http://localhost:8080/FsoftOnlineShopping/api-authen';
+const authenAPI = 'http://localhost:8084/FsoftOnlineShopping/api-authen';
 const formMessage = document.querySelector(".form-message");
 var myStorage = window.sessionStorage;
 

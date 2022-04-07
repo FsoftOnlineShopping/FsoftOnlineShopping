@@ -4,16 +4,12 @@
     Author     : ADMIN
 --%>
 
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <%@page import="DAO.Account.AccountDAO"%>
 <%@page import="Model.ProductComment"%>
 <%@page import="java.util.List"%>
 <%@page import="Model.Account"%>
 <%@page import="DAO.Product.ProductDAO"%>
 <%@page import="Model.Product"%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
@@ -97,44 +93,25 @@
         <form name="f" action="" method="post">
 	<section class="sec-product-detail bg0 p-t-65 p-b-60">
 		<div class="container">
-             
-                
 			<div class="row">
 				<div class="col-md-6 col-lg-7 p-b-30">
 					<div class="p-l-25 p-r-30 p-lr-0-lg">
 						<div class="wrap-slick3 flex-sb flex-w">
 							<div class="wrap-slick3-dots"></div>
 							<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
-                                                        
+
 							<div class="slick3 gallery-lb">
+                                                            <c:forEach items="${images}" var="image">
+                                                                <div class="item-slick3" data-thumb="${image}">
+                                                                    <div class="wrap-pic-w pos-relative">
+                                                                        <img src="${image}" alt="IMG-PRODUCT">
 
-                                                        <c:forEach items="${images}" var="image">
-								<div class="item-slick3" data-thumb="${image}">
-									<div class="wrap-pic-w pos-relative">
-										<img src="${image}" alt="IMG-PRODUCT">
-
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="${image}">
-								
-                                                        </c:forEach>
-<!--								<div class="item-slick3" data-thumb="images/product-detail-02.jpg">
-									<div class="wrap-pic-w pos-relative">
-										<img src="images/product-detail-02.jpg" alt="IMG-PRODUCT">
-
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-02.jpg">
-											<i class="fa fa-expand"></i>
-										</a>
-									</div>
-								</div>
-
-								<div class="item-slick3" data-thumb="images/product-detail-03.jpg">
-									<div class="wrap-pic-w pos-relative">
-										<img src="images/product-detail-03.jpg" alt="IMG-PRODUCT">
-
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-03.jpg">
-											<i class="fa fa-expand"></i>
-										</a>
-									</div>
-								</div>-->
+                                                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="${image}">
+                                                                            <i class="fa fa-expand"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </c:forEach>
 							</div>
 						</div>
 					</div>
@@ -184,10 +161,9 @@
                                                         <div class="rs1-select2 bor8 bg0">
                                                             <select class="js-select2" name="time">
                                                                 <option>Choose an option</option>
-                                                                <option>Red</option>
-                                                                <option>Blue</option>
-                                                                <option>White</option>
-                                                                <option>Grey</option>
+                                                                <c:forEach items="${colorName}" var="o">
+                                                                <option>${o}</option>                                              
+                                                                </c:forEach>
                                                             </select>
                                                             <div class="dropDownSelect2"></div>
                                                         </div>
@@ -208,10 +184,10 @@
                                                             </div>
                                                         </div>
                                                         <% 
-                                                            if(account != null){
-                                                                out.print("<button class=\"flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail\"  type=\"submit\" onclick=\"buy(" + pro.getProductID() + ")\"  value=\"Add to cart\">Add to cart</button>");
+                                                            if(account != null){                                             
+                                                                out.print("<button class=\"flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail\"  type=\"submit\" onclick=\"buy(" + pro.getProductID() + " )\"  value=\"Add to cart\">Add to cart</button>");
                                                             }else{
-                                                                 out.print("<div class=\"flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 \"  onclick=\"showModal()\" >Add to cart</div>");
+                                                                 out.print("<div class=\"flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 \"  onclick=\"signIn()\" >Add to cart</div>");
                                                             }
                                                         %>     
 <!--                                                    <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"  
@@ -971,23 +947,30 @@
 		$('.js-addwish-b2, .js-addwish-detail').on('click', function(e){
 			e.preventDefault();
 		});
+
 		$('.js-addwish-b2').each(function(){
 			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
 			$(this).on('click', function(){
 				swal(nameProduct, "is added to wishlist !", "success");
+
 				$(this).addClass('js-addedwish-b2');
 				$(this).off('click');
 			});
 		});
+
 		$('.js-addwish-detail').each(function(){
 			var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+
 			$(this).on('click', function(){
 				swal(nameProduct, "is added to wishlist !", "success");
+
 				$(this).addClass('js-addedwish-detail');
 				$(this).off('click');
 			});
 		});
+
 		/*---------------------------------------------*/
+
 		$('.js-addcart-detail').each(function(){
 			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
 			$(this).on('click', function(){
@@ -1007,6 +990,7 @@
 				scrollingThreshold: 1000,
 				wheelPropagation: false,
 			});
+
 			$(window).on('resize', function(){
 				ps.update();
 			})
@@ -1021,7 +1005,7 @@
         </script>
         
         <script>
-            function showModal(){
+            function signIn(){
                 var modalSignIn = document.getElementById("modalSignIn");
                 modalSignIn.style.transition = "5s";
                 modalSignIn.style.display="flex";
@@ -1081,6 +1065,5 @@
 	<script src="js/main.js"></script>
 
 </body>
-
 </html>
 

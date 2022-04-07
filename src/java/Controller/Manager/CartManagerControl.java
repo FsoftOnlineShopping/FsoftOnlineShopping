@@ -3,30 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.Product;
+package Controller.Manager;
 
-import DAO.Color.colorDAO;
-import DAO.Product.productDAO_1;
-import ProductCorlor.ProductColorDAO;
-import Model.Color;
-import Model.Product;
-import Model.ProductColor;
+import DAO.Cart.CartDAO;
+import Model.Cart;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
  *
- * @author Admin
+ * @author ハン
  */
-@WebServlet(name = "ColorControl", urlPatterns = {"/ColorControl"})
-public class ColorControl extends HttpServlet {
+@WebServlet(name = "CartManagerControl", urlPatterns = {"/CartManagerControl"})
+public class CartManagerControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,21 +36,33 @@ public class ColorControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-            List<Color> listCo = colorDAO.getAllColor();
-            String colorID = request.getParameter("colorID");
-            request.setAttribute("listCo", listCo);
+        CartDAO cdao = new CartDAO();
+        List<Cart> listC;
+        List<Cart> listCart;
+        try {
+            listC = cdao.getListTop10Cart();
+            listCart = cdao.getListCart();
+            float total = 0;
+            for (Cart cart : listCart) {
+                total += cart.getTotalPrice();          
+            }
+            int totalIncome = (int)total;
+            int totalOrder = listCart.size();           
+            int newOrders = cdao.countNewOrders(1);
             
- 
+            request.setAttribute("listC", listC);
+            request.setAttribute("listCart", listCart);
+            request.setAttribute("totalIncome", totalIncome);
+            request.setAttribute("newOrders", newOrders);
+            request.setAttribute("totalOrder", totalOrder);
 
-            List<Product> listbyCo = ProductColorDAO.getProductByColorID(colorID);       
-             
             
-            request.setAttribute("colorID", colorID);
-            request.setAttribute("listP", listbyCo);
-            request.setAttribute("isShow", false);
-            request.getRequestDispatcher("ProductControl").forward(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(CartManagerControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        request.getRequestDispatcher("admin-order.jsp").forward(request, response);
     }
-     
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

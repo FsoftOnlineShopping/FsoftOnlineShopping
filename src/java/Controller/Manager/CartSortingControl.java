@@ -3,30 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.Product;
+package Controller.Manager;
 
-import DAO.Color.colorDAO;
-import DAO.Product.productDAO_1;
-import ProductCorlor.ProductColorDAO;
-import Model.Color;
-import Model.Product;
-import Model.ProductColor;
+import DAO.Cart.CartDAO;
+import Model.Cart;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
  *
- * @author Admin
+ * @author ハン
  */
-@WebServlet(name = "ColorControl", urlPatterns = {"/ColorControl"})
-public class ColorControl extends HttpServlet {
+@WebServlet(name = "CartSortingControl", urlPatterns = {"/CartSortingControl"})
+public class CartSortingControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,21 +37,44 @@ public class ColorControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-            List<Color> listCo = colorDAO.getAllColor();
-            String colorID = request.getParameter("colorID");
-            request.setAttribute("listCo", listCo);
-            
- 
-
-            List<Product> listbyCo = ProductColorDAO.getProductByColorID(colorID);       
-             
-            
-            request.setAttribute("colorID", colorID);
-            request.setAttribute("listP", listbyCo);
-            request.setAttribute("isShow", false);
-            request.getRequestDispatcher("ProductControl").forward(request, response);
+        String sortID = request.getParameter("sortID");
+        CartDAO cdao = new CartDAO();
+        try {
+            if ("AToZ".equals(sortID)) {
+                List<Cart> listAtoZ = cdao.getListCartByNameAsc();
+                request.setAttribute("listC", listAtoZ);
+                request.getRequestDispatcher("admin-order.jsp").forward(request, response);
+            }
+            if ("ZtoA".equals(sortID)) {
+                List<Cart> listAtoZ = cdao.getListCartByNameDesc();
+                request.setAttribute("listC", listAtoZ);
+                request.getRequestDispatcher("admin-order.jsp").forward(request, response);
+            }
+            if ("orderDateNewest".equals(sortID)) {
+                List<Cart> listAtoZ = cdao.getListCartByDayNewest();
+                request.setAttribute("listC", listAtoZ);
+                request.getRequestDispatcher("admin-order.jsp").forward(request, response);
+            }
+            if ("orderDateOldest".equals(sortID)) {
+                List<Cart> listAtoZ = cdao.getListCartByDayOldest();
+                request.setAttribute("listC", listAtoZ);
+                request.getRequestDispatcher("admin-order.jsp").forward(request, response);
+            }
+            if ("billTotalLargeToSmall".equals(sortID)) {
+                List<Cart> listAtoZ = cdao.getListCartByHighToLowPrice();
+                request.setAttribute("listC", listAtoZ);
+                request.getRequestDispatcher("admin-order.jsp").forward(request, response);
+            }
+            if ("billTotalSmallToLarge".equals(sortID)) {
+                List<Cart> listAtoZ = cdao.getListCartByLowToHighPrice();
+                request.setAttribute("listC", listAtoZ);
+                request.getRequestDispatcher("admin-order.jsp").forward(request, response);
+            }       
+        } catch (Exception ex) {
+            Logger.getLogger(CartManagerControl.class.getName()).log(Level.SEVERE, null, ex);
+        }       
     }
-     
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
